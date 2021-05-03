@@ -1,9 +1,7 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Covid19Radar.LogViewer.Models;
-using Covid19Radar.LogViewer.Transformers;
 
 namespace Covid19Radar.LogViewer.Views
 {
