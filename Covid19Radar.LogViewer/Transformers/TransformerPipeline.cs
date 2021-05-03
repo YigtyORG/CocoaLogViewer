@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Covid19Radar.LogViewer.Transformers
 {
-	public class TransformerPipeline : TransformerBase
+	public class TransformerPipeline : TransformerBase, IEnumerable<TransformDelegate>, IEnumerable<ITransformer>
 	{
 		private readonly List<TransformDelegate> _delegates;
 
@@ -12,51 +13,81 @@ namespace Covid19Radar.LogViewer.Transformers
 			_delegates = new();
 		}
 
-		public TransformerPipeline Use(ITransformer transformer)
+		public TransformerPipeline Add(ITransformer transformer)
 		{
 			if (transformer is null) {
 				throw new ArgumentNullException(nameof(transformer));
 			}
-			this.UseCore(transformer.Transform);
+			if (transformer is TransformDelegateWrapper wrapper) {
+				this.AddCore(wrapper.Delegate);
+			} else {
+				this.AddCore(transformer.Transform);
+			}
 			return this;
 		}
 
-		public TransformerPipeline Use(TransformDelegate transformDelegate)
+		public TransformerPipeline Add(TransformDelegate transformDelegate)
 		{
 			if (transformDelegate is null) {
 				throw new ArgumentNullException(nameof(transformDelegate));
 			}
-			this.UseCore(transformDelegate);
+			this.AddCore(transformDelegate);
 			return this;
 		}
 
-		public TransformerPipeline Use<TTransformer>()
+		public TransformerPipeline Add<TTransformer>()
 			where TTransformer: ITransformer, new()
 		{
-			this.UseCore(new TTransformer().Transform);
+			this.AddCore(new TTransformer().Transform);
 			return this;
 		}
 
-		private void UseCore(TransformDelegate transformDelegate)
+		private void AddCore(TransformDelegate transformDelegate)
 		{
 			lock (_delegates) {
 				_delegates.Add(transformDelegate);
 			}
 		}
 
-		protected override string? TransformCore(string? message, Func<string?, string?> next)
+		public Func<string?, string?> Build(Func<string?, string?> final)
 		{
 			TransformDelegate[] funcs;
 			lock (_delegates) {
 				funcs = _delegates.ToArray();
 			}
+			var next = final;
 			for (int i = funcs.Length - 1; i >= 0; --i) {
 				next = new Next(funcs[i], next).Invoke;
 			}
-			return next(message);
+			return next;
 		}
 
-		public delegate string? TransformDelegate(string? message, Func<string?, string?> next);
+		protected override string? TransformCore(string? message, Func<string?, string?> next)
+		{
+			return this.Build(next)(message);
+		}
+
+		public List<TransformDelegate>.Enumerator GetEnumerator()
+		{
+			return _delegates.GetEnumerator();
+		}
+
+		IEnumerator<TransformDelegate> IEnumerable<TransformDelegate>.GetEnumerator()
+		{
+			return this.GetEnumerator();
+		}
+
+		IEnumerator<ITransformer> IEnumerable<ITransformer>.GetEnumerator()
+		{
+			foreach (var item in this) {
+				yield return item.ToTransformer();
+			}
+		}
+
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return this.GetEnumerator();
+		}
 
 		private readonly struct Next
 		{

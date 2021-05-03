@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,12 +13,15 @@ namespace Covid19Radar.LogViewer.Models
 		public IReadOnlyList<LogDataModel> Logs { get; }
 
 		public LogFileModel(Stream stream, ITransformer transformer)
+			: this(stream, transformer is null ? ThrowArgNull() : transformer.Transform) { }
+
+		public LogFileModel(Stream stream, Func<string?, string?> transformer)
 		{
 			if (stream is null) {
 				throw new ArgumentNullException(nameof(stream));
 			}
 			if (transformer is null) {
-				throw new ArgumentNullException(nameof(transformer));
+				ThrowArgNull();
 			}
 
 			var logs = new List<LogDataModel>();
@@ -26,8 +30,9 @@ namespace Covid19Radar.LogViewer.Models
 					var row = ParseCsv(line);
 					if (row.Count == 12) {
 						if (row[0] != "output_date") {
+							string msg = row[02];
 							logs.Add(new(
-								row[00], row[01], row[02], transformer.Transform(row[02]),
+								row[00], row[01], msg, transformer(msg) ?? msg,
 								row[03], row[04], row[05], row[06],
 								row[07], row[08], row[09], row[10],
 								row[11]
@@ -44,6 +49,12 @@ namespace Covid19Radar.LogViewer.Models
 				}
 			}
 			this.Logs = logs;
+		}
+
+		[DoesNotReturn()]
+		private static Func<string?, string?> ThrowArgNull()
+		{
+			throw new ArgumentNullException("transformer");
 		}
 
 		private static List<string> ParseCsv(string line)

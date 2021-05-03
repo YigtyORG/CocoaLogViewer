@@ -11,11 +11,11 @@ namespace Covid19Radar.LogViewer
 {
 	public partial class MainWindow : Window
 	{
-		private readonly TransformerPipeline _transformer;
+		private readonly Func<string?, string?> _transformer;
 
 		public MainWindow()
 		{
-			_transformer = new TransformerPipeline().ConfigureDefaults();
+			_transformer = new TransformerPipeline().ConfigureDefaults().Build(m => m);
 			this.InitializeComponent();
 		}
 

@@ -19,4 +19,21 @@ namespace Covid19Radar.LogViewer.Transformers
 
 		protected abstract string? TransformCore(string? message, Func<string?, string?> next);
 	}
+
+	public delegate string? TransformDelegate(string? message, Func<string?, string?> next);
+
+	internal sealed class TransformDelegateWrapper : ITransformer
+	{
+		internal TransformDelegate Delegate { get; }
+
+		internal TransformDelegateWrapper(TransformDelegate transformDelegate)
+		{
+			this.Delegate = transformDelegate;
+		}
+
+		public string? Transform(string? message, Func<string?, string?> next)
+		{
+			return this.Delegate(message, next);
+		}
+	}
 }

@@ -12,48 +12,79 @@ namespace Covid19Radar.LogViewer.Transformers
 			return transformer.Transform(message, message => message) ?? message ?? string.Empty;
 		}
 
+		public static ITransformer ToTransformer(this TransformDelegate transformDelegate)
+		{
+			if (transformDelegate is null) {
+				throw new ArgumentNullException(nameof(transformDelegate));
+			}
+			return new TransformDelegateWrapper(transformDelegate);
+		}
+
+		public static FuncTransformer ToTransformer(this Func<string?, string?> func)
+		{
+			if (func is null) {
+				throw new ArgumentNullException(nameof(func));
+			}
+			return new(func);
+		}
+
 		public static TransformerPipeline ConfigureDefaults(this TransformerPipeline pipeline)
 		{
 			if (pipeline is null) {
 				throw new ArgumentNullException(nameof(pipeline));
 			}
 			return pipeline
-				.UseCall()
-				.UseTekItem()
-				.UseUserData()
-				.UseTransition();
+				.AddCallTransformer()
+				.AddTekItemTransformer()
+				.AddUserDataTransformer()
+				.AddTransitionTransformer();
 		}
 
-		public static TransformerPipeline UseCall(this TransformerPipeline pipeline)
+		public static TransformerPipeline AddCallTransformer(this TransformerPipeline pipeline)
 		{
 			if (pipeline is null) {
 				throw new ArgumentNullException(nameof(pipeline));
 			}
-			return pipeline.Use(CallTransformer.Instance);
+			return pipeline.Add(CallTransformer.Instance);
 		}
 
-		public static TransformerPipeline UseTekItem(this TransformerPipeline pipeline)
+		public static TransformerPipeline AddTekItemTransformer(this TransformerPipeline pipeline)
 		{
 			if (pipeline is null) {
 				throw new ArgumentNullException(nameof(pipeline));
 			}
-			return pipeline.Use(TekItemTransformer.Instance);
+			return pipeline.Add(TekItemTransformer.Instance);
 		}
 
-		public static TransformerPipeline UseUserData(this TransformerPipeline pipeline)
+		public static TransformerPipeline AddUserDataTransformer(this TransformerPipeline pipeline)
 		{
 			if (pipeline is null) {
 				throw new ArgumentNullException(nameof(pipeline));
 			}
-			return pipeline.Use(UserDataTransformer.Instance);
+			return pipeline.Add(UserDataTransformer.Instance);
 		}
 
-		public static TransformerPipeline UseTransition(this TransformerPipeline pipeline)
+		public static TransformerPipeline AddTransitionTransformer(this TransformerPipeline pipeline)
 		{
 			if (pipeline is null) {
 				throw new ArgumentNullException(nameof(pipeline));
 			}
-			return pipeline.Use(TransitionTransformer.Instance);
+			return pipeline.Add(TransitionTransformer.Instance);
+		}
+
+		public readonly struct FuncTransformer : ITransformer
+		{
+			private readonly Func<string?, string?>? _func;
+
+			public FuncTransformer(Func<string?, string?>? func)
+			{
+				_func = func;
+			}
+
+			public string? Transform(string? message, Func<string?, string?> next)
+			{
+				return _func?.Invoke(message) ?? next(message);
+			}
 		}
 	}
 }
