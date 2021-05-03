@@ -1,0 +1,17 @@
+﻿<Window
+	x:Class="Covid19Radar.LogViewer.MainWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:local="clr-namespace:Covid19Radar.LogViewer.Views"
+	mc:Ignorable="d"
+	Title="接触確認アプリ(COCOA)の動作情報確認アプリ"
+	Height="768" Width="1024">
+	<DockPanel>
+		<StackPanel Orientation="Vertical" DockPanel.Dock="Top">
+			<Button x:Name="openBtn" Content="開く" Click="openBtn_Click" />
+		</StackPanel>
+		<local:LogFileView x:Name="lfv" />
+	</DockPanel>
+</Window>

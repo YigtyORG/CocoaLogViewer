@@ -1,0 +1,24 @@
+﻿<UserControl
+	x:Class="Covid19Radar.LogViewer.Views.LogDataView"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	Height="40" d:DesignWidth="800">
+	<Grid Background="White">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="50" />
+			<ColumnDefinition Width="150" />
+			<ColumnDefinition Width="100" />
+			<ColumnDefinition Width="200" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+		<Button      x:Name="details"   Grid.Column="0" Content="詳細"    Height="20" Margin="0,0,0,20" Click="details_Click" />
+		<Button      x:Name="copy"      Grid.Column="0" Content="コピー"  Height="20" Margin="0,20,0,0" Click="copy_Click" />
+		<TextBox     x:Name="timestamp" Grid.Column="1" IsReadOnly="True" />
+		<TextBox     x:Name="level"     Grid.Column="2" IsReadOnly="True" FontSize="20" TextAlignment="Center" />
+		<RichTextBox x:Name="location"  Grid.Column="3" IsReadOnly="True" />
+		<TextBox     x:Name="message"   Grid.Column="4" IsReadOnly="True" TextWrapping="WrapWithOverflow" />
+	</Grid>
+</UserControl>
