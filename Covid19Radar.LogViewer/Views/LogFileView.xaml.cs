@@ -55,8 +55,8 @@ namespace Covid19Radar.LogViewer.Views
 					obj.Dispatcher.Invoke(() => {
 						MessageBox.Show(
 							mwnd,
-							$"ログファイル「{mwnd.Title}」の読み込みが完了しました。",
-							"ログファイルを開く",
+							$"動作情報ファイル「{mwnd.Title}」の読み込みが完了しました。",
+							"動作情報ファイルを開く",
 							MessageBoxButton.OK,
 							MessageBoxImage.Information
 						);
@@ -66,8 +66,8 @@ namespace Covid19Radar.LogViewer.Views
 					await ShowMessageBoxCore(elem.Parent, ++i, max);
 				} else {
 					MessageBox.Show(
-						"ログファイルの読み込みが完了しました。",
-						"ログファイルを開く",
+						"動作情報ファイルの読み込みが完了しました。",
+						"動作情報ファイルを開く",
 						MessageBoxButton.OK,
 						MessageBoxImage.Information
 					);

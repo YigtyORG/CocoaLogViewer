@@ -36,9 +36,9 @@ namespace Covid19Radar.LogViewer.Launcher
 			// 
 			this.btnOpen.Location = new System.Drawing.Point(8, 8);
 			this.btnOpen.Name = "btnOpen";
-			this.btnOpen.Size = new System.Drawing.Size(144, 23);
+			this.btnOpen.Size = new System.Drawing.Size(160, 23);
 			this.btnOpen.TabIndex = 0;
-			this.btnOpen.Text = "新しいウィンドウを開く(&O)";
+			this.btnOpen.Text = "動作情報ファイルを開く(&O)";
 			this.btnOpen.UseVisualStyleBackColor = true;
 			this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
 			// 

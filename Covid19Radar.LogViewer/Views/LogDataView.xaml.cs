@@ -50,7 +50,7 @@ namespace Covid19Radar.LogViewer.Views
 			if (_log_data is not null) {
 				Clipboard.SetText(_log_data.CreateDetails());
 				MessageBox.Show(
-					"クリップボードにログ情報をコピーしました。",
+					"クリップボードにログの詳細情報をコピーしました。",
 					"コピー",
 					MessageBoxButton.OK,
 					MessageBoxImage.Information

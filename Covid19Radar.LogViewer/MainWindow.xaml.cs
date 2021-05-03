@@ -24,8 +24,8 @@ namespace Covid19Radar.LogViewer
 		{
 			try {
 				using (var ofd = new OpenFileDialog() {
-					Title                        = "ログファイルを開く",
-					Filter                       = "COCOAログファイル (cocoa_log_*.csv)|cocoa_log_*.csv|全てのファイル|*",
+					Title                        = "動作情報ファイルを開く",
+					Filter                       = "COCOA 動作情報ファイル (cocoa_log_*.csv)|cocoa_log_*.csv|全てのファイル|*",
 					RestoreDirectory             = true,
 					DereferenceLinks             = true,
 					AddExtension                 = false,

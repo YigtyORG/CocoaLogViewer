@@ -40,7 +40,7 @@ namespace Covid19Radar.LogViewer.Models
 						}
 					} else {
 						logs.Add(new(
-							"無効なログ", nameof(LogLevel.Remarks), row.Aggregate((a, b) => $"{a}, {b}"), "ログ情報の書式が誤っています。",
+							"無効なログ", nameof(LogLevel.Remarks), row.Aggregate((a, b) => $"{a}, {b}"), "書式が誤っているため読み込めませんでした。",
 							string.Empty, string.Empty, string.Empty, string.Empty,
 							string.Empty, string.Empty, string.Empty, string.Empty,
 							string.Empty
