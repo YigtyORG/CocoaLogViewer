@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Text;
 using System.Windows.Documents;
 using System.Windows.Media;
 
@@ -63,6 +64,54 @@ namespace Covid19Radar.LogViewer.Models
 					new Run(")"),
 				}
 			});
+		}
+
+		public string CreateDetails()
+		{
+			var sb = new StringBuilder();
+			sb.AppendFormat(
+				"日時：{0}",
+				this.GetDateTimeAsString()
+			).AppendLine();
+			sb.AppendFormat(
+				"ログレベル：{0}",
+				this.GetLogLevel().Text
+			).AppendLine();
+			sb.AppendFormat(
+				"場所：{0}",
+				this.GetLocation()
+			).AppendLine();
+			if (this.OriginalMessage == this.TransformedMessage) {
+				sb.AppendFormat(
+					"内容：{0}",
+					this.OriginalMessage
+				).AppendLine();
+			} else {
+				sb.AppendFormat(
+					"翻訳された内容：{0}",
+					this.TransformedMessage
+				).AppendLine();
+				sb.AppendFormat(
+					"元の内容：{0}",
+					this.OriginalMessage
+				).AppendLine();
+			}
+			sb.AppendFormat(
+				"プラットフォーム: {0} (バージョン: {1})",
+				this.Platform,
+				this.PlatformVersion
+			).AppendLine();
+			sb.AppendFormat(
+				"機器: {0} (種類: {1})",
+				this.DeviceModel,
+				this.DeviceType
+			).AppendLine();
+			sb.AppendFormat(
+				"アプリのバージョン: {0} (ビルド番号: {1})",
+				this.Version,
+				this.BuildNumber
+			).AppendLine();
+			return sb.ToString();
 		}
 	}
 }
