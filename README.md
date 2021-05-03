@@ -32,6 +32,7 @@ Copyright (C) 2020-2021 Takym.
 ## 貢献方法
 * Issue や Pull Request (PR) は何時でも歓迎しています。気軽に投稿してください！
 * このソフトウェアは [WPF](https://docs.microsoft.com/ja-jp/visualstudio/designers/getting-started-with-wpf) を用いて開発しております。
+* このソフトウェアの UI は**全て日本語**で記述します。
 * できる限り外部のライブラリに依存しないで開発しております。
 	* [COCOA](https://github.com/cocoa-mhlw/cocoa) 本体にも依存しておりません。
 * 著作権を [@Takym](https://github.com/Takym) へ譲渡・転移する事に同意してくださった方の PR のみ Merge します。
