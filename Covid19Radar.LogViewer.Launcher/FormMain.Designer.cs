@@ -28,13 +28,52 @@ namespace Covid19Radar.LogViewer.Launcher
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
+			this.btnOpen = new System.Windows.Forms.Button();
+			this.viewers = new System.Windows.Forms.ListBox();
+			this.SuspendLayout();
+			// 
+			// btnOpen
+			// 
+			this.btnOpen.Location = new System.Drawing.Point(8, 8);
+			this.btnOpen.Name = "btnOpen";
+			this.btnOpen.Size = new System.Drawing.Size(144, 23);
+			this.btnOpen.TabIndex = 0;
+			this.btnOpen.Text = "新しいウィンドウを開く(&O)";
+			this.btnOpen.UseVisualStyleBackColor = true;
+			this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
+			// 
+			// viewers
+			// 
+			this.viewers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.viewers.FormattingEnabled = true;
+			this.viewers.ItemHeight = 15;
+			this.viewers.Location = new System.Drawing.Point(8, 40);
+			this.viewers.Name = "viewers";
+			this.viewers.Size = new System.Drawing.Size(480, 394);
+			this.viewers.TabIndex = 1;
+			this.viewers.SelectedIndexChanged += new System.EventHandler(this.viewers_SelectedIndexChanged);
+			// 
+			// FormMain
+			// 
+			this.AcceptButton = this.btnOpen;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.ClientSize = new System.Drawing.Size(496, 441);
+			this.Controls.Add(this.viewers);
+			this.Controls.Add(this.btnOpen);
+			this.Name = "FormMain";
 			this.Text = "接触確認アプリ(COCOA)の動作情報確認アプリ";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
+			this.ResumeLayout(false);
+
 		}
 
 		#endregion
+
+		private System.Windows.Forms.Button btnOpen;
+		private System.Windows.Forms.ListBox viewers;
 	}
 }
 

@@ -9,8 +9,8 @@ namespace Covid19Radar.LogViewer.Views
 {
 	public partial class LogFileView : UserControl
 	{
-		private        readonly Action<ListView, LogDataModel> _add_items;
-		private                 LogFileModel?                  _log_file;
+		private readonly Action<ListView, LogDataModel> _add_items;
+		private          LogFileModel?                  _log_file;
 
 		public LogFileModel? LogFile
 		{
@@ -40,9 +40,38 @@ namespace Covid19Radar.LogViewer.Views
 					this.Dispatcher.Invoke(_add_items, listView, logs[i]);
 					await Task.Delay(1);
 				}
-				MessageBox.Show("ログファイルの読み込みが完了しました。", "ログファイルを開く", MessageBoxButton.OK, MessageBoxImage.Information);
+				await this.ShowMessageBox();
 			} catch (Exception e) {
 				MessageBox.Show(e.Message, "エラーが発生しました。", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+		}
+
+		private ValueTask ShowMessageBox()
+		{
+			return ShowMessageBoxCore(this.Parent, 0 , 2);
+			static async ValueTask ShowMessageBoxCore(DependencyObject obj, int i, int max)
+			{
+				if (obj is MainWindow mwnd) {
+					obj.Dispatcher.Invoke(() => {
+						MessageBox.Show(
+							mwnd,
+							$"ログファイル「{mwnd.Title}」の読み込みが完了しました。",
+							"ログファイルを開く",
+							MessageBoxButton.OK,
+							MessageBoxImage.Information
+						);
+					});
+				} else if (i < max && obj is FrameworkElement elem) {
+					await Task.Delay(1);
+					await ShowMessageBoxCore(elem.Parent, ++i, max);
+				} else {
+					MessageBox.Show(
+						"ログファイルの読み込みが完了しました。",
+						"ログファイルを開く",
+						MessageBoxButton.OK,
+						MessageBoxImage.Information
+					);
+				}
 			}
 		}
 

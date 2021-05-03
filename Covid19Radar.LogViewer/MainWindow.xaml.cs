@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
@@ -19,7 +20,7 @@ namespace Covid19Radar.LogViewer
 			this.InitializeComponent();
 		}
 
-		private async void openBtn_Click(object sender, RoutedEventArgs e)
+		public async ValueTask<bool> ShowOpenFileDialogAsync()
 		{
 			try {
 				using (var ofd = new OpenFileDialog() {
@@ -36,13 +37,26 @@ namespace Covid19Radar.LogViewer
 					AutoUpgradeEnabled           = true,
 				}) {
 					if (ofd.ShowDialog() == DR.OK) {
-						lfv.LogFile = await Task.Run(() => new LogFileModel(ofd.OpenFile(), _transformer));
-						openBtn.Visibility = Visibility.Collapsed;
+						this.Dispatcher.Invoke(() => this.Title = Path.GetFileName(ofd.FileName));
+						lfv.LogFile = await Task.Run(() => new LogFileModel(ofd.OpenFile(), _transformer)).ConfigureAwait(false);
+						this.Dispatcher.Invoke(() => openBtn.Visibility = Visibility.Collapsed);
+						return true;
 					}
 				}
 			} catch (Exception ex) {
-				MBOX.Show(ex.Message, "エラーが発生しました。", MessageBoxButton.OK, MessageBoxImage.Error);
+				MBOX.Show(this, ex.Message, "エラーが発生しました。", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
+			return false;
+		}
+
+		private async void openBtn_Click(object sender, RoutedEventArgs e)
+		{
+			await this.ShowOpenFileDialogAsync();
+		}
+
+		public override string ToString()
+		{
+			return this.Title;
 		}
 	}
 }
