@@ -8,7 +8,8 @@ namespace Covid19Radar.LogViewer.Models
 	public record LogDataModel(
 		string Timestamp,
 		string Level,
-		string Message,
+		string OriginalMessage,
+		string TransformedMessage,
 		string Method,
 		string FilePath,
 		string LineNumber,

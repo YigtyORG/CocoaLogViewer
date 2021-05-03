@@ -4,13 +4,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Covid19Radar.LogViewer.Models;
-using Covid19Radar.LogViewer.Transformers;
 
 namespace Covid19Radar.LogViewer.Views
 {
 	public partial class LogFileView : UserControl
 	{
-		private static readonly TransformerPipeline            _transformer;
 		private        readonly Action<ListView, LogDataModel> _add_items;
 		private                 LogFileModel?                  _log_file;
 
@@ -26,12 +24,6 @@ namespace Covid19Radar.LogViewer.Views
 					}
 				}
 			}
-		}
-
-		static LogFileView()
-		{
-			_transformer = new();
-			_transformer.ConfigureDefaults();
 		}
 
 		public LogFileView()
@@ -56,7 +48,7 @@ namespace Covid19Radar.LogViewer.Views
 
 		private static void AddItem(ListView listView, LogDataModel log)
 		{
-			listView.Items.Add(new LogDataView(_transformer) { LogData = log });
+			listView.Items.Add(new LogDataView() { LogData = log });
 		}
 	}
 }

@@ -9,8 +9,7 @@ namespace Covid19Radar.LogViewer.Views
 {
 	public partial class LogDataView : UserControl
 	{
-		private readonly ITransformer  _transformer;
-		private          LogDataModel? _log_data;
+		private LogDataModel? _log_data;
 
 		public LogDataModel? LogData
 		{
@@ -25,15 +24,14 @@ namespace Covid19Radar.LogViewer.Views
 						level.Text        = logLevel.Text;
 						level.Background  = logLevel.BackColor;
 						location.Document = value.GetLocationAsFlowDocument();
-						message .Text     = _transformer.Transform(value.Message);
+						message .Text     = value.TransformedMessage;
 					}
 				}
 			}
 		}
 
-		public LogDataView(ITransformer transformer)
+		public LogDataView()
 		{
-			_transformer = transformer ?? throw new ArgumentNullException(nameof(transformer));
 			this.InitializeComponent();
 		}
 
@@ -52,13 +50,12 @@ namespace Covid19Radar.LogViewer.Views
 		private void copy_Click(object sender, RoutedEventArgs e)
 		{
 			if (_log_data is not null) {
-				string orgMsg = _log_data.Message;
-				string msg    = _transformer.Transform(orgMsg);
 				Clipboard.SetText(
 					$"日時：{_log_data.GetDateTimeAsString()}\r\n" +
 					$"ログレベル：{_log_data.GetLogLevel().Text}\r\n" +
 					$"場所：{_log_data.GetLocation()}\r\n" +
-					$"内容：{msg}" + (msg != orgMsg ? $"\r\n元の内容：{orgMsg}" : null)
+					$"翻訳された内容：{_log_data.TransformedMessage}\r\n" +
+					$"元の内容：{_log_data.OriginalMessage}"
 				);
 				MessageBox.Show(
 					"クリップボードにログ情報をコピーしました。",

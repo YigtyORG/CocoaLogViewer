@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Covid19Radar.LogViewer.Transformers;
 
 namespace Covid19Radar.LogViewer.Models
 {
@@ -9,8 +11,15 @@ namespace Covid19Radar.LogViewer.Models
 	{
 		public IReadOnlyList<LogDataModel> Logs { get; }
 
-		public LogFileModel(Stream stream)
+		public LogFileModel(Stream stream, ITransformer transformer)
 		{
+			if (stream is null) {
+				throw new ArgumentNullException(nameof(stream));
+			}
+			if (transformer is null) {
+				throw new ArgumentNullException(nameof(transformer));
+			}
+
 			var logs = new List<LogDataModel>();
 			using (var sr = new StreamReader(stream, true)) {
 				while (sr.ReadLine() is not null and string line) {
@@ -18,14 +27,15 @@ namespace Covid19Radar.LogViewer.Models
 					if (row.Count == 12) {
 						if (row[0] != "output_date") {
 							logs.Add(new(
-								row[00], row[01], row[02], row[03],
-								row[04], row[05], row[06], row[07],
-								row[08], row[09], row[10], row[11]
+								row[00], row[01], row[02], transformer.Transform(row[02]),
+								row[03], row[04], row[05], row[06],
+								row[07], row[08], row[09], row[10],
+								row[11]
 							));
 						}
 					} else {
 						logs.Add(new(
-							"無効なログ", nameof(LogLevel.Remarks), row.Aggregate((a, b) => $"{a}, {b}"),
+							"無効なログ", nameof(LogLevel.Remarks), row.Aggregate((a, b) => $"{a}, {b}"), "ログ情報の書式が誤っています。",
 							string.Empty, string.Empty, string.Empty, string.Empty,
 							string.Empty, string.Empty, string.Empty, string.Empty,
 							string.Empty

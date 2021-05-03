@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using Covid19Radar.LogViewer.Models;
+using Covid19Radar.LogViewer.Transformers;
 using DR   = System.Windows.Forms.DialogResult;
 using MBOX = System.Windows.MessageBox;
 
@@ -10,8 +11,11 @@ namespace Covid19Radar.LogViewer
 {
 	public partial class MainWindow : Window
 	{
+		private readonly TransformerPipeline _transformer;
+
 		public MainWindow()
 		{
+			_transformer = new TransformerPipeline().ConfigureDefaults();
 			this.InitializeComponent();
 		}
 
@@ -32,7 +36,7 @@ namespace Covid19Radar.LogViewer
 					AutoUpgradeEnabled           = true,
 				}) {
 					if (ofd.ShowDialog() == DR.OK) {
-						lfv.LogFile = await Task.Run(() => new LogFileModel(ofd.OpenFile()));
+						lfv.LogFile = await Task.Run(() => new LogFileModel(ofd.OpenFile(), _transformer));
 						openBtn.Visibility = Visibility.Collapsed;
 					}
 				}
