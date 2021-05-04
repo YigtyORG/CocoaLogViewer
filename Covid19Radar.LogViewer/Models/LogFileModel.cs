@@ -12,10 +12,10 @@ namespace Covid19Radar.LogViewer.Models
 	{
 		public IReadOnlyList<LogDataModel> Logs { get; }
 
-		public LogFileModel(Stream stream, ITransformer transformer)
-			: this(stream, transformer is null ? ThrowArgNull() : transformer.Transform) { }
+		public LogFileModel(Stream stream, ITransformer transformer, bool allowEscape = false)
+			: this(stream, transformer is null ? ThrowArgNull() : transformer.Transform, allowEscape) { }
 
-		public LogFileModel(Stream stream, Func<string?, string?> transformer)
+		public LogFileModel(Stream stream, Func<string?, string?> transformer, bool allowEscape = false)
 		{
 			if (stream is null) {
 				throw new ArgumentNullException(nameof(stream));
@@ -27,7 +27,7 @@ namespace Covid19Radar.LogViewer.Models
 			var logs = new List<LogDataModel>();
 			using (var sr = new StreamReader(stream, true)) {
 				while (sr.ReadLine() is not null and string line) {
-					var row = ParseCsv(line);
+					var row = ParseCsv(line, allowEscape);
 					if (row.Count == 12) {
 						if (row[0] != "output_date") {
 							string msg = row[02];
@@ -57,7 +57,7 @@ namespace Covid19Radar.LogViewer.Models
 			throw new ArgumentNullException("transformer");
 		}
 
-		private static List<string> ParseCsv(string line)
+		private static List<string> ParseCsv(string line, bool allowEscape)
 		{
 			var  result = new List<string>();
 			var  sb     = new StringBuilder();
@@ -73,6 +73,22 @@ namespace Covid19Radar.LogViewer.Models
 						sb.Append('\"');
 					} else {
 						dq = !dq;
+					}
+					break;
+				case '\\' when allowEscape:
+					++i;
+					if (i < line.Length) {
+						ch = line[i];
+						++i;
+						sb.Append(ch switch {
+							't' => '\t',
+							'v' => '\v',
+							'r' => '\r',
+							'n' => '\n',
+							_ => ch
+						});
+					} else {
+						sb.Append('\\');
 					}
 					break;
 				case ',':
