@@ -23,7 +23,7 @@ jobs:
       uses: NuGet/setup-nuget@v1.0.5
       with:
         nuget-api-key: ${{ secrets.NUGET_API_KEY }}
-        nuget-version: 5.3.1
+        nuget-version: 5.9.1
     # Restore
     - name: Restore dependencies
       run: dotnet restore CocoaLogViewer.sln
