@@ -1,6 +1,13 @@
 # CocoaLogViewer
 Copyright (C) 2020-2021 Takym.
 
+[![Version](https://img.shields.io/badge/version-none-inactive)](https://github.com/YigtyORG/CocoaLogViewer/releases)
+[![License](https://img.shields.io/github/license/YigtyORG/CocoaLogViewer)](LICENSE.md)
+[![Build](https://github.com/YigtyORG/CocoaLogViewer/workflows/Build/badge.svg)](https://github.com/YigtyORG/CocoaLogViewer/actions/workflows/Build.yml)
+[![GitHub Watchers](https://img.shields.io/github/watchers/YigtyORG/CocoaLogViewer?style=social)](https://github.com/YigtyORG/CocoaLogViewer/watchers)
+[![GitHub Stars](https://img.shields.io/github/stars/YigtyORG/CocoaLogViewer?style=social)](https://github.com/YigtyORG/CocoaLogViewer/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/YigtyORG/CocoaLogViewer?style=social)](https://github.com/YigtyORG/CocoaLogViewer/network/members)
+
 ## 概要
 このソフトウェアは、接触確認アプリ [COCOA](https://github.com/cocoa-mhlw/cocoa) の動作情報ファイル(ログファイル)を人間が読み易い形で表示します。
 今後はログ情報を解析する機能を開発する予定です。
