@@ -37,8 +37,8 @@ jobs:
     - name: Pack
       run: dotnet pack -c ${{ matrix.config }} --no-build --include-symbols --version-suffix ${{ matrix.config }}_${{ github.sha }}
     # Add Source
-    #- name: Add Source
-    #  run: nuget sources Add -Source https://nuget.pkg.github.com/YigtyORG/index.json -Name "github" -UserName YigtyORG -Password ${{ secrets.GITHUB_TOKEN }}
+    - name: Add Source
+      run: nuget sources Add -Source https://nuget.pkg.github.com/YigtyORG/index.json -Name "github" -UserName YigtyORG -Password ${{ secrets.GITHUB_TOKEN }}
     # Publish
-    #- name: Publish
-    #  run: nuget push "**/bin/${{ matrix.config }}/*-*.nupkg" -Source "github" -SkipDuplicate
+    - name: Publish
+      run: nuget push "**/bin/${{ matrix.config }}/*-*.nupkg" -Source "github" -SkipDuplicate
