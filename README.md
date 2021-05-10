@@ -5,6 +5,7 @@ Copyright (C) 2020-2021 Takym.
 [![Version](https://img.shields.io/badge/version-none-inactive)](https://github.com/YigtyORG/CocoaLogViewer/releases)
 [![License](https://img.shields.io/github/license/YigtyORG/CocoaLogViewer)](LICENSE.md)
 [![Build](https://github.com/YigtyORG/CocoaLogViewer/workflows/Build/badge.svg)](https://github.com/YigtyORG/CocoaLogViewer/actions/workflows/Build.yml)
+
 [![GitHub Watchers](https://img.shields.io/github/watchers/YigtyORG/CocoaLogViewer?style=social)](https://github.com/YigtyORG/CocoaLogViewer/watchers)
 [![GitHub Stars](https://img.shields.io/github/stars/YigtyORG/CocoaLogViewer?style=social)](https://github.com/YigtyORG/CocoaLogViewer/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/YigtyORG/CocoaLogViewer?style=social)](https://github.com/YigtyORG/CocoaLogViewer/network/members)
