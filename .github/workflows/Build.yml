@@ -9,36 +9,36 @@ on:
 jobs:
   Build:
     runs-on: windows-latest
-  strategy:
-    matrix:
-      config: [ Debug, Release ]
-  steps:
-    - uses: actions/checkout@v2
-    # Setup
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 5.0.201
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.0.5
-      with:
-        nuget-api-key: ${{ secrets.NUGET_API_KEY }}
-        nuget-version: 5.9.1
-    # Restore
-    - name: Restore dependencies
-      run: dotnet restore CocoaLogViewer.sln
-    # Build
-    - name: Build
-      run: dotnet build -c ${{ matrix.config }} --no-restore
-    # Test
-    - name: Test
-      run: dotnet test -c ${{ matrix.config }} --no-build --verbosity normal
-    # Pack
-    - name: Pack
-      run: dotnet pack -c ${{ matrix.config }} --no-build --include-symbols --version-suffix ${{ matrix.config }}_${{ github.sha }}
-    # Add Source
-    - name: Add Source
-      run: nuget sources Add -Source https://nuget.pkg.github.com/YigtyORG/index.json -Name "github" -UserName YigtyORG -Password ${{ secrets.GITHUB_TOKEN }}
-    # Publish
-    - name: Publish
-      run: nuget push "**/bin/${{ matrix.config }}/*-*.nupkg" -Source "github" -SkipDuplicate
+    strategy:
+      matrix:
+        config: [ Debug, Release ]
+    steps:
+      - uses: actions/checkout@v2
+      # Setup
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.201
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1.0.5
+        with:
+          nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+          nuget-version: 5.9.1
+      # Restore
+      - name: Restore dependencies
+        run: dotnet restore CocoaLogViewer.sln
+      # Build
+      - name: Build
+        run: dotnet build -c ${{ matrix.config }} --no-restore
+      # Test
+      - name: Test
+        run: dotnet test -c ${{ matrix.config }} --no-build --verbosity normal
+      # Pack
+      - name: Pack
+        run: dotnet pack -c ${{ matrix.config }} --no-build --include-symbols --version-suffix ${{ matrix.config }}_${{ github.sha }}
+      # Add Source
+      - name: Add Source
+        run: nuget sources Add -Source https://nuget.pkg.github.com/YigtyORG/index.json -Name "github" -UserName YigtyORG -Password ${{ secrets.GITHUB_TOKEN }}
+      # Publish
+      - name: Publish
+        run: nuget push "**/bin/${{ matrix.config }}/*-*.nupkg" -Source "github" -SkipDuplicate
