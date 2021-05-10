@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE Project>
+<!--*
+ * CocoaLogViewer
+ * Copyright (C) 2020-2021 Yigty.ORG; all rights reserved.
+ * Copyright (C) 2020-2021 Takym.
+ *
+ * distributed under the MIT License.
+**-->
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
@@ -16,16 +23,16 @@
 		<Product>CocoaLogViewer</Product>
 		<Authors>Takym</Authors>
 		<Description>接触確認アプリのログファイルを表示します。</Description>
-		<Copyright>Copyright (C) 2020-2021 Takym.</Copyright>
+		<Copyright>Copyright (C) 2020-2021 Yigty.ORG; all rights reserved. Copyright (C) 2020-2021 Takym.</Copyright>
 		<VersionPrefix>0.0.0.0</VersionPrefix>
 		<InformationalVersion>c19r.lv00a0</InformationalVersion>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/YigtyORG/CocoaLogViewer/</RepositoryUrl>
 	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
 		<Prefer32Bit>true</Prefer32Bit>
 	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
 		<DebugType>none</DebugType>
 		<DebugSymbols>false</DebugSymbols>
 	</PropertyGroup>

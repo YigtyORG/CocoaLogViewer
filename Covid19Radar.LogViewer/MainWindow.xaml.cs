@@ -1,4 +1,12 @@
-﻿using System;
+﻿/****
+ * CocoaLogViewer
+ * Copyright (C) 2020-2021 Yigty.ORG; all rights reserved.
+ * Copyright (C) 2020-2021 Takym.
+ *
+ * distributed under the MIT License.
+****/
+
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;

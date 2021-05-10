@@ -1,4 +1,5 @@
 # CocoaLogViewer
+Copyright (C) 2020-2021 Yigty.ORG; all rights reserved.
 Copyright (C) 2020-2021 Takym.
 
 [![Version](https://img.shields.io/badge/version-none-inactive)](https://github.com/YigtyORG/CocoaLogViewer/releases)
