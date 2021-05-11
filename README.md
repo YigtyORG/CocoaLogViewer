@@ -50,6 +50,7 @@ Copyright (C) 2020-2021 Takym.
 
 | # |バージョン|開発コード名|更新日    |リリースノート                                                    |
 |--:|:--------:|:-----------|:--------:|:-----------------------------------------------------------------|
+|  2|v0.0.0.2  |c19r.lv00a2 |0000/00/00|まだ                                                              |
 |  1|v0.0.0.1  |c19r.lv00a1 |2021/05/10|<https://github.com/YigtyORG/CocoaLogViewer/releases/tag/v0.0.0.1>|
 |  0|v0.0.0.0  |c19r.lv00a0 |2021/05/10|<https://github.com/YigtyORG/CocoaLogViewer/releases/tag/v0.0.0.0>|
 
