@@ -25,14 +25,14 @@ namespace Covid19Radar.LogViewer.Launcher
 				Application.Run(new FormMain());
 				return 0;
 			} catch (Exception e) {
-				MessageBox.Show(e.Message, "ƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(e.Message, "ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return e.HResult;
 			}
 		}
 
 		private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
 		{
-			MessageBox.Show(e.Exception.Message, "ƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			MessageBox.Show(e.Exception.Message, "ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 	}
 }

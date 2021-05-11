@@ -1,4 +1,4 @@
-﻿
+
 namespace Covid19Radar.LogViewer.Launcher
 {
 	partial class FormMain
