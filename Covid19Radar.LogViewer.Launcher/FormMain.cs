@@ -1,4 +1,4 @@
-﻿/****
+/****
  * CocoaLogViewer
  * Copyright (C) 2020-2021 Yigty.ORG; all rights reserved.
  * Copyright (C) 2020-2021 Takym.
@@ -17,6 +17,11 @@ namespace Covid19Radar.LogViewer.Launcher
 		public FormMain()
 		{
 			this.InitializeComponent();
+		}
+
+		private void FormMain_Load(object sender, EventArgs e)
+		{
+			labelVersion.Text = VersionInfo.GetCaption();
 		}
 
 		private async void btnOpen_Click(object sender, EventArgs e)

@@ -30,6 +30,7 @@ namespace Covid19Radar.LogViewer.Launcher
 		{
 			this.btnOpen = new System.Windows.Forms.Button();
 			this.viewers = new System.Windows.Forms.ListBox();
+			this.labelVersion = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// btnOpen
@@ -55,18 +56,30 @@ namespace Covid19Radar.LogViewer.Launcher
 			this.viewers.TabIndex = 1;
 			this.viewers.SelectedIndexChanged += new System.EventHandler(this.viewers_SelectedIndexChanged);
 			// 
+			// labelVersion
+			// 
+			this.labelVersion.AutoSize = true;
+			this.labelVersion.Location = new System.Drawing.Point(176, 12);
+			this.labelVersion.Name = "labelVersion";
+			this.labelVersion.Size = new System.Drawing.Size(70, 15);
+			this.labelVersion.TabIndex = 2;
+			this.labelVersion.Text = "labelVersion";
+			// 
 			// FormMain
 			// 
 			this.AcceptButton = this.btnOpen;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(496, 441);
+			this.Controls.Add(this.labelVersion);
 			this.Controls.Add(this.viewers);
 			this.Controls.Add(this.btnOpen);
 			this.Name = "FormMain";
 			this.Text = "接触確認アプリ(COCOA)の動作情報確認アプリ";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
+			this.Load += new System.EventHandler(this.FormMain_Load);
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -74,6 +87,7 @@ namespace Covid19Radar.LogViewer.Launcher
 
 		private System.Windows.Forms.Button btnOpen;
 		private System.Windows.Forms.ListBox viewers;
+		private System.Windows.Forms.Label labelVersion;
 	}
 }
 
