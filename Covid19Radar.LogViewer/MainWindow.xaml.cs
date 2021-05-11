@@ -26,6 +26,7 @@ namespace Covid19Radar.LogViewer
 		{
 			_transformer = new TransformerPipeline().ConfigureDefaults().Build(m => m);
 			this.InitializeComponent();
+			lblVersion.Content = $"{VersionInfo.GetCaption()}\t{VersionInfo.GetCopyright()}";
 		}
 
 		public async ValueTask<bool> ShowOpenFileDialogAsync()
@@ -47,7 +48,7 @@ namespace Covid19Radar.LogViewer
 					if (ofd.ShowDialog() == DR.OK) {
 						this.Dispatcher.Invoke(() => this.Title = Path.GetFileName(ofd.FileName));
 						lfv.LogFile = await Task.Run(() => new LogFileModel(ofd.OpenFile(), _transformer)).ConfigureAwait(false);
-						this.Dispatcher.Invoke(() => openBtn.Visibility = Visibility.Collapsed);
+						this.Dispatcher.Invoke(() => btnOpen.Visibility = Visibility.Collapsed);
 						return true;
 					}
 				}
@@ -57,7 +58,7 @@ namespace Covid19Radar.LogViewer
 			return false;
 		}
 
-		private async void openBtn_Click(object sender, RoutedEventArgs e)
+		private async void btnOpen_Click(object sender, RoutedEventArgs e)
 		{
 			await this.ShowOpenFileDialogAsync();
 		}

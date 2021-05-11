@@ -17,7 +17,8 @@
 	Height="768" Width="1024">
 	<DockPanel>
 		<StackPanel Orientation="Vertical" DockPanel.Dock="Top">
-			<Button x:Name="openBtn" Content="開く" Click="openBtn_Click" />
+			<Button x:Name="btnOpen"    Content="開く" Click="btnOpen_Click" />
+			<Label  x:Name="lblVersion" Content="xxxx" Foreground="#240000" Background="#DEDEFF" FontSize="9" />
 		</StackPanel>
 		<local:LogFileView x:Name="lfv" />
 	</DockPanel>
