@@ -11,6 +11,7 @@ using System.Globalization;
 using System.Text;
 using System.Windows.Documents;
 using System.Windows.Media;
+using Covid19Radar.LogViewer.Globalization;
 
 namespace Covid19Radar.LogViewer.Models
 {
@@ -44,7 +45,7 @@ namespace Covid19Radar.LogViewer.Models
 		public string GetDateTimeAsString()
 		{
 			if (this.TryGetDateTime(out var dt)) {
-				return dt.ToString("yyyy\'年\'MM\'月\'dd\'日\'\r\nHH\'時\'mm\'分\'ss.fffffff\'秒\'");
+				return dt.ToString(LanguageData.Current.LogDataModel_DateTime_Format);
 			} else {
 				return this.Timestamp;
 			}
@@ -78,44 +79,44 @@ namespace Covid19Radar.LogViewer.Models
 		{
 			var sb = new StringBuilder();
 			sb.AppendFormat(
-				"日時：{0}",
+				LanguageData.Current.LogDataModel_DateTime,
 				this.GetDateTimeAsString()
 			).AppendLine();
 			sb.AppendFormat(
-				"ログレベル：{0}",
+				LanguageData.Current.LogDataModel_LogLevel,
 				this.GetLogLevel().Text
 			).AppendLine();
 			sb.AppendFormat(
-				"場所：{0}",
+				LanguageData.Current.LogDataModel_Location,
 				this.GetLocation()
 			).AppendLine();
 			if (this.OriginalMessage == this.TransformedMessage) {
 				sb.AppendFormat(
-					"内容：{0}",
+					LanguageData.Current.LogDataModel_Message,
 					this.OriginalMessage
 				).AppendLine();
 			} else {
 				sb.AppendFormat(
-					"翻訳された内容：{0}",
+					LanguageData.Current.LogDataModel_Message_Transformed,
 					this.TransformedMessage
 				).AppendLine();
 				sb.AppendFormat(
-					"元の内容：{0}",
+					LanguageData.Current.LogDataModel_Message_Original,
 					this.OriginalMessage
 				).AppendLine();
 			}
 			sb.AppendFormat(
-				"プラットフォーム: {0} (バージョン: {1})",
+				LanguageData.Current.LogDataModel_Platform,
 				this.Platform,
 				this.PlatformVersion
 			).AppendLine();
 			sb.AppendFormat(
-				"機器: {0} (種類: {1})",
+				LanguageData.Current.LogDataModel_Device,
 				this.DeviceModel,
 				this.DeviceType
 			).AppendLine();
 			sb.AppendFormat(
-				"アプリのバージョン: {0} (ビルド番号: {1})",
+				LanguageData.Current.LogDataModel_Version,
 				this.Version,
 				this.BuildNumber
 			).AppendLine();

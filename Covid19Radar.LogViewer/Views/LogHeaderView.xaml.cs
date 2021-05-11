@@ -7,6 +7,7 @@
 ****/
 
 using System.Windows.Controls;
+using Covid19Radar.LogViewer.Globalization;
 
 namespace Covid19Radar.LogViewer.Views
 {
@@ -15,6 +16,11 @@ namespace Covid19Radar.LogViewer.Views
 		public LogHeaderView()
 		{
 			this.InitializeComponent();
+			control  .Content = LanguageData.Current.LogHeaderView_Control;
+			timestamp.Content = LanguageData.Current.LogHeaderView_Timestamp;
+			level    .Content = LanguageData.Current.LogHeaderView_Level;
+			location .Content = LanguageData.Current.LogHeaderView_Location;
+			message  .Content = LanguageData.Current.LogHeaderView_Message;
 		}
 	}
 }

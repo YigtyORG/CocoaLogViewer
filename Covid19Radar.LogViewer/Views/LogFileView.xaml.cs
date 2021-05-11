@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Covid19Radar.LogViewer.Globalization;
 using Covid19Radar.LogViewer.Models;
 
 namespace Covid19Radar.LogViewer.Views
@@ -46,36 +47,39 @@ namespace Covid19Radar.LogViewer.Views
 				int count = logs.Count;
 				for (int i = 0; i < count; ++i) {
 					this.Dispatcher.Invoke(_add_items, listView, logs[i]);
-					await Task.Delay(1);
+					await Task.Yield();
 				}
-				await this.ShowMessageBox();
+				await this.ShowMessageBox(LanguageData.Current.LogFileView_MessageBox_Succeeded);
 			} catch (Exception e) {
-				MessageBox.Show(e.Message, "エラーが発生しました。", MessageBoxButton.OK, MessageBoxImage.Error);
+				await this.ShowMessageBox(mwnd => {
+					mwnd?.PrintException(e);
+					return LanguageData.Current.LogFileView_MessageBox_Failed;
+				});
 			}
 		}
 
-		private ValueTask ShowMessageBox()
+		private ValueTask ShowMessageBox(Func<MainWindow?, string> msg)
 		{
-			return ShowMessageBoxCore(this.Parent, 0 , 2);
-			static async ValueTask ShowMessageBoxCore(DependencyObject obj, int i, int max)
+			return ShowMessageBoxCore(msg, this.Parent, 0 , 2);
+			static async ValueTask ShowMessageBoxCore(Func<MainWindow?, string> msg, DependencyObject obj, int i, int max)
 			{
 				if (obj is MainWindow mwnd) {
-					obj.Dispatcher.Invoke(() => {
+					await obj.Dispatcher.InvokeAsync(() => {
 						MessageBox.Show(
 							mwnd,
-							$"動作情報ファイル「{mwnd.Title}」の読み込みが完了しました。",
-							"動作情報ファイルを開く",
+							msg(mwnd),
+							LanguageData.Current.LogFileView_MessageBox_Title,
 							MessageBoxButton.OK,
 							MessageBoxImage.Information
 						);
 					});
 				} else if (i < max && obj is FrameworkElement elem) {
 					await Task.Delay(1);
-					await ShowMessageBoxCore(elem.Parent, ++i, max);
+					await ShowMessageBoxCore(msg, elem.Parent, ++i, max);
 				} else {
 					MessageBox.Show(
-						"動作情報ファイルの読み込みが完了しました。",
-						"動作情報ファイルを開く",
+						msg(null),
+						LanguageData.Current.LogFileView_MessageBox_Title,
 						MessageBoxButton.OK,
 						MessageBoxImage.Information
 					);

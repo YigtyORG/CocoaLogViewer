@@ -39,7 +39,7 @@ namespace Covid19Radar.LogViewer.Launcher
 			this.btnOpen.Name = "btnOpen";
 			this.btnOpen.Size = new System.Drawing.Size(160, 23);
 			this.btnOpen.TabIndex = 0;
-			this.btnOpen.Text = "動作情報ファイルを開く(&O)";
+			this.btnOpen.Text = "btnOpen";
 			this.btnOpen.UseVisualStyleBackColor = true;
 			this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
 			// 
@@ -75,7 +75,7 @@ namespace Covid19Radar.LogViewer.Launcher
 			this.Controls.Add(this.viewers);
 			this.Controls.Add(this.btnOpen);
 			this.Name = "FormMain";
-			this.Text = "接触確認アプリ(COCOA)の動作情報確認アプリ";
+			this.Text = "FormMain";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
 			this.Load += new System.EventHandler(this.FormMain_Load);
 			this.ResumeLayout(false);

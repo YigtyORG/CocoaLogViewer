@@ -9,6 +9,7 @@
 using System;
 using System.Threading;
 using System.Windows.Forms;
+using Covid19Radar.LogViewer.Globalization;
 
 namespace Covid19Radar.LogViewer.Launcher
 {
@@ -25,14 +26,14 @@ namespace Covid19Radar.LogViewer.Launcher
 				Application.Run(new FormMain());
 				return 0;
 			} catch (Exception e) {
-				MessageBox.Show(e.Message, "エラーが発生しました。", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(e.Message, LanguageData.Current.MainWindow_OFD_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return e.HResult;
 			}
 		}
 
 		private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
 		{
-			MessageBox.Show(e.Exception.Message, "エラーが発生しました。", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			MessageBox.Show(e.Exception.Message, LanguageData.Current.MainWindow_OFD_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 	}
 }

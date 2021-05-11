@@ -9,6 +9,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Covid19Radar.LogViewer.Globalization;
 
 namespace Covid19Radar.LogViewer.Launcher
 {
@@ -17,6 +18,8 @@ namespace Covid19Radar.LogViewer.Launcher
 		public FormMain()
 		{
 			this.InitializeComponent();
+			this   .Text = LanguageData.Current.MainWindow_Title;
+			btnOpen.Text = LanguageData.Current.FormMain_ButtonOpen;
 		}
 
 		private void FormMain_Load(object sender, EventArgs e)
@@ -49,8 +52,9 @@ namespace Covid19Radar.LogViewer.Launcher
 		private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			if (e.CloseReason == CloseReason.UserClosing && viewers.Items.Count > 0) {
-				var dr = MessageBox.Show(this,
-					"全ての COCOA 動作情報ファイルウィンドウを閉じます。宜しいですか？",
+				var dr = MessageBox.Show(
+					this,
+					LanguageData.Current.FormMain_FormClosing,
 					this.Text,
 					MessageBoxButtons.YesNo,
 					MessageBoxIcon.Question

@@ -9,6 +9,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Covid19Radar.LogViewer.Globalization;
 using Covid19Radar.LogViewer.Models;
 
 namespace Covid19Radar.LogViewer.Views
@@ -25,12 +26,12 @@ namespace Covid19Radar.LogViewer.Views
 				if (_log_data != value) {
 					_log_data = value;
 					if (value is not null) {
-						timestamp.Text = value.GetDateTimeAsString();
+						timestamp.Text    = value.GetDateTimeAsString();
 						var logLevel      = value.GetLogLevel();
-						level.Text = logLevel.Text;
-						level.Background = logLevel.BackColor;
+						level.Text        = logLevel.Text;
+						level.Background  = logLevel.BackColor;
 						location.Document = value.GetLocationAsFlowDocument();
-						message.Text = value.TransformedMessage;
+						message.Text      = value.TransformedMessage;
 					}
 				}
 			}
@@ -39,6 +40,8 @@ namespace Covid19Radar.LogViewer.Views
 		public LogDataView()
 		{
 			this.InitializeComponent();
+			details.Content = LanguageData.Current.LogDataView_Details;
+			copy   .Content = LanguageData.Current.LogDataView_Copy;
 		}
 
 		private void details_Click(object sender, RoutedEventArgs e)
@@ -46,7 +49,7 @@ namespace Covid19Radar.LogViewer.Views
 			if (_log_data is not null) {
 				MessageBox.Show(
 					_log_data.CreateDetails(),
-					"詳細情報",
+					LanguageData.Current.LogDataView_DetailedInformation,
 					MessageBoxButton.OK,
 					MessageBoxImage.Information
 				);
@@ -58,8 +61,8 @@ namespace Covid19Radar.LogViewer.Views
 			if (_log_data is not null) {
 				Clipboard.SetText(_log_data.CreateDetails());
 				MessageBox.Show(
-					"クリップボードにログの詳細情報をコピーしました。",
-					"コピー",
+					LanguageData.Current.LogDataView_Copy_MessageBox,
+					LanguageData.Current.LogDataView_Copy,
 					MessageBoxButton.OK,
 					MessageBoxImage.Information
 				);

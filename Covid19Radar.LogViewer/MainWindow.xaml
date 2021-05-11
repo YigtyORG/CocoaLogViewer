@@ -13,12 +13,12 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:local="clr-namespace:Covid19Radar.LogViewer.Views"
 	mc:Ignorable="d"
-	Title="接触確認アプリ(COCOA)の動作情報確認アプリ"
 	Height="768" Width="1024">
 	<DockPanel>
 		<StackPanel Orientation="Vertical" DockPanel.Dock="Top">
-			<Button x:Name="btnOpen"    Content="開く" Click="btnOpen_Click" />
-			<Label  x:Name="lblVersion" Content="xxxx" Foreground="#240000" Background="#DEDEFF" FontSize="9" />
+			<Button x:Name="btnOpen"    d:Content="btnOpen"    Click="btnOpen_Click" />
+			<Label  x:Name="lblVersion" d:Content="lblVersion" Foreground="#240000" Background="#DEDEFF" FontSize="9" />
+			<Label  x:Name="lblException"                      Foreground="#FF0000" Background="#DEDEFF" Visibility="Collapsed" />
 		</StackPanel>
 		<local:LogFileView x:Name="lfv" />
 	</DockPanel>

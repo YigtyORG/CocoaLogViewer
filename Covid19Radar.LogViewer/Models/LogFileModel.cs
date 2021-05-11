@@ -12,6 +12,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Covid19Radar.LogViewer.Globalization;
 using Covid19Radar.LogViewer.Transformers;
 
 namespace Covid19Radar.LogViewer.Models
@@ -48,7 +49,9 @@ namespace Covid19Radar.LogViewer.Models
 						}
 					} else {
 						logs.Add(new(
-							"無効なログ", nameof(LogLevel.Remarks), row.Aggregate((a, b) => $"{a}, {b}"), "書式が誤っているため読み込めませんでした。",
+							LanguageData.Current.LogFileModel_InvalidLog_Short,
+							nameof(LogLevel.Remarks), row.Aggregate((a, b) => $"{a}, {b}"),
+							LanguageData.Current.LogFileModel_InvalidLog_Long,
 							string.Empty, string.Empty, string.Empty, string.Empty,
 							string.Empty, string.Empty, string.Empty, string.Empty,
 							string.Empty

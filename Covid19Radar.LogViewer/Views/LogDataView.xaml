@@ -21,8 +21,8 @@
 			<ColumnDefinition Width="200" />
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
-		<Button      x:Name="details"   Grid.Column="0" Content="詳細"    Height="20" Margin="0,0,0,20" Click="details_Click" />
-		<Button      x:Name="copy"      Grid.Column="0" Content="コピー"  Height="20" Margin="0,20,0,0" Click="copy_Click" />
+		<Button      x:Name="details"   Grid.Column="0" d:Content="details" Height="20" Margin="0,0,0,20" Click="details_Click" />
+		<Button      x:Name="copy"      Grid.Column="0" d:Content="copy"    Height="20" Margin="0,20,0,0" Click="copy_Click" />
 		<TextBox     x:Name="timestamp" Grid.Column="1" IsReadOnly="True" />
 		<TextBox     x:Name="level"     Grid.Column="2" IsReadOnly="True" FontSize="20" TextAlignment="Center" />
 		<RichTextBox x:Name="location"  Grid.Column="3" IsReadOnly="True" />

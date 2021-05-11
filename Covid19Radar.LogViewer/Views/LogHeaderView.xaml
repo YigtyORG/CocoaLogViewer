@@ -21,20 +21,10 @@
 			<ColumnDefinition Width="200" />
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
-		<Label Grid.Column="0" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">
-			操作
-		</Label>
-		<Label Grid.Column="1" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">
-			日時
-		</Label>
-		<Label Grid.Column="2" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">
-			ログレベル
-		</Label>
-		<Label Grid.Column="3" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">
-			場所
-		</Label>
-		<Label Grid.Column="4" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">
-			内容
-		</Label>
+		<Label x:Name="control"   d:Content="control"   Grid.Column="0" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" />
+		<Label x:Name="timestamp" d:Content="timestamp" Grid.Column="1" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" />
+		<Label x:Name="level"     d:Content="level"     Grid.Column="2" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" />
+		<Label x:Name="location"  d:Content="location"  Grid.Column="3" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" />
+		<Label x:Name="message"   d:Content="message"   Grid.Column="4" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" />
 	</Grid>
 </UserControl>

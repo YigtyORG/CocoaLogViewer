@@ -7,6 +7,7 @@
 ****/
 
 using System.Reflection;
+using Covid19Radar.LogViewer.Globalization;
 
 namespace Covid19Radar.LogViewer
 {
@@ -21,14 +22,15 @@ namespace Covid19Radar.LogViewer
 		public static string GetCaption()
 		{
 			if (_caption is null) {
-				var     asm  = Assembly.GetExecutingAssembly();
-				string? name = asm.GetCustomAttribute<AssemblyProductAttribute>()?.Product;
-				string  v    = asm.GetName().Version?.ToString(4) ?? "?.?.?.?";
-				string  cn   = asm.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? "unknown";
-				string  bc   = asm.GetCustomAttribute<AssemblyConfigurationAttribute>()?.Configuration?? "<Unknown>";
+				string  unknown = LanguageData.Current.VersionInfo_Unknown;
+				var     asm     = Assembly.GetExecutingAssembly();
+				string? name    = asm.GetCustomAttribute<AssemblyProductAttribute>()?.Product;
+				string  v       = asm.GetName().Version?.ToString(4) ?? "?.?.?.?";
+				string  cn      = asm.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? unknown;
+				string  bc      = asm.GetCustomAttribute<AssemblyConfigurationAttribute>()?.Configuration ?? unknown;
 				switch (bc) {
 				case Debug:
-					_caption = $"{name} - DEBUG [v{v}, cn:{cn}]";
+					_caption = $"{name} - {LanguageData.Current.VersionInfo_Debug} [v{v}, cn:{cn}]";
 					break;
 				case Release:
 					_caption = $"{name} [v{v}, cn:{cn}]";
@@ -44,7 +46,7 @@ namespace Covid19Radar.LogViewer
 		public static string GetCopyright()
 		{
 			if (_copyright is null) {
-				_copyright = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyCopyrightAttribute>()?.Copyright ?? "Unknown.";
+				_copyright = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyCopyrightAttribute>()?.Copyright ?? LanguageData.Current.VersionInfo_Unknown;
 			}
 			return _copyright;
 		}
