@@ -3,8 +3,8 @@ name: "Build"
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  #pull_request:
+  #  branches: [ master ]
 
 jobs:
   Build:
@@ -13,10 +13,10 @@ jobs:
       matrix:
         config: [ Debug, Release ]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.4
       # Setup
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v1.8.0
         with:
           dotnet-version: 5.0.201
       - name: Setup NuGet
