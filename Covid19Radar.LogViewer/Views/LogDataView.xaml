@@ -21,11 +21,39 @@
 			<ColumnDefinition Width="200" />
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
-		<Button      x:Name="details"   Grid.Column="0" d:Content="details" Height="20" Margin="0,0,0,20" Click="details_Click" />
-		<Button      x:Name="copy"      Grid.Column="0" d:Content="copy"    Height="20" Margin="0,20,0,0" Click="copy_Click" />
-		<TextBox     x:Name="timestamp" Grid.Column="1" IsReadOnly="True" />
-		<TextBox     x:Name="level"     Grid.Column="2" IsReadOnly="True" FontSize="20" TextAlignment="Center" />
-		<RichTextBox x:Name="location"  Grid.Column="3" IsReadOnly="True" />
-		<TextBox     x:Name="message"   Grid.Column="4" IsReadOnly="True" TextWrapping="WrapWithOverflow" />
+		<Button
+			Grid.Column="0"
+			x:Name="details"
+			d:Content="details"
+			Height="20"
+			Margin="0,0,0,20"
+			Command="{Binding ClickDetails}" />
+		<Button
+			Grid.Column="0"
+			x:Name="copy"
+			d:Content="copy"
+			Height="20"
+			Margin="0,20,0,0"
+			Command="{Binding ClickCopy}" />
+		<TextBox
+			Grid.Column="1"
+			Text="{Binding Timestamp}"
+			IsReadOnly="True" />
+		<TextBox
+			Grid.Column="2"
+			Text="{Binding LogLevel}"
+			Background="{Binding LogLevelBackColor}"
+			IsReadOnly="True"
+			FontSize="20"
+			TextAlignment="Center" />
+		<RichTextBox
+			Grid.Column="3"
+			x:Name="location"
+			IsReadOnly="True" />
+		<TextBox
+			Grid.Column="4"
+			Text="{Binding Message}"
+			IsReadOnly="True"
+			TextWrapping="WrapWithOverflow" />
 	</Grid>
 </UserControl>

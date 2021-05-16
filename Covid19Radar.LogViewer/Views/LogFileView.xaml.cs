@@ -13,6 +13,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Covid19Radar.LogViewer.Globalization;
 using Covid19Radar.LogViewer.Models;
+using Covid19Radar.LogViewer.ViewModels;
 
 namespace Covid19Radar.LogViewer.Views
 {
@@ -89,7 +90,9 @@ namespace Covid19Radar.LogViewer.Views
 
 		private static void AddItem(ListView listView, LogDataModel log)
 		{
-			listView.Items.Add(new LogDataView() { LogData = log });
+			var vm = new LogDataViewModel();
+			listView.Items.Add(new LogDataView(vm));
+			vm.LogData = log;
 		}
 	}
 }
