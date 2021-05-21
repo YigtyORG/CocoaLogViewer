@@ -15,10 +15,11 @@
 	mc:Ignorable="d"
 	Height="768" Width="1024">
 	<DockPanel>
-		<StackPanel Orientation="Vertical" DockPanel.Dock="Top">
+		<StackPanel Orientation="Vertical" DockPanel.Dock="Top" Background="#DEDEFF">
 			<Button x:Name="btnOpen"    d:Content="btnOpen"    Click="btnOpen_Click" />
-			<Label  x:Name="lblVersion" d:Content="lblVersion" Foreground="#240000" Background="#DEDEFF" FontSize="9" />
-			<Label  x:Name="lblException"                      Foreground="#FF0000" Background="#DEDEFF" Visibility="Collapsed" />
+			<Label  x:Name="lblVersion" d:Content="lblVersion" Foreground="#240000" FontSize="9" />
+			<Label  x:Name="lblException"                      Foreground="#FF0000" Visibility="Collapsed" />
+			<local:ControllerView x:Name="controller" />
 		</StackPanel>
 		<local:LogFileView x:Name="lfv" />
 	</DockPanel>

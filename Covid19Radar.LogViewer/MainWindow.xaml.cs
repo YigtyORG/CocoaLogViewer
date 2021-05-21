@@ -28,9 +28,10 @@ namespace Covid19Radar.LogViewer
 		{
 			_transformer = new TransformerPipeline().ConfigureDefaults().Build(m => m);
 			this.InitializeComponent();
-			this.Title         = LanguageData.Current.MainWindow_Title;
-			btnOpen   .Content = LanguageData.Current.MainWindow_ButtonOpen;
-			lblVersion.Content = $"{VersionInfo.GetCaption()}\t{VersionInfo.GetCopyright()}";
+			this.Title             = LanguageData.Current.MainWindow_Title;
+			btnOpen   .Content     = LanguageData.Current.MainWindow_ButtonOpen;
+			lblVersion.Content     = $"{VersionInfo.GetCaption()}\t{VersionInfo.GetCopyright()}";
+			controller.LogFileView = lfv;
 		}
 
 		public async ValueTask<bool> ShowOpenFileDialogAsync()

@@ -73,12 +73,26 @@ namespace Covid19Radar.LogViewer.Globalization
 
 		#endregion
 
+		#region ControllerView
+
+		public abstract string ControllerView_Copy            { get; }
+		public abstract string ControllerView_Copy_MessageBox { get; }
+
+		#endregion
+
 		#region LogFileView
 
 		public abstract string LogFileView_MessageBox_Title  { get; }
 		public abstract string LogFileView_MessageBox_Failed { get; }
 
 		public abstract string LogFileView_MessageBox_Succeeded(MainWindow? mwnd);
+
+		#endregion
+
+		#region LogFileModel
+
+		public abstract string LogFileModel_InvalidLog_Short { get; }
+		public abstract string LogFileModel_InvalidLog_Long  { get; }
 
 		#endregion
 
@@ -101,25 +115,6 @@ namespace Covid19Radar.LogViewer.Globalization
 
 		#endregion
 
-		#region LogLevel
-
-		public abstract string LogLevel_Unknown { get; }
-		public abstract string LogLevel_Verbose { get; }
-		public abstract string LogLevel_Debug   { get; }
-		public abstract string LogLevel_Info    { get; }
-		public abstract string LogLevel_Warning { get; }
-		public abstract string LogLevel_Error   { get; }
-		public abstract string LogLevel_Remarks { get; }
-
-		#endregion
-
-		#region LogFileModel
-
-		public abstract string LogFileModel_InvalidLog_Short { get; }
-		public abstract string LogFileModel_InvalidLog_Long  { get; }
-
-		#endregion
-
 		#region LogDataModel
 
 		public abstract string LogDataModel_DateTime_Format     { get; }
@@ -132,6 +127,18 @@ namespace Covid19Radar.LogViewer.Globalization
 		public abstract string LogDataModel_Platform            { get; }
 		public abstract string LogDataModel_Device              { get; }
 		public abstract string LogDataModel_Version             { get; }
+
+		#endregion
+
+		#region LogLevel
+
+		public abstract string LogLevel_Unknown { get; }
+		public abstract string LogLevel_Verbose { get; }
+		public abstract string LogLevel_Debug   { get; }
+		public abstract string LogLevel_Info    { get; }
+		public abstract string LogLevel_Warning { get; }
+		public abstract string LogLevel_Error   { get; }
+		public abstract string LogLevel_Remarks { get; }
 
 		#endregion
 	}

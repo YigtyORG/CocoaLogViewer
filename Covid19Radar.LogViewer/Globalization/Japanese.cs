@@ -23,8 +23,12 @@ namespace Covid19Radar.LogViewer.Globalization
 		public override string MainWindow_OFD_Error_Message     => "指定されたファイルにアクセスできないか、正しい動作情報ファイルではありません。";
 		public override string FormMain_ButtonOpen              => "動作情報ファイルを開く(&O)";
 		public override string FormMain_FormClosing             => "全ての COCOA 動作情報ファイルウィンドウを閉じます。宜しいですか？";
+		public override string ControllerView_Copy              => "選択範囲を一括コピー";
+		public override string ControllerView_Copy_MessageBox   => "クリップボードに選択されたログの詳細情報をコピーしました。";
 		public override string LogFileView_MessageBox_Title     => "動作情報ファイルを開く";
 		public override string LogFileView_MessageBox_Failed    => "動作情報ファイルの読み込み中に予期せぬエラーが発生しました。";
+		public override string LogFileModel_InvalidLog_Short    => "無効なログ";
+		public override string LogFileModel_InvalidLog_Long     => "書式が誤っているため読み込めませんでした。";
 		public override string LogHeaderView_Control            => "操作";
 		public override string LogHeaderView_Timestamp          => "日時";
 		public override string LogHeaderView_Level              => "ログレベル";
@@ -34,15 +38,6 @@ namespace Covid19Radar.LogViewer.Globalization
 		public override string LogDataView_DetailedInformation  => "詳細情報";
 		public override string LogDataView_Copy                 => "コピー";
 		public override string LogDataView_Copy_MessageBox      => "クリップボードにログの詳細情報をコピーしました。";
-		public override string LogLevel_Unknown                 => "不明";
-		public override string LogLevel_Verbose                 => "詳細";
-		public override string LogLevel_Debug                   => "検査";
-		public override string LogLevel_Info                    => "情報";
-		public override string LogLevel_Warning                 => "警告";
-		public override string LogLevel_Error                   => "失敗";
-		public override string LogLevel_Remarks                 => "注釈";
-		public override string LogFileModel_InvalidLog_Short    => "無効なログ";
-		public override string LogFileModel_InvalidLog_Long     => "書式が誤っているため読み込めませんでした。";
 		public override string LogDataModel_DateTime_Format     => "yyyy\'年\'MM\'月\'dd\'日\'\r\nHH\'時\'mm\'分\'ss.fffffff\'秒\'";
 		public override string LogDataModel_DateTime            => "日時：{0}";
 		public override string LogDataModel_LogLevel            => "ログレベル：{0}";
@@ -53,6 +48,13 @@ namespace Covid19Radar.LogViewer.Globalization
 		public override string LogDataModel_Platform            => "プラットフォーム: {0} (バージョン: {1})";
 		public override string LogDataModel_Device              => "機器: {0} (種類: {1})";
 		public override string LogDataModel_Version             => "アプリのバージョン: {0} (ビルド番号: {1})";
+		public override string LogLevel_Unknown                 => "不明";
+		public override string LogLevel_Verbose                 => "詳細";
+		public override string LogLevel_Debug                   => "検査";
+		public override string LogLevel_Info                    => "情報";
+		public override string LogLevel_Warning                 => "警告";
+		public override string LogLevel_Error                   => "失敗";
+		public override string LogLevel_Remarks                 => "注釈";
 
 		private Japanese() { }
 

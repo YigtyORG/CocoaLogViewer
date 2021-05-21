@@ -85,10 +85,11 @@ namespace Covid19Radar.LogViewer.Models
 			} else {
 				_sb.Clear();
 			}
-			return this.CreateDetails(_sb);
+			this.CreateDetails(_sb);
+			return _sb.ToString();
 		}
 
-		public string CreateDetails(StringBuilder sb)
+		public void CreateDetails(StringBuilder sb)
 		{
 			sb.AppendFormat(
 				LanguageData.Current.LogDataModel_DateTime,
@@ -132,7 +133,6 @@ namespace Covid19Radar.LogViewer.Models
 				this.Version,
 				this.BuildNumber
 			).AppendLine();
-			return sb.ToString();
 		}
 	}
 }
