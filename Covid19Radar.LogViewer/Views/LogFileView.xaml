@@ -22,6 +22,7 @@
 		<local:LogHeaderView        Grid.Row="0" />
 		<ListView x:Name="listView" Grid.Row="1"
 			ScrollViewer.VerticalScrollBarVisibility="Visible"
-			ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+			ItemsSource="{Binding LogRows}" />
 	</Grid>
 </UserControl>

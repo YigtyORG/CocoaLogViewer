@@ -8,9 +8,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using Covid19Radar.LogViewer.Globalization;
 using Covid19Radar.LogViewer.Models;
 using Covid19Radar.LogViewer.Views;
@@ -19,9 +19,9 @@ namespace Covid19Radar.LogViewer.ViewModels
 {
 	public class LogFileViewModel : ViewModelBase
 	{
-		private readonly Action<ListView, LogDataModel> _add_item;
-		private readonly LogFileView                    _view;
-		private          LogFileModel?                  _log_file;
+		private readonly Action<LogDataModel> _add_item;
+		private readonly LogFileView          _view;
+		private          LogFileModel?        _log_file;
 
 		public LogFileModel? LogFile
 		{
@@ -36,10 +36,13 @@ namespace Covid19Radar.LogViewer.ViewModels
 			}
 		}
 
+		public ObservableCollection<LogDataView> LogRows { get; }
+
 		public LogFileViewModel(LogFileView view)
 		{
-			_add_item = AddItem;
+			_add_item = this.AddItem;
 			_view     = view ?? throw new ArgumentNullException(nameof(view));
+			this.LogRows = new();
 		}
 
 		private async void AddItems(IReadOnlyList<LogDataModel> logs)
@@ -47,7 +50,7 @@ namespace Covid19Radar.LogViewer.ViewModels
 			try {
 				int count = logs.Count;
 				for (int i = 0; i < count; ++i) {
-					_view.Dispatcher.Invoke(_add_item, _view.listView, logs[i]);
+					_view.Dispatcher.Invoke(_add_item, logs[i]);
 					await Task.Yield();
 				}
 				await this.ShowMessageBox(LanguageData.Current.LogFileView_MessageBox_Succeeded);
@@ -87,10 +90,10 @@ namespace Covid19Radar.LogViewer.ViewModels
 			}
 		}
 
-		private static void AddItem(ListView listView, LogDataModel log)
+		private void AddItem(LogDataModel log)
 		{
 			var vm = new LogDataViewModel();
-			listView.Items.Add(new LogDataView(vm));
+			this.LogRows.Add(new LogDataView(vm));
 			vm.LogData = log;
 		}
 	}
