@@ -23,6 +23,7 @@
 		<ListView x:Name="listView" Grid.Row="1"
 			ScrollViewer.VerticalScrollBarVisibility="Visible"
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-			ItemsSource="{Binding LogRows}" />
+			ItemsSource="{Binding LogRows}"
+			SelectionChanged="listView_SelectionChanged" />
 	</Grid>
 </UserControl>

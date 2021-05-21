@@ -12,7 +12,6 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
-using System.Windows.Threading;
 using Covid19Radar.LogViewer.Globalization;
 using Covid19Radar.LogViewer.Models;
 using Covid19Radar.LogViewer.Transformers;

@@ -27,5 +27,12 @@ namespace Covid19Radar.LogViewer.Views
 			this.InitializeComponent();
 			this.DataContext = _view_model = new(this);
 		}
+
+		private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			if (listView.SelectedItem is LogDataView ldv) {
+				ldv.Focus();
+			}
+		}
 	}
 }

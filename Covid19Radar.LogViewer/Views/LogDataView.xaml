@@ -13,6 +13,10 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d"
 	Height="40" d:DesignWidth="800">
+	<UserControl.InputBindings>
+		<KeyBinding Command="{Binding ClickDetails}" Gesture="Ctrl+D" />
+		<KeyBinding Command="{Binding ClickCopy}"    Gesture="Ctrl+C" />
+	</UserControl.InputBindings>
 	<Grid Background="White">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="50" />
