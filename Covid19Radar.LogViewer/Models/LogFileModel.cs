@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Text;
 using Covid19Radar.LogViewer.Globalization;
 using Covid19Radar.LogViewer.Transformers;
 
@@ -71,7 +70,7 @@ namespace Covid19Radar.LogViewer.Models
 		private static List<string> ParseCsv(string line, bool allowEscape)
 		{
 			var  result = new List<string>();
-			var  sb     = new StringBuilder();
+			var  sb     = StringBuilderCache.Get();
 			int  i      = 0;
 			bool dq     = false;
 			while (i < line.Length) {

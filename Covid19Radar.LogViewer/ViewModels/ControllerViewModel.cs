@@ -6,8 +6,6 @@
  * distributed under the MIT License.
 ****/
 
-using System;
-using System.Text;
 using System.Windows;
 using Covid19Radar.LogViewer.Globalization;
 using Covid19Radar.LogViewer.Views;
@@ -16,9 +14,6 @@ namespace Covid19Radar.LogViewer.ViewModels
 {
 	public class ControllerViewModel : ViewModelBase
 	{
-		[ThreadStatic()]
-		private static StringBuilder? _sb;
-
 		private LogFileView? _log_file_view;
 
 		public LogFileView? LogFileView
@@ -40,22 +35,18 @@ namespace Covid19Radar.LogViewer.ViewModels
 		private void ClickCopyCore()
 		{
 			if (_log_file_view is not null) {
-				if (_sb is null) {
-					_sb = new();
-				} else {
-					_sb.Clear();
-				}
+				var sb    = StringBuilderCache.Get();
 				var items = _log_file_view.listView.SelectedItems;
 				int count = items.Count;
 				for (int i = 0; i < count; ++i) {
 					if (items[i]        is LogDataView      ldv  &&
 						ldv.DataContext is LogDataViewModel ldvm &&
 						ldvm.LogData    is not null and var ldm) {
-						ldm.CreateDetails(_sb);
-						_sb.AppendLine();
+						ldm.CreateDetails(sb); // ldm.CreateDetails() は呼び出してはいけない。StringBuilder が初期化されてしまう。
+						sb.AppendLine();
 					}
 				}
-				Clipboard.SetText(_sb.ToString());
+				Clipboard.SetText(sb.ToString());
 				MessageBox.Show(
 					LanguageData.Current.ControllerView_Copy_MessageBox,
 					LanguageData.Current.ControllerView_Copy,

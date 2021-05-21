@@ -30,9 +30,6 @@ namespace Covid19Radar.LogViewer.Models
 		string Version,
 		string BuildNumber)
 	{
-		[ThreadStatic()]
-		private static StringBuilder? _sb;
-
 		private static readonly SolidColorBrush _method_color    = new(Color.FromRgb(0x00, 0x80, 0xFF));
 		private static readonly SolidColorBrush _file_path_color = new(Color.FromRgb(0x80, 0x40, 0x00));
 		private static readonly SolidColorBrush _line_num_color  = new(Color.FromRgb(0x80, 0xFF, 0x80));
@@ -80,13 +77,9 @@ namespace Covid19Radar.LogViewer.Models
 
 		public string CreateDetails()
 		{
-			if (_sb is null) {
-				_sb = new StringBuilder();
-			} else {
-				_sb.Clear();
-			}
-			this.CreateDetails(_sb);
-			return _sb.ToString();
+			var sb = StringBuilderCache.Get();
+			this.CreateDetails(sb);
+			return sb.ToString();
 		}
 
 		public void CreateDetails(StringBuilder sb)
