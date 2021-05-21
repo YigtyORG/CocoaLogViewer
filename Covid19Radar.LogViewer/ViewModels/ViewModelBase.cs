@@ -25,6 +25,16 @@ namespace Covid19Radar.LogViewer.ViewModels
 			this.OnPropertyChanged(new(name));
 		}
 
+		protected bool TryRaisePropertyChanged<T>(ref T location, T value, T oldValue, string name) where T : class?
+		{
+			if (Interlocked.CompareExchange(ref location, value, oldValue) == oldValue) {
+				this.OnPropertyChanged(new(name));
+				return true;
+			} else {
+				return false;
+			}
+		}
+
 		protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
 		{
 			this.PropertyChanged?.Invoke(this, e);
