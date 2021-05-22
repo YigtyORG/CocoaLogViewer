@@ -24,8 +24,8 @@
 		<Authors>Takym</Authors>
 		<Description>接触確認アプリのログファイルを表示します。</Description>
 		<Copyright>Copyright (C) 2020-2021 Yigty.ORG; all rights reserved. Copyright (C) 2020-2021 Takym.</Copyright>
-		<VersionPrefix>0.0.0.2</VersionPrefix>
-		<InformationalVersion>c19r.lv00a2</InformationalVersion>
+		<VersionPrefix>0.0.0.3</VersionPrefix>
+		<InformationalVersion>c19r.lv00a3</InformationalVersion>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/YigtyORG/CocoaLogViewer/</RepositoryUrl>
 	</PropertyGroup>
