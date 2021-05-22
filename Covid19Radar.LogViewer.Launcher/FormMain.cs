@@ -15,16 +15,28 @@ namespace Covid19Radar.LogViewer.Launcher
 {
 	public partial class FormMain : Form
 	{
-		public FormMain()
+		private readonly string[]? _args;
+
+		public FormMain(string[]? args)
 		{
+			_args = args;
 			this.InitializeComponent();
 			this   .Text = LanguageData.Current.MainWindow_Title;
 			btnOpen.Text = LanguageData.Current.FormMain_ButtonOpen;
 		}
 
-		private void FormMain_Load(object sender, EventArgs e)
+		private async void FormMain_Load(object sender, EventArgs e)
 		{
 			labelVersion.Text = VersionInfo.GetCaption();
+
+			if (_args is not null && _args.Length == 1) {
+				var mwnd = new MainWindow();
+				mwnd.Closing += this.Mwnd_Closing;
+				if (await mwnd.OpenFile(_args[0])) {
+					mwnd.Show();
+					viewers.Items.Add(mwnd);
+				}
+			}
 		}
 
 		private async void btnOpen_Click(object sender, EventArgs e)

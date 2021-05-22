@@ -8,5 +8,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
 		<ProjectReference Include="../Covid19Radar.LogViewer/Covid19Radar.LogViewer.csproj" />
+		<Content Include="c19r.lv.bat">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
 	</ItemGroup>
 </Project>

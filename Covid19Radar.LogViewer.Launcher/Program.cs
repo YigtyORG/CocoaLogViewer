@@ -23,7 +23,7 @@ namespace Covid19Radar.LogViewer.Launcher
 				Application.SetHighDpiMode(HighDpiMode.SystemAware);
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
-				Application.Run(new FormMain());
+				Application.Run(new FormMain(args));
 				return 0;
 			} catch (Exception e) {
 				MessageBox.Show(e.Message, LanguageData.Current.MainWindow_OFD_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);

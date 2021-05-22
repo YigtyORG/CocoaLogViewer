@@ -23,6 +23,7 @@ namespace Covid19Radar.LogViewer
 	public partial class MainWindow : Window
 	{
 		private readonly Func<string?, string?> _transformer;
+		private          bool                   _file_loaded;
 
 		public MainWindow()
 		{
@@ -34,9 +35,9 @@ namespace Covid19Radar.LogViewer
 			controller.LogFileView = lfv;
 		}
 
-		public async ValueTask<bool> ShowOpenFileDialogAsync()
+		public ValueTask<bool> ShowOpenFileDialogAsync()
 		{
-			try {
+			return this.OpenFile(() => {
 				using (var ofd = new OpenFileDialog() {
 					Title                        = LanguageData.Current.MainWindow_OFD_Title,
 					Filter                       = LanguageData.Current.MainWindow_OFD_Filter(),
@@ -51,14 +52,36 @@ namespace Covid19Radar.LogViewer
 					AutoUpgradeEnabled           = true,
 				}) {
 					if (ofd.ShowDialog() == DR.OK) {
-						await this.Dispatcher.InvokeAsync(() => this.Title = Path.GetFileName(ofd.FileName));
-						lfv.LogFile = await Task.Run(() => new LogFileModel(ofd.OpenFile(), _transformer)).ConfigureAwait(false);
-						await this.Dispatcher.InvokeAsync(() => {
-							btnOpen     .Visibility = Visibility.Collapsed;
-							lblException.Visibility = Visibility.Collapsed;
-						});
-						return true;
+						return (ofd.FileName, ofd.OpenFile);
+					} else {
+						return null;
 					}
+				}
+			});
+		}
+
+		public ValueTask<bool> OpenFile(string filename)
+		{
+			return this.OpenFile(() => (filename, () => new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read)));
+		}
+
+		private async ValueTask<bool> OpenFile(Func<(string path, Func<Stream> open)?> file)
+		{
+			if (_file_loaded) {
+				return false;
+			}
+
+			try {
+				var f = file();
+				if (f.HasValue) {
+					await this.Dispatcher.InvokeAsync(() => this.Title = Path.GetFileName(f.Value.path));
+					lfv.LogFile = await Task.Run(() => new LogFileModel(f.Value.open(), _transformer)).ConfigureAwait(false);
+					await this.Dispatcher.InvokeAsync(() => {
+						btnOpen.Visibility      = Visibility.Collapsed;
+						lblException.Visibility = Visibility.Collapsed;
+					});
+					_file_loaded = true;
+					return true;
 				}
 			} catch (Exception e) {
 				await this.Dispatcher.InvokeAsync(() => {
