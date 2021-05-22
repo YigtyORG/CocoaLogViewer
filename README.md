@@ -3,7 +3,7 @@ Copyright (C) 2020-2021 Yigty.ORG; all rights reserved.
 Copyright (C) 2020-2021 Takym.
 
 [![Version](https://img.shields.io/badge/version-none-inactive)](https://github.com/YigtyORG/CocoaLogViewer/releases)
-[![License](https://img.shields.io/github/license/YigtyORG/CocoaLogViewer)](LICENSE.md)
+[![License](https://img.shields.io/github/license/YigtyORG/CocoaLogViewer)](https://github.com/YigtyORG/CocoaLogViewer/blob/master/LICENSE.md)
 [![Build](https://github.com/YigtyORG/CocoaLogViewer/workflows/Build/badge.svg)](https://github.com/YigtyORG/CocoaLogViewer/actions/workflows/Build.yml)
 
 [![GitHub Watchers](https://img.shields.io/github/watchers/YigtyORG/CocoaLogViewer?style=social)](https://github.com/YigtyORG/CocoaLogViewer/watchers)
@@ -27,24 +27,21 @@ Copyright (C) 2020-2021 Takym.
 * 言語: **C# 9.0**以降
 
 ## 使い方
-起動方法は二つあります。
-
-### Covid19Radar.LogViewer.exe を使う場合
-0. ソリューションを開いて、プロジェクトをビルドします。
-1. `Covid19Radar.LogViewer.exe` を起動します。
-2. 「**開く**」ボタンから COCOA のログファイルを開きます。
-	* ログファイルは「**お問い合わせ**」→「**動作情報を送信**」→「**動作情報を確認する**」から抽出できます。
-3. ログ情報が全て読み込まれるまで待機します。
-	* 通常のログファイルはかなり大きいので時間が掛かります。
-	* ログファイルの読み込みが完了するまで、ウィンドウを閉じないでください。
-		* 完了するとメッセージボックスが表示されます。
-
-### Covid19Radar.LogViewer.Launcher.exe を使う場合
-0. ソリューションを開いて、プロジェクトをビルドします。
-1. `Covid19Radar.LogViewer.Launcher.exe` を起動します。
-2. 「**動作情報ファイルを開く(O)**」ボタンから COCOA のログファイルを開きます。
-	* ログファイルは「**お問い合わせ**」→「**動作情報を送信**」→「**動作情報を確認する**」から抽出できます。
-3. ログ情報が全て読み込まれるまで待機します。
+1. COCOA からログファイルを抽出します。
+	* 「**お問い合わせ**」→「**動作情報を送信**」→「**動作情報を確認する**」から抽出できます。
+2. ソリューションを開いて、プロジェクトをビルドします。
+3. 起動方法を選びます。
+	* **Covid19Radar.LogViewer.exe** を使う場合
+		1. `Covid19Radar.LogViewer.exe` を起動します。
+		2. 画面上部の「**開く**」ボタンから COCOA のログファイルを開きます。
+	* **Covid19Radar.LogViewer.exe を使う場合**
+		1. `Covid19Radar.LogViewer.Launcher.exe` を起動します。
+		2. 画面左上の「**動作情報ファイルを開く(O)**」ボタンから COCOA のログファイルを開きます。
+	* **c19r.lv.bat** を使う場合
+		1. `Covid19Radar.LogViewer.Launcher.exe` を格納しているディレクトリでコマンドプロンプトを開きます。
+		2. `c19r.lv <ファイル名>` と入力し、コマンドを実行します。
+			* `<ファイル名>` に開くログファイルのパスを入れます。
+4. ログ情報が全て読み込まれるまで待機します。
 	* 通常のログファイルはかなり大きいので時間が掛かります。
 	* ログファイルの読み込みが完了するまで、ウィンドウを閉じないでください。
 		* 完了するとメッセージボックスが表示されます。
@@ -53,7 +50,7 @@ Copyright (C) 2020-2021 Takym.
 
 | # |バージョン|開発コード名|更新日    |リリースノート                                                    |
 |--:|:--------:|:-----------|:--------:|:-----------------------------------------------------------------|
-|  2|v0.0.0.2  |c19r.lv00a2 |0000/00/00|まだ                                                              |
+|  2|v0.0.0.2  |c19r.lv00a2 |2021/05/22|<https://github.com/YigtyORG/CocoaLogViewer/releases/tag/v0.0.0.2>|
 |  1|v0.0.0.1  |c19r.lv00a1 |2021/05/10|<https://github.com/YigtyORG/CocoaLogViewer/releases/tag/v0.0.0.1>|
 |  0|v0.0.0.0  |c19r.lv00a0 |2021/05/10|<https://github.com/YigtyORG/CocoaLogViewer/releases/tag/v0.0.0.0>|
 
