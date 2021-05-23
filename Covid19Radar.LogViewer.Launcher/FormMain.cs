@@ -29,6 +29,10 @@ namespace Covid19Radar.LogViewer.Launcher
 		{
 			labelVersion.Text = VersionInfo.GetCaption();
 
+			var app = new App();
+			app.OpenWindow = false;
+			app.InitializeComponent();
+
 			if (_args is not null && _args.Length == 1) {
 				var mwnd = new MainWindow();
 				mwnd.Closing += this.Mwnd_Closing;

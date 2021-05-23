@@ -8,8 +8,20 @@
 <Application
 	x:Class="Covid19Radar.LogViewer.App"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	StartupUri="MainWindow.xaml">
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<Application.Resources>
+		<ResourceDictionary>
+			<Brush x:Key="VersionTextColor">#240000</Brush>
+			<Brush x:Key="ErrorTextColor"  >#FF0000</Brush>
+			<Style x:Key="Controller" TargetType="StackPanel">
+				<Setter Property="Background" Value="#DEDEFF" />
+			</Style>
+			<Style x:Key="LogHeader" TargetType="Grid">
+				<Setter Property="Background" Value="LightGray" />
+			</Style>
+			<Style x:Key="LogData" TargetType="Grid">
+				<Setter Property="Background" Value="White" />
+			</Style>
+		</ResourceDictionary>
 	</Application.Resources>
 </Application>

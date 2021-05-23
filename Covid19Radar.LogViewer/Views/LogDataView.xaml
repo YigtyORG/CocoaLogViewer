@@ -13,11 +13,19 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d"
 	Height="40" d:DesignWidth="800">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<Style x:Key="OperationButton" TargetType="Button">
+				<Setter Property="Grid.Column" Value="0" />
+				<Setter Property="Height"      Value="20" />
+			</Style>
+		</ResourceDictionary>
+	</UserControl.Resources>
 	<UserControl.InputBindings>
 		<KeyBinding Command="{Binding ClickDetails}" Gesture="Ctrl+D" />
 		<KeyBinding Command="{Binding ClickCopy}"    Gesture="Ctrl+C" />
 	</UserControl.InputBindings>
-	<Grid Background="White">
+	<Grid Style="{StaticResource LogData}">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="50" />
 			<ColumnDefinition Width="150" />
@@ -26,18 +34,16 @@
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 		<Button
-			Grid.Column="0"
 			x:Name="details"
 			d:Content="details"
-			Height="20"
 			Margin="0,0,0,20"
+			Style="{StaticResource OperationButton}"
 			Command="{Binding ClickDetails}" />
 		<Button
-			Grid.Column="0"
 			x:Name="copy"
 			d:Content="copy"
-			Height="20"
 			Margin="0,20,0,0"
+			Style="{StaticResource OperationButton}"
 			Command="{Binding ClickCopy}" />
 		<TextBox
 			Grid.Column="1"
