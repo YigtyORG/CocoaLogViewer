@@ -18,9 +18,12 @@ namespace Covid19Radar.LogViewer.ViewModels
 
 		public event EventHandler? CanExecuteChanged;
 
-		public DelegateCommand(Func<object?, ValueTask>? action)
+		public DelegateCommand(Func<object?, ValueTask> action)
 		{
-			this.Action = action ?? (_ => default);
+			if (action is null) {
+				throw new ArgumentNullException(nameof(action));
+			}
+			this.Action = action;
 		}
 
 		public bool CanExecute(object? parameter)
