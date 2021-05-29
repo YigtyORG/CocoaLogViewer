@@ -77,7 +77,7 @@ namespace Covid19Radar.LogViewer.Models
 
 		public string CreateDetails()
 		{
-			var sb = StringBuilderCache.Get();
+			var sb = StringBuilderCache<LogDataModel>.Get();
 			this.CreateDetails(sb);
 			return sb.ToString();
 		}

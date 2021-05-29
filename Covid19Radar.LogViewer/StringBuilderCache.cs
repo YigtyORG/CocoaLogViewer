@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Covid19Radar.LogViewer
 {
-	internal static class StringBuilderCache
+	internal static class StringBuilderCache<T>
 	{
 		[ThreadStatic()]
 		private static StringBuilder? _sb;

@@ -70,7 +70,7 @@ namespace Covid19Radar.LogViewer.Models
 		private static List<string> ParseCsv(string line, bool allowEscape)
 		{
 			var  result = new List<string>();
-			var  sb     = StringBuilderCache.Get();
+			var  sb     = StringBuilderCache<LogFileModel>.Get();
 			int  i      = 0;
 			bool dq     = false;
 			while (i < line.Length) {

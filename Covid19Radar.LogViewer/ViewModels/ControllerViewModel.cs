@@ -35,14 +35,14 @@ namespace Covid19Radar.LogViewer.ViewModels
 		private void ClickCopyCore()
 		{
 			if (_log_file_view is not null) {
-				var sb    = StringBuilderCache.Get();
+				var sb    = StringBuilderCache<ControllerViewModel>.Get();
 				var items = _log_file_view.listView.SelectedItems;
 				int count = items.Count;
 				for (int i = 0; i < count; ++i) {
 					if (items[i]        is LogDataView      ldv  &&
 						ldv.DataContext is LogDataViewModel ldvm &&
 						ldvm.LogData    is not null and var ldm) {
-						ldm.CreateDetails(sb); // ldm.CreateDetails() は呼び出してはいけない。StringBuilder が初期化されてしまう。
+						ldm.CreateDetails(sb);
 						sb.AppendLine();
 					}
 				}
