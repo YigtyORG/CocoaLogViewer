@@ -24,6 +24,8 @@ namespace Covid19Radar.LogViewer.Globalization
 		public override string FormMain_ButtonOpen                       => "動作情報ファイルを開く(&O)";
 		public override string FormMain_CheckBoxAllowEscape              => "エスケープ文字の変換を行う。";
 		public override string FormMain_FormClosing                      => "全ての COCOA 動作情報ファイルウィンドウを閉じます。宜しいですか？";
+		public override string ModuleLoader_Failed_Title                 => "拡張機能読み込みエラー";
+		public override string ModuleLoader_Failed_Message               => "拡張機能「{0}」の読み込みに失敗しました。{1}";
 		public override string ControllerView_Copy                       => "選択範囲を一括コピー";
 		public override string ControllerView_CopyAsMarkdown             => "Markdownとしてコピー";
 		public override string ControllerView_Copy_MessageBox            => "クリップボードに選択されたログの詳細情報をコピーしました。";

@@ -10,17 +10,18 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using Covid19Radar.LogViewer.Extensibility;
 using Covid19Radar.LogViewer.Globalization;
 
 namespace Covid19Radar.LogViewer.Launcher
 {
 	public partial class FormMain : Form
 	{
-		private readonly string[]? _args;
+		private readonly ModuleInitializationContext _context;
 
-		public FormMain(string[]? args)
+		public FormMain(ModuleInitializationContext context)
 		{
-			_args = args;
+			_context = context ?? throw new ArgumentNullException(nameof(context));
 			this.InitializeComponent();
 			this           .Text = LanguageData.Current.MainWindow_Title;
 			btnOpen        .Text = LanguageData.Current.FormMain_ButtonOpen;
@@ -35,24 +36,20 @@ namespace Covid19Radar.LogViewer.Launcher
 			app.OpenWindow = false;
 			app.InitializeComponent();
 
-			if (_args is not null && _args.Length >= 1) {
-				var mwnd = new MainWindow();
-				mwnd.Closing += this.Mwnd_Closing;
-				cboxAllowEscape.Checked = _args.Contains("--allow-escape");
-				if (await mwnd.OpenFile(_args[0], cboxAllowEscape.Checked)) {
-					mwnd.Show();
-					viewers.Items.Add(mwnd);
+			if (_context.Arguments is not null and var args && args.Length >= 1) {
+				var mwnd = this.CreateMainWindow();
+				cboxAllowEscape.Checked = args.Contains("--allow-escape");
+				if (await mwnd.OpenFile(args[0], cboxAllowEscape.Checked)) {
+					this.ShowMainWindow(mwnd);
 				}
 			}
 		}
 
 		private async void btnOpen_Click(object sender, EventArgs e)
 		{
-			var mwnd = new MainWindow();
-			mwnd.Closing += this.Mwnd_Closing;
+			var mwnd = this.CreateMainWindow();
 			if (await mwnd.ShowOpenFileDialogAsync(cboxAllowEscape.Checked)) {
-				mwnd.Show();
-				viewers.Items.Add(mwnd);
+				this.ShowMainWindow(mwnd);
 			}
 		}
 
@@ -82,6 +79,24 @@ namespace Covid19Radar.LogViewer.Launcher
 					e.Cancel = true;
 				}
 			}
+		}
+
+		private MainWindow CreateMainWindow()
+		{
+			MainWindow mwnd;
+			if (_context.TransformerPipeline is not null and var transformer) {
+				mwnd = new(transformer);
+			} else {
+				mwnd = new();
+			}
+			mwnd.Closing += this.Mwnd_Closing;
+			return mwnd;
+		}
+
+		private void ShowMainWindow(MainWindow mwnd)
+		{
+			mwnd.Show();
+			viewers.Items.Add(mwnd);
 		}
 	}
 }

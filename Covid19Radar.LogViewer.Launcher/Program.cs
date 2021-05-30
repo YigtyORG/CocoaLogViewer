@@ -9,7 +9,9 @@
 using System;
 using System.Threading;
 using System.Windows.Forms;
+using Covid19Radar.LogViewer.Extensibility;
 using Covid19Radar.LogViewer.Globalization;
+using Covid19Radar.LogViewer.Launcher.Extensibility;
 
 namespace Covid19Radar.LogViewer.Launcher
 {
@@ -19,16 +21,24 @@ namespace Covid19Radar.LogViewer.Launcher
 		private static int Main(string[] args)
 		{
 			try {
-				Application.ThreadException += Application_ThreadException;
-				Application.SetHighDpiMode(HighDpiMode.SystemAware);
-				Application.EnableVisualStyles();
-				Application.SetCompatibleTextRenderingDefault(false);
-				Application.Run(new FormMain(args));
+				var context = new ModuleInitializationContextInternal();
+				context.Arguments = args;
+				ModuleLoader.LoadModules(context);
+				ShowWindow(context);
 				return 0;
 			} catch (Exception e) {
 				MessageBox.Show(e.Message, LanguageData.Current.MainWindow_OFD_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return e.HResult;
 			}
+		}
+
+		private static void ShowWindow(ModuleInitializationContext context)
+		{
+			Application.ThreadException += Application_ThreadException;
+			Application.SetHighDpiMode(HighDpiMode.SystemAware);
+			Application.EnableVisualStyles();
+			Application.SetCompatibleTextRenderingDefault(false);
+			Application.Run(new FormMain(context));
 		}
 
 		private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)

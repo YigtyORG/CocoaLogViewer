@@ -25,9 +25,11 @@ namespace Covid19Radar.LogViewer
 		private readonly Func<string?, string?> _transformer;
 		private          bool                   _file_loaded;
 
-		public MainWindow()
+		public MainWindow() : this(new TransformerPipeline().ConfigureDefaults()) { }
+
+		public MainWindow(TransformerPipeline transformerPipeline)
 		{
-			_transformer = new TransformerPipeline().ConfigureDefaults().Build(m => m);
+			_transformer = transformerPipeline.Build(m => m);
 			this.InitializeComponent();
 			this.Title             = LanguageData.Current.MainWindow_Title;
 			btnOpen   .Content     = LanguageData.Current.MainWindow_ButtonOpen;

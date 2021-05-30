@@ -21,9 +21,13 @@ namespace Covid19Radar.LogViewer
 
 		public static string GetCaption()
 		{
+			return GetCaption(Assembly.GetExecutingAssembly());
+		}
+
+		public static string GetCaption(Assembly asm)
+		{
 			if (_caption is null) {
 				string  unknown = LanguageData.Current.VersionInfo_Unknown;
-				var     asm     = Assembly.GetExecutingAssembly();
 				string? name    = asm.GetCustomAttribute<AssemblyProductAttribute>()?.Product;
 				string  v       = asm.GetName().Version?.ToString(4) ?? "?.?.?.?";
 				string  cn      = asm.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? unknown;
@@ -45,8 +49,13 @@ namespace Covid19Radar.LogViewer
 
 		public static string GetCopyright()
 		{
+			return GetCopyright(Assembly.GetExecutingAssembly());
+		}
+
+		public static string GetCopyright(Assembly asm)
+		{
 			if (_copyright is null) {
-				_copyright = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyCopyrightAttribute>()?.Copyright ?? LanguageData.Current.VersionInfo_Unknown;
+				_copyright = asm.GetCustomAttribute<AssemblyCopyrightAttribute>()?.Copyright ?? LanguageData.Current.VersionInfo_Unknown;
 			}
 			return _copyright;
 		}

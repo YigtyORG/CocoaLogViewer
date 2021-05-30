@@ -57,7 +57,7 @@ namespace Covid19Radar.LogViewer.Transformers
 			}
 		}
 
-		public Func<string?, string?> Build(Func<string?, string?> final)
+		public virtual Func<string?, string?> Build(Func<string?, string?> final)
 		{
 			TransformDelegate[] funcs;
 			lock (_delegates) {
