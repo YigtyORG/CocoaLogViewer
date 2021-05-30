@@ -6,6 +6,7 @@
  * distributed under the MIT License.
 ****/
 
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
@@ -75,17 +76,11 @@ namespace Covid19Radar.LogViewer.ViewModels
 
 		public LogDataViewModel()
 		{
-			this.ClickDetails = new(_ => {
-				this.ClickDetailsCore();
-				return default;
-			});
-			this.ClickCopy = new(_ => {
-				this.ClickCopyCore();
-				return default;
-			});
+			this.ClickDetails = new(this.ClickDetailsCore);
+			this.ClickCopy    = new(this.ClickCopyCore);
 		}
 
-		private void ClickDetailsCore()
+		private ValueTask ClickDetailsCore(object? ignored)
 		{
 			if (_log_data is not null) {
 				MessageBox.Show(
@@ -95,9 +90,10 @@ namespace Covid19Radar.LogViewer.ViewModels
 					MessageBoxImage.Information
 				);
 			}
+			return default;
 		}
 
-		private void ClickCopyCore()
+		private ValueTask ClickCopyCore(object? ignored)
 		{
 			if (_log_data is not null) {
 				Clipboard.SetText(_log_data.CreateDetails());
@@ -108,6 +104,7 @@ namespace Covid19Radar.LogViewer.ViewModels
 					MessageBoxImage.Information
 				);
 			}
+			return default;
 		}
 	}
 }

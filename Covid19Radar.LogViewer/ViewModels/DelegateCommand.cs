@@ -16,8 +16,6 @@ namespace Covid19Radar.LogViewer.ViewModels
 	{
 		public Func<object?, ValueTask> Action { get; }
 
-		public event EventHandler? CanExecuteChanged;
-
 		public DelegateCommand(Func<object?, ValueTask> action)
 		{
 			if (action is null) {
@@ -35,5 +33,9 @@ namespace Covid19Radar.LogViewer.ViewModels
 		{
 			await this.Action(parameter);
 		}
+
+#pragma warning disable CS0067
+		event EventHandler? ICommand.CanExecuteChanged { add { } remove{ } }
+#pragma warning restore CS0067
 	}
 }

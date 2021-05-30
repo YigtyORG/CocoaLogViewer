@@ -27,8 +27,7 @@ namespace Covid19Radar.LogViewer.ViewModels
 			set => this.RaisePropertyChanged(ref _log_file_view, value, nameof(this.LogFileView));
 		}
 
-		public DelegateCommand ClickCopy { get; }
-
+		public DelegateCommand ClickCopy           { get; }
 		public DelegateCommand ClickCopyAsMarkdown { get; }
 
 		public ControllerViewModel()
