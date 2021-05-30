@@ -15,6 +15,8 @@ namespace Covid19Radar.LogViewer.Globalization
 {
 	public sealed class EnglishLanguagePack : CocoaLogViewerModule
 	{
+		public override string? DisplayName => "The English Language Pack";
+
 		protected override void InitializeCore(ModuleInitializationContext context)
 		{
 #if DEBUG
@@ -32,6 +34,11 @@ namespace Covid19Radar.LogViewer.Globalization
 				.Add(TekItemTransformer.Instance)
 				.Add(UserDataTransformer.Instance)
 				.Add(TransitionTransformer.Instance);
+		}
+
+		public override string? GetLocalizedDescription()
+		{
+			return "This extension provides the English UI.";
 		}
 	}
 }
