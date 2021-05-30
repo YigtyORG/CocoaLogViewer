@@ -6,9 +6,7 @@
  * distributed under the MIT License.
 ****/
 
-using System.Windows;
+using Covid19Radar.LogViewer.Extensibility;
+using Covid19Radar.LogViewer.Globalization;
 
-[assembly: ThemeInfo(
-	ResourceDictionaryLocation.None, 
-	ResourceDictionaryLocation.SourceAssembly
-)]
+[assembly: CocoaLogViewerAddon(typeof(EnglishLanguagePack))]

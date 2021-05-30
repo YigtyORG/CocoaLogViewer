@@ -6,18 +6,16 @@
  * distributed under the MIT License.
 **-->
 <Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="../Covid19Radar.LogViewer/Covid19Radar.LogViewer.csproj" />
 		<Content Include="c19r.lv.bat">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
-		<Content Include="../README.md">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-			<Visible>false</Visible>
-		</Content>
-		<Content Include="../LICENSE.md">
+		<Content Include="../*.md">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 			<Visible>false</Visible>

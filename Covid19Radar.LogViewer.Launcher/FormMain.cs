@@ -25,16 +25,16 @@ namespace Covid19Radar.LogViewer.Launcher
 			_modules = modules ?? throw new ArgumentNullException(nameof(modules));
 			_context = context ?? throw new ArgumentNullException(nameof(context));
 			this.InitializeComponent();
-			this           .Text = LanguageData.Current.MainWindow_Title;
-			btnOpen        .Text = LanguageData.Current.FormMain_ButtonOpen;
-			cboxAllowEscape.Text = LanguageData.Current.FormMain_CheckBoxAllowEscape;
 		}
 
 		private async void FormMain_Load(object sender, EventArgs e)
 		{
 			foreach (var _ in _modules) ;
-
-			labelVersion.Text = VersionInfo.GetCaption();
+			
+			this           .Text = LanguageData.Current.MainWindow_Title;
+			btnOpen        .Text = LanguageData.Current.FormMain_ButtonOpen;
+			cboxAllowEscape.Text = LanguageData.Current.FormMain_CheckBoxAllowEscape;
+			labelVersion   .Text = VersionInfo.GetCaption();
 
 			var app = new App();
 			app.OpenWindow = false;

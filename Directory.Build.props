@@ -9,7 +9,6 @@
 **-->
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
 		<TargetFramework>net5.0-windows</TargetFramework>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
@@ -30,7 +29,7 @@
 		<RepositoryUrl>https://github.com/YigtyORG/CocoaLogViewer/</RepositoryUrl>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
-		<Prefer32Bit>true</Prefer32Bit>
+		<Prefer32Bit Condition="'$(OutputType)'=='WinExe'">true</Prefer32Bit>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
 		<DebugType>none</DebugType>
