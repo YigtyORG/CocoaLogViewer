@@ -7,8 +7,9 @@
 ****/
 
 using System;
+using Covid19Radar.LogViewer.Transformers;
 
-namespace Covid19Radar.LogViewer.Transformers
+namespace Covid19Radar.LogViewer.Globalization.EnglishTransformers
 {
 	internal sealed class UserDataTransformer : TransformerBase
 	{
@@ -23,12 +24,12 @@ namespace Covid19Radar.LogViewer.Transformers
 		protected override string? TransformCore(string? message, Func<string?, string?> next)
 		{
 			if (message == UserDataExists) {
-				return "利用者情報は存在します。";
+				return "The user data exists.";
 			} else if (message == NoUserDataExists) {
-				return "利用者情報は存在しません。";
+				return "The user data does not exist.";
 			} else if ((message?.StartsWith(Prefix) ?? false) &&
 				bool.TryParse(message.Substring(Prefix.Length), out bool exists)) {
-				return $"利用者情報の存否：存在{(exists ? "する" : "しない")}。";
+				return $"Does user data exist? {(exists ? "Yes" : "No")}.";
 			} else {
 				return next(message);
 			}

@@ -8,6 +8,8 @@
 
 using System.Globalization;
 using Covid19Radar.LogViewer.Extensibility;
+using Covid19Radar.LogViewer.Globalization.EnglishTransformers;
+using Covid19Radar.LogViewer.Transformers;
 
 namespace Covid19Radar.LogViewer.Globalization
 {
@@ -23,6 +25,13 @@ namespace Covid19Radar.LogViewer.Globalization
 			CultureInfo.CurrentUICulture              = cinfo;
 #endif
 			LanguageData.Current = English._inst;
+
+			context.TransformerPipeline = new TransformerPipeline()
+				.AddControlCharTransformer()
+				.Add(CallTransformer.Instance)
+				.Add(TekItemTransformer.Instance)
+				.Add(UserDataTransformer.Instance)
+				.Add(TransitionTransformer.Instance);
 		}
 	}
 }
