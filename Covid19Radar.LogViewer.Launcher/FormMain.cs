@@ -8,7 +8,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows.Forms;
 using Covid19Radar.LogViewer.Extensibility;
 using Covid19Radar.LogViewer.Globalization;
@@ -36,11 +35,16 @@ namespace Covid19Radar.LogViewer.Launcher
 			app.OpenWindow = false;
 			app.InitializeComponent();
 
-			if (_context.Arguments is not null and var args && args.Length >= 1) {
-				var mwnd = this.CreateMainWindow();
-				cboxAllowEscape.Checked = args.Contains("--allow-escape");
-				if (await mwnd.OpenFile(args[0], cboxAllowEscape.Checked)) {
-					this.ShowMainWindow(mwnd);
+			cboxAllowEscape.Checked = _context.AllowEscape;
+
+			if (_context.LogFilesToOpen is not null) {
+				var files = _context.LogFilesToOpen;
+				int count = files.Count;
+				for (int i = 0; i < count; ++i) {
+					var mwnd = this.CreateMainWindow();
+					if (await mwnd.OpenFile(files[i], _context.AllowEscape)) {
+						this.ShowMainWindow(mwnd);
+					}
 				}
 			}
 		}

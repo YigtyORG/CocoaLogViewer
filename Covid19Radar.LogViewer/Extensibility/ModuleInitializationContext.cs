@@ -6,6 +6,7 @@
  * distributed under the MIT License.
 ****/
 
+using System.Collections.Generic;
 using Covid19Radar.LogViewer.Transformers;
 
 namespace Covid19Radar.LogViewer.Extensibility
@@ -14,5 +15,10 @@ namespace Covid19Radar.LogViewer.Extensibility
 	{
 		public string[]?            Arguments           { get; set; }
 		public TransformerPipeline? TransformerPipeline { get; set; }
+		public IList<string>?       LogFilesToOpen      { get; set; }
+		public bool                 AllowEscape         { get; set; }
+		public bool                 DisallowExtensions  { get; set; }
+
+		public abstract void ParseArguments();
 	}
 }

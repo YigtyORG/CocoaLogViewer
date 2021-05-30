@@ -39,6 +39,10 @@ namespace Covid19Radar.LogViewer.Launcher.Extensibility
 			if (!Directory.Exists(dir)) {
 				yield break;
 			}
+			context.ParseArguments();
+			if (context.DisallowExtensions) {
+				yield break;
+			}
 			foreach (string fname in Directory.EnumerateFiles(dir, pattern, _eo)) {
 				if (LoadModuleCore(fname) is not null and var mod) {
 					mod.Initialize(context);

@@ -21,8 +21,7 @@ namespace Covid19Radar.LogViewer.Launcher
 		private static int Main(string[] args)
 		{
 			try {
-				var context = new ModuleInitializationContextInternal();
-				context.Arguments = args;
+				var context = new ModuleInitializationContextInternal(args);
 				ModuleLoader.LoadModules(context);
 				ShowWindow(context);
 				return 0;
