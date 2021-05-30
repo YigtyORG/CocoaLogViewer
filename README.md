@@ -31,12 +31,12 @@ Copyright (C) 2020-2021 Takym.
 	* 「**お問い合わせ**」→「**動作情報を送信**」→「**動作情報を確認する**」から抽出できます。
 2. ソリューションを開いて、プロジェクトをビルドします。
 3. 起動方法を選びます。
+	* **Covid19Radar.LogViewer.Launcher.exe を使う場合** (推奨)
+		1. `Covid19Radar.LogViewer.Launcher.exe` を起動します。
+		2. 画面左上の「**動作情報ファイルを開く(O)**」ボタンから COCOA のログファイルを開きます。
 	* **Covid19Radar.LogViewer.exe** を使う場合
 		1. `Covid19Radar.LogViewer.exe` を起動します。
 		2. 画面上部の「**開く**」ボタンから COCOA のログファイルを開きます。
-	* **Covid19Radar.LogViewer.exe を使う場合**
-		1. `Covid19Radar.LogViewer.Launcher.exe` を起動します。
-		2. 画面左上の「**動作情報ファイルを開く(O)**」ボタンから COCOA のログファイルを開きます。
 	* **c19r.lv.bat** を使う場合
 		1. `Covid19Radar.LogViewer.Launcher.exe` を格納しているディレクトリでコマンドプロンプトを開きます。
 		2. `c19r.lv <ファイル名>` と入力し、コマンドを実行します。
