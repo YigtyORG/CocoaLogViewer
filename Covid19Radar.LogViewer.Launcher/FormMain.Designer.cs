@@ -31,6 +31,7 @@ namespace Covid19Radar.LogViewer.Launcher
 			this.btnOpen = new System.Windows.Forms.Button();
 			this.viewers = new System.Windows.Forms.ListBox();
 			this.labelVersion = new System.Windows.Forms.Label();
+			this.cboxAllowEscape = new System.Windows.Forms.CheckBox();
 			this.SuspendLayout();
 			// 
 			// btnOpen
@@ -50,10 +51,10 @@ namespace Covid19Radar.LogViewer.Launcher
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.viewers.FormattingEnabled = true;
 			this.viewers.ItemHeight = 15;
-			this.viewers.Location = new System.Drawing.Point(8, 40);
+			this.viewers.Location = new System.Drawing.Point(8, 56);
 			this.viewers.Name = "viewers";
-			this.viewers.Size = new System.Drawing.Size(480, 394);
-			this.viewers.TabIndex = 1;
+			this.viewers.Size = new System.Drawing.Size(480, 379);
+			this.viewers.TabIndex = 3;
 			this.viewers.SelectedIndexChanged += new System.EventHandler(this.viewers_SelectedIndexChanged);
 			// 
 			// labelVersion
@@ -62,8 +63,18 @@ namespace Covid19Radar.LogViewer.Launcher
 			this.labelVersion.Location = new System.Drawing.Point(176, 12);
 			this.labelVersion.Name = "labelVersion";
 			this.labelVersion.Size = new System.Drawing.Size(70, 15);
-			this.labelVersion.TabIndex = 2;
+			this.labelVersion.TabIndex = 1;
 			this.labelVersion.Text = "labelVersion";
+			// 
+			// cboxAllowEscape
+			// 
+			this.cboxAllowEscape.AutoSize = true;
+			this.cboxAllowEscape.Location = new System.Drawing.Point(8, 32);
+			this.cboxAllowEscape.Name = "cboxAllowEscape";
+			this.cboxAllowEscape.Size = new System.Drawing.Size(118, 19);
+			this.cboxAllowEscape.TabIndex = 2;
+			this.cboxAllowEscape.Text = "cboxAllowEscape";
+			this.cboxAllowEscape.UseVisualStyleBackColor = true;
 			// 
 			// FormMain
 			// 
@@ -71,6 +82,7 @@ namespace Covid19Radar.LogViewer.Launcher
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(496, 441);
+			this.Controls.Add(this.cboxAllowEscape);
 			this.Controls.Add(this.labelVersion);
 			this.Controls.Add(this.viewers);
 			this.Controls.Add(this.btnOpen);
@@ -88,6 +100,7 @@ namespace Covid19Radar.LogViewer.Launcher
 		private System.Windows.Forms.Button btnOpen;
 		private System.Windows.Forms.ListBox viewers;
 		private System.Windows.Forms.Label labelVersion;
+		private System.Windows.Forms.CheckBox cboxAllowEscape;
 	}
 }
 

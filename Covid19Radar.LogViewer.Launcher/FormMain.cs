@@ -8,6 +8,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using Covid19Radar.LogViewer.Globalization;
 
@@ -21,8 +22,9 @@ namespace Covid19Radar.LogViewer.Launcher
 		{
 			_args = args;
 			this.InitializeComponent();
-			this   .Text = LanguageData.Current.MainWindow_Title;
-			btnOpen.Text = LanguageData.Current.FormMain_ButtonOpen;
+			this           .Text = LanguageData.Current.MainWindow_Title;
+			btnOpen        .Text = LanguageData.Current.FormMain_ButtonOpen;
+			cboxAllowEscape.Text = LanguageData.Current.FormMain_CheckBoxAllowEscape;
 		}
 
 		private async void FormMain_Load(object sender, EventArgs e)
@@ -33,10 +35,11 @@ namespace Covid19Radar.LogViewer.Launcher
 			app.OpenWindow = false;
 			app.InitializeComponent();
 
-			if (_args is not null && _args.Length == 1) {
+			if (_args is not null && _args.Length >= 1) {
 				var mwnd = new MainWindow();
 				mwnd.Closing += this.Mwnd_Closing;
-				if (await mwnd.OpenFile(_args[0])) {
+				cboxAllowEscape.Checked = _args.Contains("--allow-escape");
+				if (await mwnd.OpenFile(_args[0], cboxAllowEscape.Checked)) {
 					mwnd.Show();
 					viewers.Items.Add(mwnd);
 				}
@@ -47,7 +50,7 @@ namespace Covid19Radar.LogViewer.Launcher
 		{
 			var mwnd = new MainWindow();
 			mwnd.Closing += this.Mwnd_Closing;
-			if (await mwnd.ShowOpenFileDialogAsync()) {
+			if (await mwnd.ShowOpenFileDialogAsync(cboxAllowEscape.Checked)) {
 				mwnd.Show();
 				viewers.Items.Add(mwnd);
 			}

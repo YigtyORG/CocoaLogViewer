@@ -35,7 +35,7 @@ namespace Covid19Radar.LogViewer
 			controller.LogFileView = lfv;
 		}
 
-		public ValueTask<bool> ShowOpenFileDialogAsync()
+		public ValueTask<bool> ShowOpenFileDialogAsync(bool allowEscape)
 		{
 			return this.OpenFile(() => {
 				using (var ofd = new OpenFileDialog() {
@@ -57,15 +57,15 @@ namespace Covid19Radar.LogViewer
 						return null;
 					}
 				}
-			});
+			}, allowEscape);
 		}
 
-		public ValueTask<bool> OpenFile(string filename)
+		public ValueTask<bool> OpenFile(string filename, bool allowEscape)
 		{
-			return this.OpenFile(() => (filename, () => new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read)));
+			return this.OpenFile(() => (filename, () => new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read)), allowEscape);
 		}
 
-		private async ValueTask<bool> OpenFile(Func<(string path, Func<Stream> open)?> file)
+		private async ValueTask<bool> OpenFile(Func<(string path, Func<Stream> open)?> file, bool allowEscape)
 		{
 			if (_file_loaded) {
 				return false;
@@ -75,7 +75,7 @@ namespace Covid19Radar.LogViewer
 				var f = file();
 				if (f.HasValue) {
 					await this.Dispatcher.InvokeAsync(() => this.Title = Path.GetFileName(f.Value.path));
-					lfv.LogFile = await Task.Run(() => new LogFileModel(f.Value.open(), _transformer)).ConfigureAwait(false);
+					lfv.LogFile = await Task.Run(() => new LogFileModel(f.Value.open(), _transformer, allowEscape)).ConfigureAwait(false);
 					await this.Dispatcher.InvokeAsync(() => {
 						btnOpen.Visibility      = Visibility.Collapsed;
 						lblException.Visibility = Visibility.Collapsed;
@@ -107,7 +107,7 @@ namespace Covid19Radar.LogViewer
 
 		private async void btnOpen_Click(object sender, RoutedEventArgs e)
 		{
-			await this.ShowOpenFileDialogAsync();
+			await this.ShowOpenFileDialogAsync(false);
 		}
 
 		public override string ToString()

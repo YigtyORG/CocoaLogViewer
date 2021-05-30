@@ -20,10 +20,10 @@ namespace Covid19Radar.LogViewer.Models
 	{
 		public IReadOnlyList<LogDataModel> Logs { get; }
 
-		public LogFileModel(Stream stream, ITransformer transformer, bool allowEscape = false)
+		public LogFileModel(Stream stream, ITransformer transformer, bool allowEscape)
 			: this(stream, transformer is null ? ThrowArgNull() : transformer.Transform, allowEscape) { }
 
-		public LogFileModel(Stream stream, Func<string?, string?> transformer, bool allowEscape = false)
+		public LogFileModel(Stream stream, Func<string?, string?> transformer, bool allowEscape)
 		{
 			if (stream is null) {
 				throw new ArgumentNullException(nameof(stream));
