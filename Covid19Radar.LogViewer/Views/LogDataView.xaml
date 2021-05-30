@@ -64,6 +64,7 @@
 			Grid.Column="4"
 			Text="{Binding Message}"
 			IsReadOnly="True"
+			FontSize="16"
 			TextWrapping="WrapWithOverflow" />
 	</Grid>
 </UserControl>
