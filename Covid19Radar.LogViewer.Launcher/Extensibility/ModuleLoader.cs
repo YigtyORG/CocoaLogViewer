@@ -36,11 +36,8 @@ namespace Covid19Radar.LogViewer.Launcher.Extensibility
 
 		internal static IEnumerable<CocoaLogViewerModule> LoadModules(ModuleInitializationContext context, string dir, string pattern)
 		{
-			if (!Directory.Exists(dir)) {
-				yield break;
-			}
 			context.ParseArguments();
-			if (context.DisallowExtensions) {
+			if (context.DisallowExtensions || !Directory.Exists(dir)) {
 				yield break;
 			}
 			foreach (string fname in Directory.EnumerateFiles(dir, pattern, _eo)) {

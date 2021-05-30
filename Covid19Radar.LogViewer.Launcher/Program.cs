@@ -7,6 +7,7 @@
 ****/
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
 using Covid19Radar.LogViewer.Extensibility;
@@ -22,8 +23,8 @@ namespace Covid19Radar.LogViewer.Launcher
 		{
 			try {
 				var context = new ModuleInitializationContextInternal(args);
-				ModuleLoader.LoadModules(context);
-				ShowWindow(context);
+				var modules = ModuleLoader.LoadModules(context);
+				ShowWindow(modules, context);
 				return 0;
 			} catch (Exception e) {
 				MessageBox.Show(e.Message, LanguageData.Current.MainWindow_OFD_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -31,13 +32,13 @@ namespace Covid19Radar.LogViewer.Launcher
 			}
 		}
 
-		private static void ShowWindow(ModuleInitializationContext context)
+		private static void ShowWindow(IEnumerable<CocoaLogViewerModule> modules, ModuleInitializationContext context)
 		{
 			Application.ThreadException += Application_ThreadException;
 			Application.SetHighDpiMode(HighDpiMode.SystemAware);
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new FormMain(context));
+			Application.Run(new FormMain(modules, context));
 		}
 
 		private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)

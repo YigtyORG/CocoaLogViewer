@@ -7,6 +7,7 @@
 ****/
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using Covid19Radar.LogViewer.Extensibility;
@@ -16,10 +17,12 @@ namespace Covid19Radar.LogViewer.Launcher
 {
 	public partial class FormMain : Form
 	{
-		private readonly ModuleInitializationContext _context;
+		private readonly IEnumerable<CocoaLogViewerModule> _modules;
+		private readonly ModuleInitializationContext       _context;
 
-		public FormMain(ModuleInitializationContext context)
+		public FormMain(IEnumerable<CocoaLogViewerModule> modules, ModuleInitializationContext context)
 		{
+			_modules = modules ?? throw new ArgumentNullException(nameof(modules));
 			_context = context ?? throw new ArgumentNullException(nameof(context));
 			this.InitializeComponent();
 			this           .Text = LanguageData.Current.MainWindow_Title;
@@ -29,6 +32,8 @@ namespace Covid19Radar.LogViewer.Launcher
 
 		private async void FormMain_Load(object sender, EventArgs e)
 		{
+			foreach (var _ in _modules) ;
+
 			labelVersion.Text = VersionInfo.GetCaption();
 
 			var app = new App();
