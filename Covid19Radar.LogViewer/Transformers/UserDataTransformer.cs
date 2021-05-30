@@ -16,7 +16,7 @@ namespace Covid19Radar.LogViewer.Transformers
 		private const string NoUserDataExists = "No user data exists";
 		private const string Prefix           = "existsUserData: ";
 
-		public static UserDataTransformer Instance { get; } = new();
+		internal static UserDataTransformer Instance { get; } = new();
 
 		private UserDataTransformer() { }
 

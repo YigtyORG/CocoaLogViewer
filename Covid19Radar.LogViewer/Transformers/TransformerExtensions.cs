@@ -42,10 +42,19 @@ namespace Covid19Radar.LogViewer.Transformers
 				throw new ArgumentNullException(nameof(pipeline));
 			}
 			return pipeline
+				.AddControlCharTransformer()
 				.AddCallTransformer()
 				.AddTekItemTransformer()
 				.AddUserDataTransformer()
 				.AddTransitionTransformer();
+		}
+
+		public static TransformerPipeline AddControlCharTransformer(this TransformerPipeline pipeline)
+		{
+			if (pipeline is null) {
+				throw new ArgumentNullException(nameof(pipeline));
+			}
+			return pipeline.Add(ControlCharTransformer.Instance);
 		}
 
 		public static TransformerPipeline AddCallTransformer(this TransformerPipeline pipeline)

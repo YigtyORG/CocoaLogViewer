@@ -14,7 +14,7 @@ namespace Covid19Radar.LogViewer.Transformers
 	{
 		private const string Prefix = "tekItem.Created: ";
 
-		public static TekItemTransformer Instance { get; } = new();
+		internal static TekItemTransformer Instance { get; } = new();
 
 		private TekItemTransformer() { }
 

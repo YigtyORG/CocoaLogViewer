@@ -15,7 +15,7 @@ namespace Covid19Radar.LogViewer.Transformers
 		private const string Start = "処理を開始しました。";
 		private const string End   = "処理を終了しました。";
 
-		public static CallTransformer Instance { get; } = new();
+		internal static CallTransformer Instance { get; } = new();
 
 		private CallTransformer() { }
 

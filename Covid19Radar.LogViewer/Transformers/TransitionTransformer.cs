@@ -19,7 +19,7 @@ namespace Covid19Radar.LogViewer.Transformers
 		private const string ReAgreeTermsOfServicePage = "利用規約の改定";
 		private const string ReAgreePrivacyPolicyPage  = "プライバシーポリシーの改定";
 
-		public static TransitionTransformer Instance { get; } = new();
+		internal static TransitionTransformer Instance { get; } = new();
 
 		private TransitionTransformer() { }
 
