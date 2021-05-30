@@ -76,6 +76,7 @@ namespace Covid19Radar.LogViewer.Globalization
 		#region ControllerView
 
 		public abstract string ControllerView_Copy            { get; }
+		public abstract string ControllerView_CopyAsMarkdown  { get; }
 		public abstract string ControllerView_Copy_MessageBox { get; }
 
 		#endregion
@@ -117,16 +118,17 @@ namespace Covid19Radar.LogViewer.Globalization
 
 		#region LogDataModel
 
-		public abstract string LogDataModel_DateTime_Format     { get; }
-		public abstract string LogDataModel_DateTime            { get; }
-		public abstract string LogDataModel_LogLevel            { get; }
-		public abstract string LogDataModel_Location            { get; }
-		public abstract string LogDataModel_Message             { get; }
-		public abstract string LogDataModel_Message_Transformed { get; }
-		public abstract string LogDataModel_Message_Original    { get; }
-		public abstract string LogDataModel_Platform            { get; }
-		public abstract string LogDataModel_Device              { get; }
-		public abstract string LogDataModel_Version             { get; }
+		public abstract string LogDataModel_DateTime_Format_WithWordWrap { get; }
+		public abstract string LogDataModel_DateTime_Format_WithNoWrap   { get; }
+		public abstract string LogDataModel_DateTime                     { get; }
+		public abstract string LogDataModel_LogLevel                     { get; }
+		public abstract string LogDataModel_Location                     { get; }
+		public abstract string LogDataModel_Message                      { get; }
+		public abstract string LogDataModel_Message_Transformed          { get; }
+		public abstract string LogDataModel_Message_Original             { get; }
+		public abstract string LogDataModel_Platform                     { get; }
+		public abstract string LogDataModel_Device                       { get; }
+		public abstract string LogDataModel_Version                      { get; }
 
 		#endregion
 

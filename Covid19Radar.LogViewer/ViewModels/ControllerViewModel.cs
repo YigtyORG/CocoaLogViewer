@@ -6,8 +6,13 @@
  * distributed under the MIT License.
 ****/
 
+using System;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using Covid19Radar.LogViewer.Globalization;
+using Covid19Radar.LogViewer.Models;
 using Covid19Radar.LogViewer.Views;
 
 namespace Covid19Radar.LogViewer.ViewModels
@@ -24,36 +29,59 @@ namespace Covid19Radar.LogViewer.ViewModels
 
 		public DelegateCommand ClickCopy { get; }
 
+		public DelegateCommand ClickCopyAsMarkdown { get; }
+
 		public ControllerViewModel()
 		{
-			this.ClickCopy = new(_ => {
-				this.ClickCopyCore();
-				return default;
-			});
+			this.ClickCopy           = new(this.ClickCopyCore);
+			this.ClickCopyAsMarkdown = new(this.ClickCopyAsMarkdownCore);
 		}
 
-		private void ClickCopyCore()
+		private ValueTask ClickCopyCore(object? ignored)
 		{
 			if (_log_file_view is not null) {
-				var sb    = StringBuilderCache<ControllerViewModel>.Get();
-				var items = _log_file_view.listView.SelectedItems;
-				int count = items.Count;
-				for (int i = 0; i < count; ++i) {
-					if (items[i]        is LogDataView      ldv  &&
-						ldv.DataContext is LogDataViewModel ldvm &&
-						ldvm.LogData    is not null and var ldm) {
-						ldm.CreateDetails(sb);
-						sb.AppendLine();
-					}
-				}
-				Clipboard.SetText(sb.ToString());
-				MessageBox.Show(
-					LanguageData.Current.ControllerView_Copy_MessageBox,
-					LanguageData.Current.ControllerView_Copy,
-					MessageBoxButton.OK,
-					MessageBoxImage.Information
-				);
+				var sb = StringBuilderCache<ControllerViewModel>.Get();
+				this.ForAllLogData(sb, _log_file_view.listView, (sb, ldm) => ldm.CreateDetails(sb));
+				this.CopyToClipboard(sb.ToString());
 			}
+			return default;
+		}
+
+		private ValueTask ClickCopyAsMarkdownCore(object? ignored)
+		{
+			if (_log_file_view is not null) {
+				var sb = StringBuilderCache<ControllerViewModel>.Get();
+				LogDataModel.CreateMarkdownHeader(sb);
+				this.ForAllLogData(sb, _log_file_view.listView, (sb, ldm) => ldm.CreateDetailsAsMarkdown(sb));
+				LogDataModel.CreateMarkdownFooter(sb);
+				this.CopyToClipboard(sb.ToString());
+			}
+			return default;
+		}
+
+		private void ForAllLogData(StringBuilder sb, ListView listView, Action<StringBuilder, LogDataModel> action)
+		{
+			var items = listView.SelectedItems;
+			int count = items.Count;
+			for (int i = 0; i < count; ++i) {
+				if (items[i]        is LogDataView      ldv  &&
+					ldv.DataContext is LogDataViewModel ldvm &&
+					ldvm.LogData    is not null and var ldm) {
+					action(sb, ldm);
+					sb.AppendLine();
+				}
+			}
+		}
+
+		private void CopyToClipboard(string s)
+		{
+			Clipboard.SetText(s);
+			MessageBox.Show(
+				LanguageData.Current.ControllerView_Copy_MessageBox,
+				LanguageData.Current.ControllerView_Copy,
+				MessageBoxButton.OK,
+				MessageBoxImage.Information
+			);
 		}
 	}
 }
