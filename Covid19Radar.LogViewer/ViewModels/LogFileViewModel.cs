@@ -58,7 +58,7 @@ namespace Covid19Radar.LogViewer.ViewModels
 			}
 			bool result = true;
 			this.Refreshing = true;
-			this.LogRows.Clear();
+			await _view.Dispatcher.InvokeAsync(this.LogRows.Clear);
 			if (_log_file is not null) {
 				result = await this.AddItemsAsync(_log_file.Logs);
 			}
