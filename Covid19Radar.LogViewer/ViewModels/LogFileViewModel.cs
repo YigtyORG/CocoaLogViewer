@@ -20,7 +20,6 @@ namespace Covid19Radar.LogViewer.ViewModels
 	public class LogFileViewModel : ViewModelBase
 	{
 		private readonly Action<LogDataModel> _add_item;
-		private readonly Action               _remove_item;
 		private readonly LogFileView          _view;
 		private          LogFileModel?        _log_file;
 
@@ -48,7 +47,6 @@ namespace Covid19Radar.LogViewer.ViewModels
 		public LogFileViewModel(LogFileView view)
 		{
 			_add_item    = this.AddItem;
-			_remove_item = this.RemoveFirstItem;
 			_view        = view ?? throw new ArgumentNullException(nameof(view));
 			this.LogRows = new();
 		}
@@ -60,7 +58,7 @@ namespace Covid19Radar.LogViewer.ViewModels
 			}
 			bool result = true;
 			this.Refreshing = true;
-			await this.ClearAsync();
+			this.LogRows.Clear();
 			if (_log_file is not null) {
 				result = await this.AddItemsAsync(_log_file.Logs);
 			}
@@ -101,19 +99,6 @@ namespace Covid19Radar.LogViewer.ViewModels
 			var vm = new LogDataViewModel();
 			this.LogRows.Add(new LogDataView(vm));
 			vm.LogData = log;
-		}
-
-		private async ValueTask ClearAsync()
-		{
-			while (this.LogRows.Count != 0) {
-				await _view.Dispatcher.InvokeAsync(_remove_item);
-				await Task.Yield();
-			}
-		}
-
-		private void RemoveFirstItem()
-		{
-			this.LogRows.RemoveAt(0);
 		}
 	}
 }
