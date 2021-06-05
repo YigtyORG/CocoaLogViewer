@@ -9,6 +9,8 @@
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
 		<RootNamespace>Covid19Radar.LogViewer.Globalization</RootNamespace>
+		<Product>English UI for CocoaLogViewer</Product>
+		<Description>This is an extension for CocoaLogViewer provides the English UI.</Description>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="../Covid19Radar.LogViewer/Covid19Radar.LogViewer.csproj" />
