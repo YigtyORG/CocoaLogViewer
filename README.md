@@ -123,6 +123,27 @@ Copyright (C) 2020-2021 Takym.
 	* 著作権表記: Copyright (c) .NET Foundation and Contributors
 	* リポジトリ: <https://github.com/dotnet/sdk>
 	* 利用規約: [MITライセンス](https://github.com/dotnet/sdk/blob/main/LICENSE.TXT)
+* [Microsoft.NET.Test.Sdk](https://www.nuget.org/packages/Microsoft.NET.Test.Sdk/)
+	* 著作権表記：Copyright (c) 2020 Microsoft Corporation
+	* リポジトリ：<https://github.com/microsoft/vstest/>
+	* 利用規約：[MITライセンス](https://github.com/microsoft/vstest/blob/master/LICENSE)
+	* 利用規約：<https://www.microsoft.com/web/webpi/eula/net_library_eula_enu.htm>
+* [MSTest.TestAdapter](https://www.nuget.org/packages/MSTest.TestAdapter/)
+	* 著作権表記：Copyright (c) 2020 Microsoft Corporation
+	* リポジトリ：<https://github.com/microsoft/testfx>
+	* 利用規約：[MITライセンス](https://github.com/microsoft/testfx/blob/master/LICENSE.txt)
+* [MSTest.TestFramework](https://www.nuget.org/packages/MSTest.TestFramework/)
+	* 著作権表記：Copyright (c) 2020 Microsoft Corporation
+	* リポジトリ：<https://github.com/microsoft/testfx>
+	* 利用規約：[MITライセンス](https://github.com/microsoft/testfx/blob/master/LICENSE.txt)
+* [coverlet.collector](https://www.nuget.org/packages/coverlet.collector/)
+	* 著作権表記：Copyright (c) 2018 Toni Solarin-Sodara
+	* リポジトリ：<https://github.com/coverlet-coverage/coverlet>
+	* 利用規約：[MITライセンス](https://github.com/coverlet-coverage/coverlet/blob/master/LICENSE)
+* [BenchmarkDotNet](https://www.nuget.org/packages/BenchmarkDotNet/)
+	* 著作権表記：Copyright (c) 2013–2021 .NET Foundation and contributors
+	* リポジトリ：<https://github.com/dotnet/BenchmarkDotNet>
+	* 利用規約：[MITライセンス](https://github.com/dotnet/BenchmarkDotNet/blob/master/LICENSE.md)
 
 ## 謝辞
 この場を借りてお礼を申し上げます。COCOA と接触確認アプリ開発関係者各位に感謝致します。

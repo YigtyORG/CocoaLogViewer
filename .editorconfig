@@ -1,3 +1,5 @@
+# 最新版: https://github.com/YigtyORG/TakymLib/blob/master/.editorconfig
+
 # 上位ディレクトリから .editorconfig 設定を継承する場合は、以下の行を削除します
 root = true
 
