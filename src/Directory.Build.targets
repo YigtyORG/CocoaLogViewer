@@ -8,8 +8,5 @@
  * distributed under the MIT License.
 **-->
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<PropertyGroup>
-		<OutputPath>$(SolutionDir)/bin/$(AssemblyName)/$(Configuration)</OutputPath>
-		<IntermediateOutputPath>$(SolutionDir)/obj/$(AssemblyName)/$(Configuration)</IntermediateOutputPath>
-	</PropertyGroup>
+	<!-- PLACEHOLDER -->
 </Project>

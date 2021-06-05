@@ -17,6 +17,8 @@
 		<UseWindowsForms>true</UseWindowsForms>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<OutputPath>$(SolutionDir)/bin/$(MSBuildProjectName)/$(Configuration)/</OutputPath>
+		<IntermediateOutputPath>$(SolutionDir)/obj/$(MSBuildProjectName)/$(Configuration)/</IntermediateOutputPath>
 	</PropertyGroup>
 	<PropertyGroup Label="Version">
 		<Product>CocoaLogViewer</Product>
