@@ -9,9 +9,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Forms;
 using Covid19Radar.LogViewer.Extensibility;
 using Covid19Radar.LogViewer.Globalization;
+using MBOX = System.Windows.Forms.MessageBox;
 
 namespace Covid19Radar.LogViewer.Launcher
 {
@@ -19,6 +21,7 @@ namespace Covid19Radar.LogViewer.Launcher
 	{
 		private readonly IEnumerable<CocoaLogViewerModule> _modules;
 		private readonly ModuleInitializationContext       _context;
+		private          App?                              _app;
 
 		public FormMain(IEnumerable<CocoaLogViewerModule> modules, ModuleInitializationContext context)
 		{
@@ -36,9 +39,10 @@ namespace Covid19Radar.LogViewer.Launcher
 			cboxAllowEscape.Text = LanguageData.Current.FormMain_CheckBoxAllowEscape;
 			labelVersion   .Text = VersionInfo.GetCaption();
 
-			var app = new App();
-			app.OpenWindow = false;
-			app.InitializeComponent();
+			_app = new App();
+			_app.OpenWindow   = false;
+			_app.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+			_app.InitializeComponent();
 
 			cboxAllowEscape.Checked = _context.AllowEscape;
 
@@ -77,7 +81,7 @@ namespace Covid19Radar.LogViewer.Launcher
 		private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			if (e.CloseReason == CloseReason.UserClosing && viewers.Items.Count > 0) {
-				var dr = MessageBox.Show(
+				var dr = MBOX.Show(
 					this,
 					LanguageData.Current.FormMain_FormClosing,
 					this.Text,
@@ -87,6 +91,13 @@ namespace Covid19Radar.LogViewer.Launcher
 				if (dr == DialogResult.No) {
 					e.Cancel = true;
 				}
+			}
+		}
+
+		private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
+		{
+			if (_app is not null) {
+				_app.Shutdown();
 			}
 		}
 
