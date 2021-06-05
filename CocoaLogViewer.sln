@@ -3,20 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covid19Radar.LogViewer", "Covid19Radar.LogViewer\Covid19Radar.LogViewer.csproj", "{BCD1361B-DBF2-4839-9A37-D7A9E96F383C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D293299C-C392-4D5F-BBF6-E298BFD9A0DD}"
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
-		Directory.Build.props = Directory.Build.props
+		src\Directory.Build.props = src\Directory.Build.props
 		LICENSE.md = LICENSE.md
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covid19Radar.LogViewer.Launcher", "Covid19Radar.LogViewer.Launcher\Covid19Radar.LogViewer.Launcher.csproj", "{7A091C6F-52BA-42E6-BC38-390FB18FE1D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covid19Radar.LogViewer", "src\Covid19Radar.LogViewer\Covid19Radar.LogViewer.csproj", "{BCD1361B-DBF2-4839-9A37-D7A9E96F383C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Covid19Radar.LogViewer.Globalization.English", "Covid19Radar.LogViewer.Globalization.English\Covid19Radar.LogViewer.Globalization.English.csproj", "{0D34647C-E114-42C3-B883-02494251AA88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covid19Radar.LogViewer.Launcher", "src\Covid19Radar.LogViewer.Launcher\Covid19Radar.LogViewer.Launcher.csproj", "{7A091C6F-52BA-42E6-BC38-390FB18FE1D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Covid19Radar.LogViewer.Globalization.English", "src\Covid19Radar.LogViewer.Globalization.English\Covid19Radar.LogViewer.Globalization.English.csproj", "{0D34647C-E114-42C3-B883-02494251AA88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
