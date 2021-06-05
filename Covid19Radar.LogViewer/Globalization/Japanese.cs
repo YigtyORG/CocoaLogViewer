@@ -8,7 +8,7 @@
 
 namespace Covid19Radar.LogViewer.Globalization
 {
-	internal sealed class Japanese : LanguageData
+	public class Japanese : LanguageData
 	{
 		internal static readonly Japanese _inst = new();
 
@@ -62,7 +62,7 @@ namespace Covid19Radar.LogViewer.Globalization
 		public override string LogLevel_Error                            => "失敗";
 		public override string LogLevel_Remarks                          => "注釈";
 
-		private Japanese() { }
+		protected Japanese() { }
 
 		public override string ControllerView_Refresh_Failed(MainWindow? mwnd)
 		{
