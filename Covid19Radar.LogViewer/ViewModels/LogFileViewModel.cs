@@ -30,6 +30,7 @@ namespace Covid19Radar.LogViewer.ViewModels
 			{
 				if (value is not null) {
 					if (this.TryRaisePropertyChanged(ref _log_file, value, null, nameof(this.LogFile))) {
+						this.LogRows.Clear();
 						this.AddItems(value.Logs);
 					}
 				}
