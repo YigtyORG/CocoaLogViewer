@@ -7,25 +7,18 @@
 ****/
 
 using System.Windows.Controls;
-using Covid19Radar.LogViewer.Models;
 using Covid19Radar.LogViewer.ViewModels;
 
 namespace Covid19Radar.LogViewer.Views
 {
 	public partial class LogFileView : UserControl
 	{
-		private readonly LogFileViewModel _view_model;
-
-		public LogFileModel? LogFile
-		{
-			get => _view_model.LogFile;
-			set => _view_model.LogFile = value;
-		}
+		public LogFileViewModel ViewModel { get; }
 
 		public LogFileView()
 		{
 			this.InitializeComponent();
-			this.DataContext = _view_model = new(this);
+			this.DataContext = this.ViewModel = new(this);
 		}
 
 		private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -83,9 +83,12 @@ namespace Covid19Radar.LogViewer.Globalization
 
 		#region ControllerView
 
+		public abstract string ControllerView_Refresh         { get; }
 		public abstract string ControllerView_Copy            { get; }
 		public abstract string ControllerView_CopyAsMarkdown  { get; }
 		public abstract string ControllerView_Copy_MessageBox { get; }
+
+		public abstract string ControllerView_Refresh_Failed(MainWindow? mwnd);
 
 		#endregion
 

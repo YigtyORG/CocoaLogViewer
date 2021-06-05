@@ -77,7 +77,7 @@ namespace Covid19Radar.LogViewer
 				var f = file();
 				if (f.HasValue) {
 					await this.Dispatcher.InvokeAsync(() => this.Title = Path.GetFileName(f.Value.path));
-					lfv.LogFile = await Task.Run(() => new LogFileModel(f.Value.open(), _transformer, allowEscape)).ConfigureAwait(false);
+					lfv.ViewModel.LogFile = await Task.Run(() => new LogFileModel(f.Value.open(), _transformer, allowEscape)).ConfigureAwait(false);
 					await this.Dispatcher.InvokeAsync(() => {
 						btnOpen.Visibility      = Visibility.Collapsed;
 						lblException.Visibility = Visibility.Collapsed;

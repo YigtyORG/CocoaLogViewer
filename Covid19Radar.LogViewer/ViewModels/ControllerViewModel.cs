@@ -27,21 +27,37 @@ namespace Covid19Radar.LogViewer.ViewModels
 			set => this.RaisePropertyChanged(ref _log_file_view, value, nameof(this.LogFileView));
 		}
 
+		public bool RefreshButtonEnabled => !(_log_file_view?.ViewModel.Refreshing ?? true);
+
+		public DelegateCommand Refresh             { get; }
 		public DelegateCommand ClickCopy           { get; }
 		public DelegateCommand ClickCopyAsMarkdown { get; }
 
 		public ControllerViewModel()
 		{
+			this.Refresh             = new(this.RefreshCore);
 			this.ClickCopy           = new(this.ClickCopyCore);
 			this.ClickCopyAsMarkdown = new(this.ClickCopyAsMarkdownCore);
+		}
+
+		private async ValueTask RefreshCore(object? ignored)
+		{
+			if (_log_file_view is not null && !await _log_file_view.ViewModel.RefreshAsync()) {
+				await Dialogs.ShowMessageAsync(
+					LanguageData.Current.ControllerView_Refresh_Failed,
+					LanguageData.Current.ControllerView_Refresh,
+					_log_file_view,
+					MessageBoxImage.Warning
+				);
+			}
 		}
 
 		private ValueTask ClickCopyCore(object? ignored)
 		{
 			if (_log_file_view is not null) {
 				var sb = StringBuilderCache<ControllerViewModel>.Get();
-				this.ForAllLogData(sb, _log_file_view.listView, (sb, ldm) => ldm.CreateDetails(sb));
-				this.CopyToClipboard(sb.ToString());
+				ForAllLogData(sb, _log_file_view.listView, (sb, ldm) => ldm.CreateDetails(sb));
+				return CopyToClipboardAsync(sb, false, _log_file_view);
 			}
 			return default;
 		}
@@ -51,14 +67,14 @@ namespace Covid19Radar.LogViewer.ViewModels
 			if (_log_file_view is not null) {
 				var sb = StringBuilderCache<ControllerViewModel>.Get();
 				LogDataModel.CreateMarkdownHeader(sb);
-				this.ForAllLogData(sb, _log_file_view.listView, (sb, ldm) => ldm.CreateDetailsAsMarkdown(sb));
+				ForAllLogData(sb, _log_file_view.listView, (sb, ldm) => ldm.CreateDetailsAsMarkdown(sb));
 				LogDataModel.CreateMarkdownFooter(sb);
-				this.CopyToClipboard(sb.ToString());
+				return CopyToClipboardAsync(sb, true, _log_file_view);
 			}
 			return default;
 		}
 
-		private void ForAllLogData(StringBuilder sb, ListView listView, Action<StringBuilder, LogDataModel> action)
+		private static void ForAllLogData(StringBuilder sb, ListView listView, Action<StringBuilder, LogDataModel> action)
 		{
 			var items = listView.SelectedItems;
 			int count = items.Count;
@@ -72,14 +88,14 @@ namespace Covid19Radar.LogViewer.ViewModels
 			}
 		}
 
-		private void CopyToClipboard(string s)
+		private static ValueTask CopyToClipboardAsync(StringBuilder data, bool copyAsMarkdown, DependencyObject depObj)
 		{
-			Clipboard.SetText(s);
-			MessageBox.Show(
-				LanguageData.Current.ControllerView_Copy_MessageBox,
-				LanguageData.Current.ControllerView_Copy,
-				MessageBoxButton.OK,
-				MessageBoxImage.Information
+			Clipboard.SetText(data.ToString());
+			return Dialogs.ShowMessageAsync(
+				_ =>             LanguageData.Current.ControllerView_Copy_MessageBox,
+				copyAsMarkdown ? LanguageData.Current.ControllerView_CopyAsMarkdown
+				               : LanguageData.Current.ControllerView_Copy,
+				depObj
 			);
 		}
 	}

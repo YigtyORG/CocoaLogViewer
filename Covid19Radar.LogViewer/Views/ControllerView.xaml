@@ -13,6 +13,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d">
 	<UserControl.InputBindings>
+		<KeyBinding Command="{Binding Refresh}"             Gesture="F5" />
 		<KeyBinding Command="{Binding ClickCopy}"           Gesture="Ctrl+C" />
 		<KeyBinding Command="{Binding ClickCopyAsMarkdown}" Gesture="Ctrl+Shift+C" />
 	</UserControl.InputBindings>
@@ -29,12 +30,19 @@
 		</Grid.ColumnDefinitions>
 		<Button
 			Grid.Column="0"
+			x:Name="refresh"
+			d:Content="refresh"
+			Margin="4,4,4,4"
+			Command="{Binding Refresh}"
+			IsEnabled="{Binding RefreshButtonEnabled}" />
+		<Button
+			Grid.Column="1"
 			x:Name="copy"
 			d:Content="copy"
 			Margin="4,4,4,4"
 			Command="{Binding ClickCopy}" />
 		<Button
-			Grid.Column="1"
+			Grid.Column="2"
 			x:Name="copyAsMd"
 			d:Content="copyAsMd"
 			Margin="4,4,4,4"

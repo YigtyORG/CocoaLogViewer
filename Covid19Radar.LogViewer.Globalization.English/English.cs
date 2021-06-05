@@ -26,6 +26,7 @@ namespace Covid19Radar.LogViewer.Globalization
 		public override string FormMain_FormClosing                      => "Are you sure to close all COCOA log file viewers?";
 		public override string ModuleLoader_Failed_Title                 => "Extension loading error";
 		public override string ModuleLoader_Failed_Message               => "Failed to load the extension \"{0}\". {1}";
+		public override string ControllerView_Refresh                    => "Reload logs";
 		public override string ControllerView_Copy                       => "Copy selected logs";
 		public override string ControllerView_CopyAsMarkdown             => "Copy as Markdown";
 		public override string ControllerView_Copy_MessageBox            => "Copied details of selected logs into the clipboard.";
@@ -62,6 +63,15 @@ namespace Covid19Radar.LogViewer.Globalization
 		public override string LogLevel_Remarks                          => "Remarks";
 
 		private English() { }
+
+		public override string ControllerView_Refresh_Failed(MainWindow? mwnd)
+		{
+			if (mwnd is null) {
+				return "Failed to reload a log file.";
+			} else {
+				return $"Failed to reload the log file \"{mwnd.Title}\".";
+			}
+		}
 
 		public override string LogFileView_MessageBox_Succeeded(MainWindow? mwnd)
 		{

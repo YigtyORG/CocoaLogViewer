@@ -26,6 +26,7 @@ namespace Covid19Radar.LogViewer.Views
 		{
 			this.InitializeComponent();
 			this.DataContext = _view_model = new ControllerViewModel();
+			refresh .Content = LanguageData.Current.ControllerView_Refresh;
 			copy    .Content = LanguageData.Current.ControllerView_Copy;
 			copyAsMd.Content = LanguageData.Current.ControllerView_CopyAsMarkdown;
 		}

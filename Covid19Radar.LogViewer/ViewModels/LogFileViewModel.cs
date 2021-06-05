@@ -30,23 +30,43 @@ namespace Covid19Radar.LogViewer.ViewModels
 			{
 				if (value is not null) {
 					if (this.TryRaisePropertyChanged(ref _log_file, value, null, nameof(this.LogFile))) {
-						this.LogRows.Clear();
-						this.AddItems(value.Logs);
+						Refresh();
+
+						async void Refresh()
+						{
+							await this.RefreshAsync();
+						}
 					}
 				}
 			}
 		}
 
-		public ObservableCollection<LogDataView> LogRows { get; }
+		public ObservableCollection<LogDataView> LogRows    { get; }
+		public bool                              Refreshing { get; set; }
 
 		public LogFileViewModel(LogFileView view)
 		{
-			_add_item = this.AddItem;
-			_view     = view ?? throw new ArgumentNullException(nameof(view));
+			_add_item    = this.AddItem;
+			_view        = view ?? throw new ArgumentNullException(nameof(view));
 			this.LogRows = new();
 		}
 
-		private async void AddItems(IReadOnlyList<LogDataModel> logs)
+		public async ValueTask<bool> RefreshAsync()
+		{
+			if (this.Refreshing) {
+				return false;
+			}
+			bool result = true;
+			this.Refreshing = true;
+			this.LogRows.Clear();
+			if (_log_file is not null) {
+				result = await this.AddItemsAsync(_log_file.Logs);
+			}
+			this.Refreshing = false;
+			return result;
+		}
+
+		private async ValueTask<bool> AddItemsAsync(IReadOnlyList<LogDataModel> logs)
 		{
 			try {
 				int count = logs.Count;
@@ -54,40 +74,23 @@ namespace Covid19Radar.LogViewer.ViewModels
 					_view.Dispatcher.Invoke(_add_item, logs[i]);
 					await Task.Yield();
 				}
-				await this.ShowMessageBox(LanguageData.Current.LogFileView_MessageBox_Succeeded);
+				await Dialogs.ShowMessageAsync(
+					LanguageData.Current.LogFileView_MessageBox_Succeeded,
+					LanguageData.Current.LogFileView_MessageBox_Title,
+					_view
+				);
+				return true;
 			} catch (Exception e) {
-				await this.ShowMessageBox(mwnd => {
-					mwnd?.PrintException(e);
-					return LanguageData.Current.LogFileView_MessageBox_Failed;
-				});
-			}
-		}
-
-		private ValueTask ShowMessageBox(Func<MainWindow?, string> msg)
-		{
-			return ShowMessageBoxCore(msg, _view, 0, 2);
-
-			static async ValueTask ShowMessageBoxCore(Func<MainWindow?, string> msg, DependencyObject obj, int i, int max)
-			{
-				if (obj is MainWindow mwnd) {
-					await obj.Dispatcher.InvokeAsync(() => MessageBox.Show(
-						mwnd,
-						msg(mwnd),
-						LanguageData.Current.LogFileView_MessageBox_Title,
-						MessageBoxButton.OK,
-						MessageBoxImage.Information
-					));
-				} else if (i < max && obj is FrameworkElement elem) {
-					await Task.Delay(1);
-					await ShowMessageBoxCore(msg, elem.Parent, ++i, max);
-				} else {
-					MessageBox.Show(
-						msg(null),
-						LanguageData.Current.LogFileView_MessageBox_Title,
-						MessageBoxButton.OK,
-						MessageBoxImage.Information
-					);
-				}
+				await Dialogs.ShowMessageAsync(
+					mwnd => {
+						mwnd?.PrintException(e);
+						return LanguageData.Current.LogFileView_MessageBox_Failed;
+					},
+					LanguageData.Current.LogFileView_MessageBox_Title,
+					_view,
+					MessageBoxImage.Error
+				);
+				return false;
 			}
 		}
 
