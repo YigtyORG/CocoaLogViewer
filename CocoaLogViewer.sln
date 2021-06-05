@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		src\Directory.Build.props = src\Directory.Build.props
+		src\Directory.Build.targets = src\Directory.Build.targets
 		LICENSE.md = LICENSE.md
 		README.md = README.md
 	EndProjectSection
@@ -16,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covid19Radar.LogViewer", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covid19Radar.LogViewer.Launcher", "src\Covid19Radar.LogViewer.Launcher\Covid19Radar.LogViewer.Launcher.csproj", "{7A091C6F-52BA-42E6-BC38-390FB18FE1D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Covid19Radar.LogViewer.Globalization.English", "src\Covid19Radar.LogViewer.Globalization.English\Covid19Radar.LogViewer.Globalization.English.csproj", "{0D34647C-E114-42C3-B883-02494251AA88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covid19Radar.LogViewer.Globalization.English", "src\Covid19Radar.LogViewer.Globalization.English\Covid19Radar.LogViewer.Globalization.English.csproj", "{0D34647C-E114-42C3-B883-02494251AA88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

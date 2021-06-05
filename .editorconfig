@@ -1,5 +1,3 @@
-# 最新版: https://github.com/YigtyORG/TakymLib/blob/master/.editorconfig
-
 # 上位ディレクトリから .editorconfig 設定を継承する場合は、以下の行を削除します
 root = true
 
@@ -32,7 +30,7 @@ file_header_template = unset
 
 # this. と Me. の設定
 dotnet_style_qualification_for_event = true:suggestion
-dotnet_style_qualification_for_field = false:silent
+dotnet_style_qualification_for_field = false
 dotnet_style_qualification_for_method = true:suggestion
 dotnet_style_qualification_for_property = true:suggestion
 
@@ -41,36 +39,39 @@ dotnet_style_predefined_type_for_locals_parameters_members = true:suggestion
 dotnet_style_predefined_type_for_member_access = true:suggestion
 
 # かっこの設定
-dotnet_style_parentheses_in_arithmetic_binary_operators = always_for_clarity:silent
-dotnet_style_parentheses_in_other_binary_operators = always_for_clarity:silent
-dotnet_style_parentheses_in_other_operators = never_if_unnecessary:silent
-dotnet_style_parentheses_in_relational_binary_operators = always_for_clarity:silent
+dotnet_style_parentheses_in_arithmetic_binary_operators = always_for_clarity
+dotnet_style_parentheses_in_other_binary_operators = always_for_clarity
+dotnet_style_parentheses_in_other_operators = never_if_unnecessary
+dotnet_style_parentheses_in_relational_binary_operators = always_for_clarity
 
 # 修飾子設定
-dotnet_style_require_accessibility_modifiers = for_non_interface_members:silent
+dotnet_style_require_accessibility_modifiers = for_non_interface_members
 
 # 式レベルの設定
-dotnet_style_coalesce_expression = true:suggestion
+dotnet_style_coalesce_expression = true
 dotnet_style_collection_initializer = true:silent
 dotnet_style_explicit_tuple_names = true:silent
-dotnet_style_null_propagation = true:suggestion
+dotnet_style_null_propagation = true
 dotnet_style_object_initializer = true:silent
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
-dotnet_style_prefer_auto_properties = true:silent
-dotnet_style_prefer_compound_assignment = true:suggestion
-dotnet_style_prefer_conditional_expression_over_assignment = true:silent
-dotnet_style_prefer_conditional_expression_over_return = true:silent
+dotnet_style_prefer_auto_properties = true
+dotnet_style_prefer_compound_assignment = true
+dotnet_style_prefer_conditional_expression_over_assignment = true
+dotnet_style_prefer_conditional_expression_over_return = true
 dotnet_style_prefer_inferred_anonymous_type_member_names = true:silent
 dotnet_style_prefer_inferred_tuple_names = true:silent
-dotnet_style_prefer_is_null_check_over_reference_equality_method = true:suggestion
-dotnet_style_prefer_simplified_boolean_expressions = true:suggestion
-dotnet_style_prefer_simplified_interpolation = true:suggestion
+dotnet_style_prefer_is_null_check_over_reference_equality_method = true
+dotnet_style_prefer_simplified_boolean_expressions = true
+dotnet_style_prefer_simplified_interpolation = true
 
 # フィールド設定
-dotnet_style_readonly_field = true:suggestion
+dotnet_style_readonly_field = true
 
 # パラメーターの設定
 dotnet_code_quality_unused_parameters = all:silent
+
+# 抑制の設定
+dotnet_remove_unnecessary_suppression_exclusions = none
 
 #### C# コーディング規則 ####
 
@@ -84,37 +85,40 @@ csharp_style_expression_bodied_accessors = when_on_single_line:suggestion
 csharp_style_expression_bodied_constructors = false:suggestion
 csharp_style_expression_bodied_indexers = when_on_single_line:suggestion
 csharp_style_expression_bodied_lambdas = true:suggestion
-csharp_style_expression_bodied_local_functions = false:silent
+csharp_style_expression_bodied_local_functions = false
 csharp_style_expression_bodied_methods = false:suggestion
 csharp_style_expression_bodied_operators = true:suggestion
 csharp_style_expression_bodied_properties = when_on_single_line:suggestion
 
 # パターン マッチング設定
-csharp_style_pattern_matching_over_as_with_null_check = true:suggestion
-csharp_style_pattern_matching_over_is_with_cast_check = true:suggestion
+csharp_style_pattern_matching_over_as_with_null_check = true
+csharp_style_pattern_matching_over_is_with_cast_check = true
+csharp_style_prefer_not_pattern = true
+csharp_style_prefer_pattern_matching = true
 csharp_style_prefer_switch_expression = false:silent
 
 # Null チェック設定
-csharp_style_conditional_delegate_call = true:suggestion
+csharp_style_conditional_delegate_call = true
 
 # 修飾子設定
 csharp_prefer_static_local_function = true:silent
-csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async:silent
+csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async
 
 # コード ブロックの設定
 csharp_prefer_braces = when_multiline:suggestion
 csharp_prefer_simple_using_statement = false:silent
 
 # 式レベルの設定
-csharp_prefer_simple_default_expression = true:suggestion
+csharp_prefer_simple_default_expression = true
 csharp_style_deconstructed_variable_declaration = true:silent
-csharp_style_inlined_variable_declaration = true:suggestion
-csharp_style_pattern_local_over_anonymous_function = true:suggestion
+csharp_style_implicit_object_creation_when_type_is_apparent = true
+csharp_style_inlined_variable_declaration = true
+csharp_style_pattern_local_over_anonymous_function = true
 csharp_style_prefer_index_operator = false:silent
 csharp_style_prefer_range_operator = false:silent
 csharp_style_throw_expression = true:silent
 csharp_style_unused_value_assignment_preference = discard_variable:silent
-csharp_style_unused_value_expression_statement_preference = discard_variable:silent
+csharp_style_unused_value_expression_statement_preference = discard_variable
 
 # 'using' ディレクティブの基本設定
 csharp_using_directive_placement = outside_namespace:suggestion

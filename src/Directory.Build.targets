@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Project>
+<!--*
+ * CocoaLogViewer
+ * Copyright (C) 2020-2021 Yigty.ORG; all rights reserved.
+ * Copyright (C) 2020-2021 Takym.
+ *
+ * distributed under the MIT License.
+**-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<OutputPath>$(SolutionDir)/bin/$(AssemblyName)/$(Configuration)</OutputPath>
+		<IntermediateOutputPath>$(SolutionDir)/obj/$(AssemblyName)/$(Configuration)</IntermediateOutputPath>
+	</PropertyGroup>
+</Project>
