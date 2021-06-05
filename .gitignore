@@ -361,3 +361,20 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+
+
+
+### CUSTOM SETTINGS ###
+# (latest: https://github.com/YigtyORG/TakymLib/blob/master/.gitignore)
+
+# User configurations (used by OS)
+[Dd]esktop.ini
+[Tt]humbs.db
+.DS_Store
+*.DS_Store
+._*
+*._*
+
+# Local files
+/!L_*
