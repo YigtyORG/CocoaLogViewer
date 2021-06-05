@@ -29,12 +29,28 @@ Copyright (C) 2020-2021 Takym.
 ## 使い方
 1. COCOA からログファイルを抽出します。
 	* 「**お問い合わせ**」→「**動作情報を送信**」→「**動作情報を確認する**」から抽出できます。
-2. ソリューションを開いて、プロジェクトをビルドします。
-3. 起動方法を選びます。
+2. ソフトウェアを入手する方法は二つあります。
+	* **[リリースビルド](https://github.com/YigtyORG/CocoaLogViewer/releases)をダウンロードする場合** (一般人向け)
+		1. バージョンを選択します。
+			* 特に理由が無い場合は最新版を選んでください。
+		2. `Assets` からダウンロードするファイルを選びます。
+			* `Covid19Radar.LogViewer.*.win-x64.zip` は64ビット版の Windows 向けです。
+			* `Covid19Radar.LogViewer.*.win-x86.zip` は32ビット版の Windows 向けです。
+			* 正常に実行できない場合は最新の .NET ランタイムをインストールしてみてください。
+				* .NET ランタイムは <https://dot.net> からダウンロードできます。
+				* または <https://dotnet.microsoft.com/download/dotnet/5.0/runtime> から .NET 5 をダウンロードできます。
+		3. ダウンロードしたZIPファイルを適当な場所に解凍してください。
+		4. これでインストールは完了です。このソフトウェアはレジストリを使いません。
+	* **ソースコードをダウンロードする場合** (開発者向け)
+		1. リポジトリをクローンします。
+			1. コマンドプロンプトを開きます。
+			2. `git clone https://github.com/YigtyORG/CocoaLogViewer.git` と入力し、コマンドを実行します。
+		1. ソリューションを開いて、プロジェクトをビルドします。
+3. 起動方法は三つあります。
 	* **ランチャーを使う場合** (推奨)
 		1. `Covid19Radar.LogViewer.Launcher.exe` を起動します。
 		2. 画面左上の「**動作情報ファイルを開く(O)**」ボタンから COCOA のログファイルを開きます。
-	* **ランチャーを使わない場合**
+	* **ランチャーを使わない場合** (非推奨)
 		1. `Covid19Radar.LogViewer.exe` を起動します。
 		2. 画面上部の「**開く**」ボタンから COCOA のログファイルを開きます。
 	* **コマンドプロンプトから起動する場合**
@@ -50,6 +66,7 @@ Copyright (C) 2020-2021 Takym.
 ### 拡張機能
 * 拡張機能はランチャーから起動した場合にのみ読み込まれます。
 * ランチャーに `--disallow-extensions` を指定して起動すると拡張機能の読み込みを拒否できます。
+* 英語版の CocoaLogViewer は拡張機能として実装されています。
 
 ### コマンド行引数について
 * `c19r.lv` に下記の引数を指定して起動方法を制御できます。
@@ -71,9 +88,11 @@ Copyright (C) 2020-2021 Takym.
 
 ## 貢献方法
 * Issue や Pull Request (PR) は何時でも歓迎しています。気軽に投稿してください！
-* このソフトウェアは [WPF](https://docs.microsoft.com/ja-jp/visualstudio/designers/getting-started-with-wpf) を用いて開発しております。
-	* ランチャーのみ [Windows Forms](https://docs.microsoft.com/ja-jp/dotnet/desktop/winforms/overview/?view=netdesktop-5.0) を使っております。
+* このソフトウェアは下記のフレームワークを用いて開発しております。
+	* 本体は [WPF](https://docs.microsoft.com/ja-jp/visualstudio/designers/getting-started-with-wpf) を使っております。
+	* ランチャーは [Windows Forms](https://docs.microsoft.com/ja-jp/dotnet/desktop/winforms/overview/?view=netdesktop-5.0) を使っております。
 * このソフトウェアの UI は**全て日本語**で記述します。
+	* 英語版は拡張機能として用意しています。
 * できる限り外部のライブラリに依存しないで開発しております。
 	* [COCOA](https://github.com/cocoa-mhlw/cocoa) 本体にも依存しておりません。
 * 著作権を [@Takym](https://github.com/Takym) へ**譲渡・転移する事に同意**してくださった方の PR のみ Merge します。
