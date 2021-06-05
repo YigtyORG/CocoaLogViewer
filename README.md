@@ -97,6 +97,7 @@ Copyright (C) 2020-2021 Takym.
 	* [COCOA](https://github.com/cocoa-mhlw/cocoa) 本体にも依存しておりません。
 * 著作権を [@Takym](https://github.com/Takym) へ**譲渡・転移する事に同意**してくださった方の PR のみ Merge します。
 	* あなたの PR に他者が作成したコードを**含めないで**ください。
+* PR は GitHub Actions を用いて検証しています。
 * 現在はアプリアイコンを募集しております。
 
 ## 利用ライブラリ

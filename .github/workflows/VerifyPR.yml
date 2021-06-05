@@ -1,0 +1,28 @@
+name: "The Pull Request Validation"
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  Build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        config: [ Debug, Release ]
+    steps:
+      - uses: actions/checkout@v2.3.4
+      # Setup
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1.8.0
+        with:
+          dotnet-version: 5.0.201
+      # Restore
+      - name: Restore dependencies
+        run: dotnet restore CocoaLogViewer.sln
+      # Build
+      - name: Build
+        run: dotnet build -c ${{ matrix.config }} --no-restore
+      # Test
+      - name: Test
+        run: dotnet test -c ${{ matrix.config }} --no-build --verbosity normal
