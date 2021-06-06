@@ -24,7 +24,7 @@ namespace Covid19Radar.LogViewer.Extensibility
 
 		public virtual string? GetLocalizedDescription()
 		{
-			return string.Empty;
+			return null;
 		}
 
 		protected abstract void InitializeCore(ModuleInitializationContext context);

@@ -26,5 +26,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="../src/Covid19Radar.LogViewer/Covid19Radar.LogViewer.csproj" />
+		<ProjectReference Include="../src/Covid19Radar.LogViewer.Globalization.English/Covid19Radar.LogViewer.Globalization.English.csproj" />
+		<ProjectReference Include="../src/Covid19Radar.LogViewer.Launcher/Covid19Radar.LogViewer.Launcher.csproj" />
 	</ItemGroup>
 </Project>
