@@ -45,4 +45,4 @@ jobs:
         run: nuget sources Add -Source https://nuget.pkg.github.com/YigtyORG/index.json -Name "github" -UserName YigtyORG -Password ${{ secrets.GITHUB_TOKEN }}
       # Publish
       - name: Publish
-        run: nuget push "**/bin/${{ matrix.config }}/*-*.nupkg" -Source "github" -SkipDuplicate
+        run: nuget push "/bin/Covid19Radar.LogViewer*/${{ matrix.config }}/*-*.nupkg" -Source "github" -SkipDuplicate
