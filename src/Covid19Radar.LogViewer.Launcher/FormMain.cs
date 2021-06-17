@@ -23,6 +23,7 @@ namespace Covid19Radar.LogViewer.Launcher
 		private readonly IEnumerable<CocoaLogViewerModule> _modules;
 		private readonly ModuleInitializationContext       _context;
 		private          App?                              _app;
+		private          FormReceiver?                     _receiver;
 
 		public FormMain(IEnumerable<CocoaLogViewerModule> modules, ModuleInitializationContext context)
 		{
@@ -34,11 +35,12 @@ namespace Covid19Radar.LogViewer.Launcher
 		private async void FormMain_Load(object sender, EventArgs e)
 		{
 			foreach (var _ in _modules) ;
-			
-			this           .Text = LanguageData.Current.MainWindow_Title;
-			btnOpen        .Text = LanguageData.Current.FormMain_ButtonOpen;
-			cboxAllowEscape.Text = LanguageData.Current.FormMain_CheckBoxAllowEscape;
-			labelVersion   .Text = VersionInfo.GetCaption();
+
+			this                 .Text = LanguageData.Current.MainWindow_Title;
+			btnOpen              .Text = LanguageData.Current.FormMain_ButtonOpen;
+			menuItem_showReceiver.Text = LanguageData.Current.FormMain_Menu_ShowReceiver;
+			cboxAllowEscape      .Text = LanguageData.Current.FormMain_CheckBoxAllowEscape;
+			labelVersion         .Text = VersionInfo.GetCaption();
 
 			_app = new App();
 			_app.OpenWindow   = false;
@@ -64,9 +66,12 @@ namespace Covid19Radar.LogViewer.Launcher
 			}
 		}
 
-		private void Mwnd_Closing(object sender, CancelEventArgs e)
+		private void menuItem_showReceiver_Click(object sender, EventArgs e)
 		{
-			viewers.Items.Remove(sender);
+			if (_receiver is null || _receiver.IsDisposed) {
+				_receiver = new(this);
+				_receiver.ShowReceiver();
+			}
 		}
 
 		private void viewers_SelectedIndexChanged(object sender, EventArgs e)
@@ -74,6 +79,11 @@ namespace Covid19Radar.LogViewer.Launcher
 			if (viewers.SelectedItem is MainWindow mwnd) {
 				mwnd.Activate();
 			}
+		}
+
+		private void Mwnd_Closing(object sender, CancelEventArgs e)
+		{
+			viewers.Items.Remove(sender);
 		}
 
 		private void FormMain_FormClosing(object sender, FormClosingEventArgs e)

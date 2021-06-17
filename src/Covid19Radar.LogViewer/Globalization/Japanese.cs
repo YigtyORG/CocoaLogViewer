@@ -22,6 +22,7 @@ namespace Covid19Radar.LogViewer.Globalization
 		public override string MainWindow_OFD_Error                      => "エラーが発生しました。";
 		public override string MainWindow_OFD_Error_Message              => "指定されたファイルにアクセスできないか、正しい動作情報ファイルではありません。";
 		public override string FormMain_ButtonOpen                       => "動作情報ファイルを開く(&O)";
+		public override string FormMain_Menu_ShowReceiver                => "COCOA から動作情報を受信する(&R)";
 		public override string FormMain_CheckBoxAllowEscape              => "エスケープ文字を変換する。";
 		public override string FormMain_FormClosing                      => "全ての COCOA 動作情報ファイルウィンドウを閉じます。宜しいですか？";
 		public override string FormReceiver_Title                        => "COCOA から動作情報を受信する";

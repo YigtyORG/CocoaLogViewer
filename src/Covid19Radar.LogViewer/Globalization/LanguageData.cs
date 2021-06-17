@@ -69,6 +69,7 @@ namespace Covid19Radar.LogViewer.Globalization
 		#region FormMain
 
 		public abstract string FormMain_ButtonOpen          { get; }
+		public abstract string FormMain_Menu_ShowReceiver   { get; }
 		public abstract string FormMain_CheckBoxAllowEscape { get; }
 		public abstract string FormMain_FormClosing         { get; }
 

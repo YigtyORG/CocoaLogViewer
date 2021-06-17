@@ -29,7 +29,7 @@ namespace Covid19Radar.LogViewer.Launcher
 			this.InitializeComponent();
 		}
 
-		public new void Show()
+		public void ShowReceiver()
 		{
 			this.Show(_owner);
 		}
