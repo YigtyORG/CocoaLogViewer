@@ -74,6 +74,13 @@ namespace Covid19Radar.LogViewer.Globalization
 
 		#endregion
 
+		#region FormReceiver
+
+		public abstract string FormReceiver_Title       { get; }
+		public abstract string FormReceiver_Description { get; }
+
+		#endregion
+
 		#region ModuleLoader
 
 		public abstract string ModuleLoader_Failed_Title   { get; }

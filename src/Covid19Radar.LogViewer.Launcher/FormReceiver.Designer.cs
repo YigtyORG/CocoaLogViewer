@@ -75,6 +75,8 @@ namespace Covid19Radar.LogViewer.Launcher
 			this.MinimumSize = new System.Drawing.Size(512, 320);
 			this.Name = "FormReceiver";
 			this.Text = "FormReceiver";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormReceiver_FormClosing);
+			this.Load += new System.EventHandler(this.FormReceiver_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
