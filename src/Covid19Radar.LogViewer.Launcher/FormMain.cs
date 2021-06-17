@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using Covid19Radar.LogViewer.Extensibility;
@@ -50,10 +51,7 @@ namespace Covid19Radar.LogViewer.Launcher
 				var files = _context.LogFilesToOpen;
 				int count = files.Count;
 				for (int i = 0; i < count; ++i) {
-					var mwnd = this.CreateMainWindow();
-					if (await mwnd.OpenFile(files[i], _context.AllowEscape)) {
-						this.ShowMainWindow(mwnd);
-					}
+					await this.OpenFileAsync(files[i]);
 				}
 			}
 		}
@@ -98,6 +96,14 @@ namespace Covid19Radar.LogViewer.Launcher
 		{
 			if (_app is not null) {
 				_app.Shutdown();
+			}
+		}
+
+		internal async ValueTask OpenFileAsync(string filename)
+		{
+			var mwnd = this.CreateMainWindow();
+			if (await mwnd.OpenFile(filename, cboxAllowEscape.Checked)) {
+				this.ShowMainWindow(mwnd);
 			}
 		}
 
