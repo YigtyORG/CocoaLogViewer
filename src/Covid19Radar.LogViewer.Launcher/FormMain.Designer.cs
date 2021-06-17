@@ -28,14 +28,17 @@ namespace Covid19Radar.LogViewer.Launcher
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.btnOpen = new System.Windows.Forms.Button();
 			this.viewers = new System.Windows.Forms.ListBox();
 			this.labelVersion = new System.Windows.Forms.Label();
 			this.cboxAllowEscape = new System.Windows.Forms.CheckBox();
+			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.SuspendLayout();
 			// 
 			// btnOpen
 			// 
+			this.btnOpen.ContextMenuStrip = this.contextMenuStrip;
 			this.btnOpen.Location = new System.Drawing.Point(8, 8);
 			this.btnOpen.Name = "btnOpen";
 			this.btnOpen.Size = new System.Drawing.Size(160, 23);
@@ -76,6 +79,11 @@ namespace Covid19Radar.LogViewer.Launcher
 			this.cboxAllowEscape.Text = "cboxAllowEscape";
 			this.cboxAllowEscape.UseVisualStyleBackColor = true;
 			// 
+			// contextMenuStrip
+			// 
+			this.contextMenuStrip.Name = "contextMenuStrip";
+			this.contextMenuStrip.Size = new System.Drawing.Size(61, 4);
+			// 
 			// FormMain
 			// 
 			this.AcceptButton = this.btnOpen;
@@ -102,6 +110,7 @@ namespace Covid19Radar.LogViewer.Launcher
 		private System.Windows.Forms.ListBox viewers;
 		private System.Windows.Forms.Label labelVersion;
 		private System.Windows.Forms.CheckBox cboxAllowEscape;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
 	}
 }
 
