@@ -18,7 +18,8 @@ namespace Covid19Radar.LogViewer.Transformers
 				return false;
 			}
 
-			if (originalMessage.StartsWith("Exposure count: ")) {
+			if (originalMessage.StartsWith("Exposure notification status: ") ||
+				originalMessage.StartsWith("Exposure count: ")) {
 				return true;
 			}
 
