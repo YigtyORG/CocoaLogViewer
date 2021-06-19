@@ -21,15 +21,15 @@ namespace Covid19Radar.LogViewer.Models
 		public IReadOnlyList<LogDataModel> Logs { get; }
 
 		public LogFileModel(Stream stream, ITransformer transformer, bool allowEscape)
-			: this(stream, transformer is null ? ThrowArgNull() : transformer.Transform, allowEscape) { }
+			: this(stream, transformer.ToFunc(), allowEscape) { }
 
-		public LogFileModel(Stream stream, Func<string?, string?> transformer, bool allowEscape)
+		public LogFileModel(Stream stream, Func<string?, string> transformer, bool allowEscape)
 		{
 			if (stream is null) {
 				throw new ArgumentNullException(nameof(stream));
 			}
 			if (transformer is null) {
-				ThrowArgNull();
+				throw new ArgumentNullException(nameof(transformer));
 			}
 
 			var logs = new List<LogDataModel>();
@@ -43,7 +43,7 @@ namespace Covid19Radar.LogViewer.Models
 								row[00], row[01], msg, transformer(msg) ?? msg,
 								row[03], row[04], row[05], row[06],
 								row[07], row[08], row[09], row[10],
-								row[11]
+								row[11], PrivacyValidator.Check(msg)
 							));
 						}
 					} else {
@@ -53,18 +53,12 @@ namespace Covid19Radar.LogViewer.Models
 							LanguageData.Current.LogFileModel_InvalidLog_Long,
 							string.Empty, string.Empty, string.Empty, string.Empty,
 							string.Empty, string.Empty, string.Empty, string.Empty,
-							string.Empty
+							string.Empty, false
 						));
 					}
 				}
 			}
 			this.Logs = logs;
-		}
-
-		[DoesNotReturn()]
-		private static Func<string?, string?> ThrowArgNull()
-		{
-			throw new ArgumentNullException("transformer");
 		}
 
 		private static List<string> ParseCsv(string line, bool allowEscape)

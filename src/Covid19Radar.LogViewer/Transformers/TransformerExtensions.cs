@@ -36,6 +36,14 @@ namespace Covid19Radar.LogViewer.Transformers
 			return new(func);
 		}
 
+		public static Func<string?, string> ToFunc(this ITransformer? transformer)
+		{
+			if (transformer is null) {
+				throw new ArgumentNullException(nameof(transformer));
+			}
+			return msg => Transform(transformer, msg);
+		}
+
 		public static TransformerPipeline ConfigureDefaults(this TransformerPipeline pipeline)
 		{
 			if (pipeline is null) {
