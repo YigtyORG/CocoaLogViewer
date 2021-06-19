@@ -1,17 +1,24 @@
+/****
+ * CocoaLogViewer
+ * Copyright (C) 2020-2021 Yigty.ORG; all rights reserved.
+ * Copyright (C) 2020-2021 Takym.
+ *
+ * distributed under the MIT License.
+****/
 
 namespace Covid19Radar.LogViewer.Launcher
 {
 	partial class FormMain
 	{
 		/// <summary>
-		///  Required designer variable.
+		/// 必要なデザイナー変数です。
 		/// </summary>
 		private System.ComponentModel.IContainer components = null;
 
 		/// <summary>
-		///  Clean up any resources being used.
+		/// 使用中のリソースをすべてクリーンアップします。
 		/// </summary>
-		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		/// <param name="disposing">マネージド リソースを破棄する場合は true を指定し、その他の場合は false を指定します。</param>
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing && (components != null)) {
@@ -20,22 +27,27 @@ namespace Covid19Radar.LogViewer.Launcher
 			base.Dispose(disposing);
 		}
 
-		#region Windows Form Designer generated code
+		#region Windows フォーム デザイナーで生成されたコード
 
 		/// <summary>
-		///  Required method for Designer support - do not modify
-		///  the contents of this method with the code editor.
+		/// デザイナー サポートに必要なメソッドです。このメソッドの内容を
+		/// コード エディターで変更しないでください。
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.btnOpen = new System.Windows.Forms.Button();
+			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.menuItem_showReceiver = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewers = new System.Windows.Forms.ListBox();
 			this.labelVersion = new System.Windows.Forms.Label();
 			this.cboxAllowEscape = new System.Windows.Forms.CheckBox();
+			this.contextMenuStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// btnOpen
 			// 
+			this.btnOpen.ContextMenuStrip = this.contextMenuStrip;
 			this.btnOpen.Location = new System.Drawing.Point(8, 8);
 			this.btnOpen.Name = "btnOpen";
 			this.btnOpen.Size = new System.Drawing.Size(160, 23);
@@ -43,6 +55,21 @@ namespace Covid19Radar.LogViewer.Launcher
 			this.btnOpen.Text = "btnOpen";
 			this.btnOpen.UseVisualStyleBackColor = true;
 			this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
+			// 
+			// contextMenuStrip
+			// 
+			this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItem_showReceiver});
+			this.contextMenuStrip.Name = "contextMenuStrip";
+			this.contextMenuStrip.Size = new System.Drawing.Size(210, 26);
+			// 
+			// menuItem_showReceiver
+			// 
+			this.menuItem_showReceiver.Name = "menuItem_showReceiver";
+			this.menuItem_showReceiver.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+			this.menuItem_showReceiver.Size = new System.Drawing.Size(209, 22);
+			this.menuItem_showReceiver.Text = "menuItem_showReceiver";
+			this.menuItem_showReceiver.Click += new System.EventHandler(this.menuItem_showReceiver_Click);
 			// 
 			// viewers
 			// 
@@ -91,6 +118,7 @@ namespace Covid19Radar.LogViewer.Launcher
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
 			this.Load += new System.EventHandler(this.FormMain_Load);
+			this.contextMenuStrip.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -102,6 +130,8 @@ namespace Covid19Radar.LogViewer.Launcher
 		private System.Windows.Forms.ListBox viewers;
 		private System.Windows.Forms.Label labelVersion;
 		private System.Windows.Forms.CheckBox cboxAllowEscape;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+		private System.Windows.Forms.ToolStripMenuItem menuItem_showReceiver;
 	}
 }
 
