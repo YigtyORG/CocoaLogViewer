@@ -36,12 +36,7 @@ namespace Covid19Radar.LogViewer.Globalization
 			LanguageData.Current = English._inst;
 
 			// Step 3: build a transformer pipeline.
-			context.TransformerPipeline = new TransformerPipeline()
-				.AddControlCharTransformer()
-				.Add(CallTransformer      .Instance)
-				.Add(TekItemTransformer   .Instance)
-				.Add(UserDataTransformer  .Instance)
-				.Add(TransitionTransformer.Instance);
+			BuildTransformerPipeline(context);
 		}
 
 		private static void SetCultureInfo()
@@ -78,6 +73,17 @@ namespace Covid19Radar.LogViewer.Globalization
 					Debug.Fail(e.Message, e.ToString());
 				}
 			}
+		}
+
+		private static void BuildTransformerPipeline(ModuleInitializationContext context)
+		{
+			context.TransformerPipeline = new TransformerPipeline()
+				.AddControlCharTransformer()
+				.Add(CallTransformer       .Instance)
+				.Add(TekItemTransformer    .Instance)
+				.Add(LastCreatedTransformer.Instance)
+				.Add(UserDataTransformer   .Instance)
+				.Add(TransitionTransformer .Instance);
 		}
 	}
 }

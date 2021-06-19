@@ -45,6 +45,7 @@ namespace Covid19Radar.LogViewer.Transformers
 				.AddControlCharTransformer()
 				.AddCallTransformer()
 				.AddTekItemTransformer()
+				.AddLastCreatedTransformer()
 				.AddUserDataTransformer()
 				.AddTransitionTransformer();
 		}
@@ -71,6 +72,14 @@ namespace Covid19Radar.LogViewer.Transformers
 				throw new ArgumentNullException(nameof(pipeline));
 			}
 			return pipeline.Add(TekItemTransformer.Instance);
+		}
+
+		public static TransformerPipeline AddLastCreatedTransformer(this TransformerPipeline pipeline)
+		{
+			if (pipeline is null) {
+				throw new ArgumentNullException(nameof(pipeline));
+			}
+			return pipeline.Add(LastCreatedTransformer.Instance);
 		}
 
 		public static TransformerPipeline AddUserDataTransformer(this TransformerPipeline pipeline)
