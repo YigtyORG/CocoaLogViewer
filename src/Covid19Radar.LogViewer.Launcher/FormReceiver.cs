@@ -49,6 +49,8 @@ namespace Covid19Radar.LogViewer.Launcher
 			}
 
 			try {
+				bool allowEscape;
+
 				while (!_cts.IsCancellationRequested) {
 					string temp = Path.GetTempFileName();
 					byte[] buf  = new byte[1024];
@@ -56,19 +58,29 @@ namespace Covid19Radar.LogViewer.Launcher
 					using (var client = await Task.Run(listener.AcceptTcpClientAsync, _cts.Token)) {
 						var ns = client.GetStream();
 						await using (ns.ConfigureAwait(false)) {
-							var fs = new FileStream(temp, FileMode.Create, FileAccess.Write, FileShare.None);
-							await using (fs.ConfigureAwait(false)) {
-								while (ns.DataAvailable) {
-									int bytes = await ns.ReadAsync(buf.AsMemory(), _cts.Token);
-									if (bytes > 0) {
-										await fs.WriteAsync(buf.AsMemory(0..bytes), _cts.Token);
+							using (var br = new BinaryReader(ns)) {
+								while (!ns.DataAvailable) {
+									await Task.Yield();
+								}
+								allowEscape = br.ReadBoolean();
+								long len    = br.ReadInt64();
+								var  fs     = new FileStream(temp, FileMode.Create, FileAccess.Write, FileShare.None);
+								await using (fs.ConfigureAwait(false)) {
+									while (fs.Length < len) {
+										while (!ns.DataAvailable) {
+											await Task.Yield();
+										}
+										int bytes = await ns.ReadAsync(buf.AsMemory(), _cts.Token);
+										if (bytes > 0) {
+											await fs.WriteAsync(buf.AsMemory(0..bytes), _cts.Token);
+										}
 									}
 								}
 							}
 						}
 					}
 
-					await _owner.OpenFileAsync(temp);
+					await _owner.OpenFileAsync(temp, allowEscape);
 				}
 			} finally {
 				listener.Stop();
