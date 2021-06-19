@@ -26,9 +26,13 @@ namespace Covid19Radar.LogViewer.Globalization.EnglishTransformers
 
 		protected override string? TransformCore(string? message, Func<string?, string?> next)
 		{
+			if (message is null) {
+				return null;
+			}
+
 			if (message == Failed) {
 				return "Failed to transit to a page.";
-			} else if (message?.StartsWith(Prefix) ?? false) {
+			} else if (message.StartsWith(Prefix)) {
 				string page = message.Substring(Prefix.Length);
 				page = page switch {
 					nameof(HomePage)                  => HomePage,

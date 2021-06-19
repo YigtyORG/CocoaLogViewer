@@ -23,11 +23,15 @@ namespace Covid19Radar.LogViewer.Globalization.EnglishTransformers
 
 		protected override string? TransformCore(string? message, Func<string?, string?> next)
 		{
+			if (message is null) {
+				return null;
+			}
+
 			if (message == UserDataExists) {
 				return "The user data exists.";
 			} else if (message == NoUserDataExists) {
 				return "The user data does not exist.";
-			} else if ((message?.StartsWith(Prefix) ?? false) &&
+			} else if (message.StartsWith(Prefix) &&
 				bool.TryParse(message.Substring(Prefix.Length), out bool exists)) {
 				return $"Does user data exist? {(exists ? "Yes" : "No")}.";
 			} else {

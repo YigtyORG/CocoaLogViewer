@@ -21,7 +21,11 @@ namespace Covid19Radar.LogViewer.Globalization.EnglishTransformers
 
 		protected override string? TransformCore(string? message, Func<string?, string?> next)
 		{
-			if ((message?.StartsWith(Prefix) ?? false) &&
+			if (message is null) {
+				return null;
+			}
+
+			if (message.StartsWith(Prefix) &&
 				long.TryParse(message.Substring(Prefix.Length), out long milliseconds)) {
 				var dto = DateTimeOffset.FromUnixTimeMilliseconds(milliseconds);
 				return $"The temporary exposure key (TEK) was created on {dto:MMMM dd, yyyy tthh:mm:ss.fffffff}.";

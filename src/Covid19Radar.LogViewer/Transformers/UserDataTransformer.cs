@@ -22,11 +22,15 @@ namespace Covid19Radar.LogViewer.Transformers
 
 		protected override string? TransformCore(string? message, Func<string?, string?> next)
 		{
+			if (message is null) {
+				return null;
+			}
+
 			if (message == UserDataExists) {
 				return "利用者情報は存在します。";
 			} else if (message == NoUserDataExists) {
 				return "利用者情報は存在しません。";
-			} else if ((message?.StartsWith(Prefix) ?? false) &&
+			} else if (message.StartsWith(Prefix) &&
 				bool.TryParse(message.Substring(Prefix.Length), out bool exists)) {
 				return $"利用者情報の存否：存在{(exists ? "する" : "しない")}。";
 			} else {

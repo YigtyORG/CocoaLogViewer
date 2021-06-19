@@ -72,6 +72,10 @@ namespace Covid19Radar.LogViewer.Transformers
 
 		protected override string? TransformCore(string? message, Func<string?, string?> next)
 		{
+			if (message is null) {
+				return null;
+			}
+
 			return this.Build(next)(message);
 		}
 
