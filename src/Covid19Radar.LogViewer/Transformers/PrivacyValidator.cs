@@ -29,7 +29,7 @@ namespace Covid19Radar.LogViewer.Transformers
 					msg = msg.Slice(4);
 					if (msg.Length > 0) {
 						int i = msg[0] == 's' ? 1 : 0;
-						if (msg.Length > (i + 3) &&
+						if (msg.Length >= (i + 3) &&
 							msg[i + 0] == ':' &&
 							msg[i + 1] == '/' &&
 							msg[i + 2] == '/') {
