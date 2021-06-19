@@ -38,6 +38,7 @@ namespace Covid19Radar.LogViewer.Launcher
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnSend = new System.Windows.Forms.Button();
 			this.ofd = new System.Windows.Forms.OpenFileDialog();
+			this.cboxAllowEscape = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.nudPort)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -63,7 +64,7 @@ namespace Covid19Radar.LogViewer.Launcher
 			this.labelPort.Location = new System.Drawing.Point(8, 64);
 			this.labelPort.Name = "labelPort";
 			this.labelPort.Size = new System.Drawing.Size(54, 15);
-			this.labelPort.TabIndex = 2;
+			this.labelPort.TabIndex = 0;
 			this.labelPort.Text = "labelPort";
 			// 
 			// nudPort
@@ -81,7 +82,7 @@ namespace Covid19Radar.LogViewer.Launcher
             0});
 			this.nudPort.Name = "nudPort";
 			this.nudPort.Size = new System.Drawing.Size(120, 23);
-			this.nudPort.TabIndex = 3;
+			this.nudPort.TabIndex = 2;
 			this.nudPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.nudPort.Value = new decimal(new int[] {
             1,
@@ -95,23 +96,23 @@ namespace Covid19Radar.LogViewer.Launcher
 			this.labelFile.Location = new System.Drawing.Point(8, 120);
 			this.labelFile.Name = "labelFile";
 			this.labelFile.Size = new System.Drawing.Size(50, 15);
-			this.labelFile.TabIndex = 4;
+			this.labelFile.TabIndex = 0;
 			this.labelFile.Text = "labelFile";
 			// 
 			// tboxFile
 			// 
 			this.tboxFile.Location = new System.Drawing.Point(8, 144);
 			this.tboxFile.Name = "tboxFile";
-			this.tboxFile.Size = new System.Drawing.Size(456, 23);
-			this.tboxFile.TabIndex = 5;
 			this.tboxFile.ReadOnly = true;
+			this.tboxFile.Size = new System.Drawing.Size(456, 23);
+			this.tboxFile.TabIndex = 3;
 			// 
 			// btnOpenFile
 			// 
 			this.btnOpenFile.Location = new System.Drawing.Point(464, 144);
 			this.btnOpenFile.Name = "btnOpenFile";
 			this.btnOpenFile.Size = new System.Drawing.Size(27, 23);
-			this.btnOpenFile.TabIndex = 6;
+			this.btnOpenFile.TabIndex = 4;
 			this.btnOpenFile.Text = "...";
 			this.btnOpenFile.UseVisualStyleBackColor = true;
 			this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
@@ -121,7 +122,7 @@ namespace Covid19Radar.LogViewer.Launcher
 			this.btnCancel.Location = new System.Drawing.Point(336, 248);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
-			this.btnCancel.TabIndex = 7;
+			this.btnCancel.TabIndex = 6;
 			this.btnCancel.Text = "btnCancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -131,7 +132,7 @@ namespace Covid19Radar.LogViewer.Launcher
 			this.btnSend.Location = new System.Drawing.Point(416, 248);
 			this.btnSend.Name = "btnSend";
 			this.btnSend.Size = new System.Drawing.Size(75, 23);
-			this.btnSend.TabIndex = 8;
+			this.btnSend.TabIndex = 7;
 			this.btnSend.Text = "btnSend";
 			this.btnSend.UseVisualStyleBackColor = true;
 			this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
@@ -143,6 +144,16 @@ namespace Covid19Radar.LogViewer.Launcher
 			this.ofd.RestoreDirectory = true;
 			this.ofd.SupportMultiDottedExtensions = true;
 			// 
+			// cboxAllowEscape
+			// 
+			this.cboxAllowEscape.AutoSize = true;
+			this.cboxAllowEscape.Location = new System.Drawing.Point(8, 176);
+			this.cboxAllowEscape.Name = "cboxAllowEscape";
+			this.cboxAllowEscape.Size = new System.Drawing.Size(118, 19);
+			this.cboxAllowEscape.TabIndex = 5;
+			this.cboxAllowEscape.Text = "cboxAllowEscape";
+			this.cboxAllowEscape.UseVisualStyleBackColor = true;
+			// 
 			// FormSender
 			// 
 			this.AcceptButton = this.btnSend;
@@ -150,6 +161,7 @@ namespace Covid19Radar.LogViewer.Launcher
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnCancel;
 			this.ClientSize = new System.Drawing.Size(496, 281);
+			this.Controls.Add(this.cboxAllowEscape);
 			this.Controls.Add(this.btnSend);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnOpenFile);
@@ -183,5 +195,6 @@ namespace Covid19Radar.LogViewer.Launcher
 		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.Button btnSend;
 		private System.Windows.Forms.OpenFileDialog ofd;
+		private System.Windows.Forms.CheckBox cboxAllowEscape;
 	}
 }

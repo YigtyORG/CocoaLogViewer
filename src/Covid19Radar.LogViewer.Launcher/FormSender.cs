@@ -9,6 +9,7 @@
 using System;
 using System.IO;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Covid19Radar.LogViewer.Globalization;
@@ -24,14 +25,15 @@ namespace Covid19Radar.LogViewer.Launcher
 
 		private void FormSender_Load(object sender, EventArgs e)
 		{
-			this        .Text   = LanguageData.Current.FormSender_Title;
-			labelAddress.Text   = LanguageData.Current.FormSender_Label_Address;
-			labelPort   .Text   = LanguageData.Current.FormSender_Label_Port;
-			labelFile   .Text   = LanguageData.Current.FormSender_Label_File;
-			btnCancel   .Text   = LanguageData.Current.FormSender_Button_Cancel;
-			btnSend     .Text   = LanguageData.Current.FormSender_Button_Send;
-			ofd         .Title  = LanguageData.Current.MainWindow_OFD_Title;
-			ofd         .Filter = LanguageData.Current.MainWindow_OFD_Filter();
+			this           .Text   = LanguageData.Current.FormSender_Title;
+			labelAddress   .Text   = LanguageData.Current.FormSender_Label_Address;
+			labelPort      .Text   = LanguageData.Current.FormSender_Label_Port;
+			labelFile      .Text   = LanguageData.Current.FormSender_Label_File;
+			btnCancel      .Text   = LanguageData.Current.FormSender_Button_Cancel;
+			btnSend        .Text   = LanguageData.Current.FormSender_Button_Send;
+			cboxAllowEscape.Text   = LanguageData.Current.FormMain_CheckBoxAllowEscape;
+			ofd            .Title  = LanguageData.Current.MainWindow_OFD_Title;
+			ofd            .Filter = LanguageData.Current.MainWindow_OFD_Filter();
 		}
 
 		private async void btnSend_Click(object sender, EventArgs e)
@@ -39,9 +41,14 @@ namespace Covid19Radar.LogViewer.Launcher
 			using (var client = new TcpClient(tboxAddress.Text, ((int)(nudPort.Value)))) {
 				var ns = client.GetStream();
 				await using (ns.ConfigureAwait(false)) {
-					var fs = new FileStream(tboxFile.Text, FileMode.Open, FileAccess.Read, FileShare.Read);
-					await using (fs.ConfigureAwait(false)) {
-						await fs.CopyToAsync(ns);
+					var bw = new BinaryWriter(ns);
+					await using (bw.ConfigureAwait(false)) {
+						bw.Write(cboxAllowEscape.Checked);
+						var fs = new FileStream(tboxFile.Text, FileMode.Open, FileAccess.Read, FileShare.Read);
+						await using (fs.ConfigureAwait(false)) {
+							bw.Write(fs.Length);
+							await fs.CopyToAsync(ns);
+						}
 					}
 				}
 			}

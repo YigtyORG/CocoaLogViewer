@@ -120,10 +120,10 @@ namespace Covid19Radar.LogViewer.Launcher
 			}
 		}
 
-		internal async ValueTask OpenFileAsync(string filename)
+		internal async ValueTask OpenFileAsync(string filename, bool? allowEscape = null)
 		{
 			var mwnd = this.CreateMainWindow();
-			if (await mwnd.OpenFile(filename, cboxAllowEscape.Checked)) {
+			if (await mwnd.OpenFile(filename, allowEscape ?? cboxAllowEscape.Checked)) {
 				this.ShowMainWindow(mwnd);
 			}
 		}
