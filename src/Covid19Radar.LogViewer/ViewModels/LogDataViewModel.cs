@@ -17,12 +17,16 @@ namespace Covid19Radar.LogViewer.ViewModels
 {
 	public class LogDataViewModel : ViewModelBase
 	{
+		private static readonly SolidColorBrush _does_not_contain_privacy = new(Color.FromRgb(0xFF, 0xFF, 0xFF));
+		private static readonly SolidColorBrush _maybe_contains_privacy   = new(Color.FromRgb(0xFF, 0xDD, 0xDD));
+
 		private LogDataModel?    _log_data;
 		private string?          _timestamp;
 		private string?          _level;
 		private SolidColorBrush? _level_back;
 		private FlowDocument?    _location;
 		private string?          _message;
+		private SolidColorBrush? _message_back;
 
 		public LogDataModel? LogData
 		{
@@ -37,6 +41,7 @@ namespace Covid19Radar.LogViewer.ViewModels
 					this.LogLevelBackColor = loglevel.BackColor;
 					this.Location          = value.GetLocationAsFlowDocument();
 					this.Message           = value.TransformedMessage;
+					this.MessageBackColor  = value.MaybeContainsPrivacy ? _maybe_contains_privacy : _does_not_contain_privacy;
 				}
 			}
 		}
@@ -69,6 +74,12 @@ namespace Covid19Radar.LogViewer.ViewModels
 		{
 			get => _message;
 			set => this.RaisePropertyChanged(ref _message, value, nameof(this.Message));
+		}
+
+		public SolidColorBrush? MessageBackColor
+		{
+			get => _message_back;
+			set => this.RaisePropertyChanged(ref _message_back, value, nameof(this.MessageBackColor));
 		}
 
 		public DelegateCommand ClickDetails { get; }

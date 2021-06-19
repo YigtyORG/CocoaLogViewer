@@ -63,6 +63,7 @@
 		<TextBox
 			Grid.Column="4"
 			Text="{Binding Message}"
+			Background="{Binding MessageBackColor}"
 			IsReadOnly="True"
 			FontSize="16"
 			TextWrapping="WrapWithOverflow" />
