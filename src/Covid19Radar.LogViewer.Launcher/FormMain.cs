@@ -36,11 +36,12 @@ namespace Covid19Radar.LogViewer.Launcher
 		{
 			foreach (var _ in _modules) ;
 
-			this                 .Text = LanguageData.Current.MainWindow_Title;
-			btnOpen              .Text = LanguageData.Current.FormMain_ButtonOpen;
-			menuItem_showReceiver.Text = LanguageData.Current.FormMain_Menu_ShowReceiver;
-			cboxAllowEscape      .Text = LanguageData.Current.FormMain_CheckBoxAllowEscape;
-			labelVersion         .Text = VersionInfo.GetCaption();
+			this                     .Text = LanguageData.Current.MainWindow_Title;
+			btnOpen                  .Text = LanguageData.Current.FormMain_ButtonOpen;
+			menuFeatures             .Text = LanguageData.Current.FormMain_FeaturesMenu;
+			menuFeatures_showReceiver.Text = LanguageData.Current.FormMain_FeaturesMenu_ShowReceiver;
+			cboxAllowEscape          .Text = LanguageData.Current.FormMain_CheckBoxAllowEscape;
+			labelVersion             .Text = VersionInfo.GetCaption() + "\r\n" + VersionInfo.GetCopyright();
 
 			_app = new App();
 			_app.OpenWindow   = false;
@@ -66,7 +67,7 @@ namespace Covid19Radar.LogViewer.Launcher
 			}
 		}
 
-		private void menuItem_showReceiver_Click(object sender, EventArgs e)
+		private void menuFeatures_showReceiver_Click(object sender, EventArgs e)
 		{
 			if (_receiver is null || _receiver.IsDisposed) {
 				_receiver = new(this);

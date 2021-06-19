@@ -22,7 +22,8 @@ namespace Covid19Radar.LogViewer.Globalization
 		public override string MainWindow_OFD_Error                      => "An error occurred.";
 		public override string MainWindow_OFD_Error_Message              => "The specified file is not a log file, or the application cannot access the file.";
 		public override string FormMain_ButtonOpen                       => "&Open a log file";
-		public override string FormMain_Menu_ShowReceiver                => "&Receive log files from COCOA";
+		public override string FormMain_FeaturesMenu                     => "&Tools";
+		public override string FormMain_FeaturesMenu_ShowReceiver        => "&Receive log files from COCOA";
 		public override string FormMain_CheckBoxAllowEscape              => "Convert escape characters.";
 		public override string FormMain_FormClosing                      => "Are you sure to close all COCOA log file viewers?";
 		public override string FormReceiver_Title                        => "Receive log files from COCOA";
