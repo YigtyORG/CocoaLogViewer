@@ -8,6 +8,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Covid19Radar.LogViewer.Extensibility;
@@ -27,7 +29,7 @@ namespace Covid19Radar.LogViewer.Launcher
 				ShowWindow(modules, context);
 				return 0;
 			} catch (Exception e) {
-				MessageBox.Show(e.Message, LanguageData.Current.MainWindow_OFD_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				HandleException(e);
 				return e.HResult;
 			}
 		}
@@ -43,7 +45,28 @@ namespace Covid19Radar.LogViewer.Launcher
 
 		private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
 		{
-			MessageBox.Show(e.Exception.Message, LanguageData.Current.MainWindow_OFD_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+			HandleException(e.Exception);
+		}
+
+		private static void HandleException(Exception exception)
+		{
+			MessageBox.Show(exception.Message, LanguageData.Current.MainWindow_OFD_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+			using (var fs = new FileStream(Path.Combine(AppContext.BaseDirectory, "error_log.md"), FileMode.Append, FileAccess.Write, FileShare.None))
+			using (var sw = new StreamWriter(fs, Encoding.UTF8)) {
+				var    now   = DateTime.Now;
+				int    pid   = Environment.ProcessId;
+				string dt    = now.ToString("yyyy/MM/dd HH:mm:ss.fffffff");
+				string id    = now.ToString("yyyyMMddHHmmssfffffff") + "__" + pid;
+				sw.WriteLine();
+				sw.WriteLine("<a id=\"{0}\"></a>", id);
+				sw.WriteLine("# **[Date/Time: {0}, PID: {1}](#{2})**", dt, pid, id);
+				sw.WriteLine("```log");
+				sw.WriteLine(exception);
+				sw.WriteLine("```");
+				sw.WriteLine("----------------");
+				sw.WriteLine();
+			}
 		}
 	}
 }
