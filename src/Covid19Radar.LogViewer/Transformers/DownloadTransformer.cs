@@ -19,10 +19,11 @@ namespace Covid19Radar.LogViewer.Transformers
 		protected override string? TransformCore(string? message, Func<string?, string?> next)
 		{
 			return message switch {
-				"Start download files"  => "ファイルのダウンロードを開始しました。",
-				"End to download files" => "ファイルのダウンロードを終了しました。",
-				"Success to download"   => "ダウンロードが成功しました。",
-				"Fail to download"      => "ダウンロードが失敗しました。",
+				"Start download files"              => "ファイルのダウンロードを開始しました。",
+				"End to download files"             => "ファイルのダウンロードを終了しました。",
+				"Success to download"               => "ダウンロードが成功しました。",
+				"Success to download configuration" => "構成設定のダウンロードが成功しました。",
+				"Fail to download"                  => "ダウンロードが失敗しました。",
 				_ => next(message)
 			};
 		}

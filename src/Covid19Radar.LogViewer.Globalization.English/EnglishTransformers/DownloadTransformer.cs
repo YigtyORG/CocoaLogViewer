@@ -20,10 +20,11 @@ namespace Covid19Radar.LogViewer.Globalization.EnglishTransformers
 		protected override string? TransformCore(string? message, Func<string?, string?> next)
 		{
 			return message switch {
-				"Start download files"  => "To download files starts.",
-				"End to download files" => "To download files ends.",
-				"Success to download"   => "Succeeded to download.",
-				"Fail to download"      => "Failed to download.",
+				"Start download files"              => "To download files starts.",
+				"End to download files"             => "To download files ends.",
+				"Success to download"               => "Succeeded to download.",
+				"Success to download configuration" => "Succeeded to download a configuration.",
+				"Fail to download"                  => "Failed to download.",
 				_ => next(message)
 			};
 		}
