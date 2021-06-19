@@ -82,6 +82,7 @@ namespace Covid19Radar.LogViewer.Globalization
 				.Add(CallTransformer                .Instance)
 				.Add(TekItemTransformer             .Instance)
 				.Add(LastCreatedTransformer         .Instance)
+				.Add(DownloadTekFileTransformer     .Instance)
 				.Add(DownloadTransformer            .Instance)
 				.Add(ExposureNotificationTransformer.Instance)
 				.Add(UserDataTransformer            .Instance)
