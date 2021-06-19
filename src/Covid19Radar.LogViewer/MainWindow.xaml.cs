@@ -22,14 +22,14 @@ namespace Covid19Radar.LogViewer
 {
 	public partial class MainWindow : Window
 	{
-		private readonly Func<string?, string?> _transformer;
-		private          bool                   _file_loaded;
+		private readonly Func<string?, string> _transformer;
+		private          bool                  _file_loaded;
 
 		public MainWindow() : this(new TransformerPipeline().ConfigureDefaults()) { }
 
 		public MainWindow(TransformerPipeline transformerPipeline)
 		{
-			_transformer = transformerPipeline.Build(m => m);
+			_transformer = transformerPipeline.Build(m => m ?? string.Empty);
 			this.InitializeComponent();
 			this.Title             = LanguageData.Current.MainWindow_Title;
 			btnOpen   .Content     = LanguageData.Current.MainWindow_ButtonOpen;

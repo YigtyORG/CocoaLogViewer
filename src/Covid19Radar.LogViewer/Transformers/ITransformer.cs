@@ -12,12 +12,12 @@ namespace Covid19Radar.LogViewer.Transformers
 {
 	public interface ITransformer
 	{
-		public string? Transform(string? message, Func<string?, string?> next);
+		public string Transform(string? message, Func<string?, string> next);
 	}
 
 	public abstract class TransformerBase : ITransformer
 	{
-		public string? Transform(string? message, Func<string?, string?> next)
+		public string Transform(string? message, Func<string?, string> next)
 		{
 			if (next is null) {
 				throw new ArgumentNullException(nameof(next));
@@ -25,10 +25,10 @@ namespace Covid19Radar.LogViewer.Transformers
 			return this.TransformCore(message, next);
 		}
 
-		protected abstract string? TransformCore(string? message, Func<string?, string?> next);
+		protected abstract string TransformCore(string? message, Func<string?, string> next);
 	}
 
-	public delegate string? TransformDelegate(string? message, Func<string?, string?> next);
+	public delegate string TransformDelegate(string? message, Func<string?, string> next);
 
 	internal sealed class TransformDelegateWrapper : ITransformer
 	{
@@ -39,7 +39,7 @@ namespace Covid19Radar.LogViewer.Transformers
 			this.Delegate = transformDelegate;
 		}
 
-		public string? Transform(string? message, Func<string?, string?> next)
+		public string Transform(string? message, Func<string?, string> next)
 		{
 			return this.Delegate(message, next);
 		}

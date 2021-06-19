@@ -16,7 +16,7 @@ namespace Covid19Radar.LogViewer.Transformers
 
 		private DownloadTransformer() { }
 
-		protected override string? TransformCore(string? message, Func<string?, string?> next)
+		protected override string TransformCore(string? message, Func<string?, string> next)
 		{
 			return message switch {
 				"Start download files"              => "ファイルのダウンロードを開始しました。",

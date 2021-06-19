@@ -17,7 +17,7 @@ namespace Covid19Radar.LogViewer.Transformers
 			if (transformer is null) {
 				throw new ArgumentNullException(nameof(transformer));
 			}
-			return transformer.Transform(message, message => message) ?? message ?? string.Empty;
+			return transformer.Transform(message, message => message ?? string.Empty) ?? message ?? string.Empty;
 		}
 
 		public static ITransformer ToTransformer(this TransformDelegate transformDelegate)
@@ -28,7 +28,7 @@ namespace Covid19Radar.LogViewer.Transformers
 			return new TransformDelegateWrapper(transformDelegate);
 		}
 
-		public static FuncTransformer ToTransformer(this Func<string?, string?> func)
+		public static FuncTransformer ToTransformer(this Func<string?, string> func)
 		{
 			if (func is null) {
 				throw new ArgumentNullException(nameof(func));
@@ -118,14 +118,14 @@ namespace Covid19Radar.LogViewer.Transformers
 
 		public readonly struct FuncTransformer : ITransformer
 		{
-			private readonly Func<string?, string?>? _func;
+			private readonly Func<string?, string>? _func;
 
-			public FuncTransformer(Func<string?, string?>? func)
+			public FuncTransformer(Func<string?, string>? func)
 			{
 				_func = func;
 			}
 
-			public string? Transform(string? message, Func<string?, string?> next)
+			public string Transform(string? message, Func<string?, string> next)
 			{
 				return _func?.Invoke(message) ?? next(message);
 			}

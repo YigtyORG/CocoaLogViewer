@@ -17,7 +17,7 @@ namespace Covid19Radar.LogViewer.Globalization.EnglishTransformers
 
 		private DownloadTransformer() { }
 
-		protected override string? TransformCore(string? message, Func<string?, string?> next)
+		protected override string TransformCore(string? message, Func<string?, string> next)
 		{
 			return message switch {
 				"Start download files"              => "To download files starts.",

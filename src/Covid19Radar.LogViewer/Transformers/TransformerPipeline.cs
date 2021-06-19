@@ -57,7 +57,7 @@ namespace Covid19Radar.LogViewer.Transformers
 			}
 		}
 
-		public virtual Func<string?, string?> Build(Func<string?, string?> final)
+		public virtual Func<string?, string> Build(Func<string?, string> final)
 		{
 			TransformDelegate[] funcs;
 			lock (_delegates) {
@@ -70,10 +70,10 @@ namespace Covid19Radar.LogViewer.Transformers
 			return next;
 		}
 
-		protected override string? TransformCore(string? message, Func<string?, string?> next)
+		protected override string TransformCore(string? message, Func<string?, string> next)
 		{
-			if (message is null) {
-				return null;
+			if (string.IsNullOrEmpty(message)) {
+				return string.Empty;
 			}
 
 			return this.Build(next)(message);
@@ -103,16 +103,16 @@ namespace Covid19Radar.LogViewer.Transformers
 
 		private readonly struct Next
 		{
-			private readonly TransformDelegate      _func;
-			private readonly Func<string?, string?> _next;
+			private readonly TransformDelegate     _func;
+			private readonly Func<string?, string> _next;
 
-			internal Next(TransformDelegate f, Func<string?, string?> n)
+			internal Next(TransformDelegate f, Func<string?, string> n)
 			{
 				_func = f;
 				_next = n;
 			}
 
-			internal string? Invoke(string? msg)
+			internal string Invoke(string? msg)
 			{
 				return _func(msg, _next);
 			}

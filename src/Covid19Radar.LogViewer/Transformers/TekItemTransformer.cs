@@ -18,10 +18,10 @@ namespace Covid19Radar.LogViewer.Transformers
 
 		private TekItemTransformer() { }
 
-		protected override string? TransformCore(string? message, Func<string?, string?> next)
+		protected override string TransformCore(string? message, Func<string?, string> next)
 		{
-			if (message is null) {
-				return null;
+			if (string.IsNullOrEmpty(message)) {
+				return string.Empty;
 			}
 
 			if (message.StartsWith(Prefix) &&
