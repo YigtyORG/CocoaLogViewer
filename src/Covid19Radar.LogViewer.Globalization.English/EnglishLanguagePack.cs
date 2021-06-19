@@ -79,12 +79,13 @@ namespace Covid19Radar.LogViewer.Globalization
 		{
 			context.TransformerPipeline = new TransformerPipeline()
 				.AddControlCharTransformer()
-				.Add(CallTransformer       .Instance)
-				.Add(TekItemTransformer    .Instance)
-				.Add(LastCreatedTransformer.Instance)
-				.Add(DownloadTransformer   .Instance)
-				.Add(UserDataTransformer   .Instance)
-				.Add(TransitionTransformer .Instance);
+				.Add(CallTransformer                .Instance)
+				.Add(TekItemTransformer             .Instance)
+				.Add(LastCreatedTransformer         .Instance)
+				.Add(DownloadTransformer            .Instance)
+				.Add(ExposureNotificationTransformer.Instance)
+				.Add(UserDataTransformer            .Instance)
+				.Add(TransitionTransformer          .Instance);
 		}
 	}
 }
