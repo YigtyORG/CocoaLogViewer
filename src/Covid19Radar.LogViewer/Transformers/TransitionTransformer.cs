@@ -23,11 +23,15 @@ namespace Covid19Radar.LogViewer.Transformers
 
 		private TransitionTransformer() { }
 
-		protected override string? TransformCore(string? message, Func<string?, string?> next)
+		protected override string TransformCore(string? message, Func<string?, string> next)
 		{
+			if (string.IsNullOrEmpty(message)) {
+				return string.Empty;
+			}
+
 			if (message == Failed) {
 				return "ページの遷移に失敗しました。";
-			} else if (message?.StartsWith(Prefix) ?? false) {
+			} else if (message.StartsWith(Prefix)) {
 				string page = message.Substring(Prefix.Length);
 				page = page switch {
 					nameof(HomePage)                  => HomePage,

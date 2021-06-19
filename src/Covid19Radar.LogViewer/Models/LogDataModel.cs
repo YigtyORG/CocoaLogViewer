@@ -28,7 +28,8 @@ namespace Covid19Radar.LogViewer.Models
 		string DeviceModel,
 		string DeviceType,
 		string Version,
-		string BuildNumber)
+		string BuildNumber,
+		bool   MaybeContainsPrivacy)
 	{
 		private static readonly SolidColorBrush _method_color    = new(Color.FromRgb(0x00, 0x80, 0xFF));
 		private static readonly SolidColorBrush _file_path_color = new(Color.FromRgb(0x80, 0x40, 0x00));

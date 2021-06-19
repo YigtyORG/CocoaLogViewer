@@ -19,7 +19,7 @@ namespace Covid19Radar.LogViewer.Transformers
 
 		private CallTransformer() { }
 
-		protected override string? TransformCore(string? message, Func<string?, string?> next)
+		protected override string TransformCore(string? message, Func<string?, string> next)
 		{
 			return message switch {
 				nameof(Start) => Start,

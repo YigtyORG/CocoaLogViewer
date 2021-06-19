@@ -16,7 +16,7 @@ namespace Covid19Radar.LogViewer.Transformers
 
 		private ControlCharTransformer() { }
 
-		protected override string? TransformCore(string? message, Func<string?, string?> next)
+		protected override string TransformCore(string? message, Func<string?, string> next)
 		{
 			var sb  = StringBuilderCache<ControlCharTransformer>.Get();
 			var msg = message.AsSpan();

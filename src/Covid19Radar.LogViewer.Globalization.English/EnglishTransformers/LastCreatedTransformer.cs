@@ -11,13 +11,13 @@ using Covid19Radar.LogViewer.Transformers;
 
 namespace Covid19Radar.LogViewer.Globalization.EnglishTransformers
 {
-	internal sealed class TekItemTransformer : TransformerBase
+	internal sealed class LastCreatedTransformer : TransformerBase
 	{
-		private const string Prefix = "tekItem.Created: ";
+		private const string Prefix = "lastCreated: ";
 
-		internal static TekItemTransformer Instance { get; } = new();
+		internal static LastCreatedTransformer Instance { get; } = new();
 
-		private TekItemTransformer() { }
+		private LastCreatedTransformer() { }
 
 		protected override string TransformCore(string? message, Func<string?, string> next)
 		{
@@ -28,7 +28,7 @@ namespace Covid19Radar.LogViewer.Globalization.EnglishTransformers
 			if (message.StartsWith(Prefix) &&
 				long.TryParse(message.Substring(Prefix.Length), out long milliseconds)) {
 				var dto = DateTimeOffset.FromUnixTimeMilliseconds(milliseconds);
-				return $"The temporary exposure key (TEK) was created on {dto:MMMM dd, yyyy tthh:mm:ss.fffffff}.";
+				return $"Last created on {dto:MMMM dd, yyyy tthh:mm:ss.fffffff}.";
 			} else {
 				return next(message);
 			}

@@ -11,13 +11,13 @@ using Covid19Radar.LogViewer.Transformers;
 
 namespace Covid19Radar.LogViewer.Globalization.EnglishTransformers
 {
-	internal sealed class TekItemTransformer : TransformerBase
+	internal sealed class DownloadTekFileTransformer : TransformerBase
 	{
-		private const string Prefix = "tekItem.Created: ";
+		private const string Prefix = "Download TEK file. url: ";
 
-		internal static TekItemTransformer Instance { get; } = new();
+		internal static DownloadTekFileTransformer Instance { get; } = new();
 
-		private TekItemTransformer() { }
+		private DownloadTekFileTransformer() { }
 
 		protected override string TransformCore(string? message, Func<string?, string> next)
 		{
@@ -25,10 +25,8 @@ namespace Covid19Radar.LogViewer.Globalization.EnglishTransformers
 				return string.Empty;
 			}
 
-			if (message.StartsWith(Prefix) &&
-				long.TryParse(message.Substring(Prefix.Length), out long milliseconds)) {
-				var dto = DateTimeOffset.FromUnixTimeMilliseconds(milliseconds);
-				return $"The temporary exposure key (TEK) was created on {dto:MMMM dd, yyyy tthh:mm:ss.fffffff}.";
+			if (message.StartsWith(Prefix)) {
+				return "Downloaded the temporary exposure key (TEK) file from \"" + message.Substring(Prefix.Length) + "\".";
 			} else {
 				return next(message);
 			}
