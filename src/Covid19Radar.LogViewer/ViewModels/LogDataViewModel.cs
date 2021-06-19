@@ -18,7 +18,7 @@ namespace Covid19Radar.LogViewer.ViewModels
 	public class LogDataViewModel : ViewModelBase
 	{
 		private static readonly SolidColorBrush _does_not_contain_privacy = new(Color.FromRgb(0xFF, 0xFF, 0xFF));
-		private static readonly SolidColorBrush _maybe_contains_privacy   = new(Color.FromRgb(0xFF, 0xDD, 0xDD));
+		private static readonly SolidColorBrush _maybe_contains_privacy   = new(Color.FromRgb(0xFF, 0xEE, 0xEE));
 
 		private LogDataModel?    _log_data;
 		private string?          _timestamp;
