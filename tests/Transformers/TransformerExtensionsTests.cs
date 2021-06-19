@@ -17,7 +17,7 @@ namespace Covid19Radar.LogViewer.Tests.Transformers
 	public class TransformerExtensionsTests
 	{
 		[TestMethod()]
-		public void ConfigureDefaultsTests()
+		public void ConfigureDefaultsTest()
 		{
 			Assert.ThrowsException<ArgumentNullException>(() => TransformerExtensions.ConfigureDefaults(null!));
 			Assert.ThrowsException<ArgumentNullException>(() => TransformerExtensions.ConfigureDefaults(default!));
