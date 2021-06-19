@@ -89,7 +89,7 @@ namespace Covid19Radar.LogViewer.Launcher
 			// cboxAllowEscape
 			// 
 			this.cboxAllowEscape.AutoSize = true;
-			this.cboxAllowEscape.Location = new System.Drawing.Point(8, 64);
+			this.cboxAllowEscape.Location = new System.Drawing.Point(8, 56);
 			this.cboxAllowEscape.Name = "cboxAllowEscape";
 			this.cboxAllowEscape.Size = new System.Drawing.Size(118, 19);
 			this.cboxAllowEscape.TabIndex = 2;
