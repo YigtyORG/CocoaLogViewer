@@ -39,7 +39,7 @@ namespace Covid19Radar.LogViewer.Launcher
 			using (var client = new TcpClient(tboxAddress.Text, ((int)(nudPort.Value)))) {
 				var ns = client.GetStream();
 				await using (ns.ConfigureAwait(false)) {
-					var fs = new FileStream(tboxFile.Text, FileMode.Create, FileAccess.Write, FileShare.None);
+					var fs = new FileStream(tboxFile.Text, FileMode.Open, FileAccess.Read, FileShare.Read);
 					await using (fs.ConfigureAwait(false)) {
 						await fs.CopyToAsync(ns);
 					}
