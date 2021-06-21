@@ -6,7 +6,7 @@
  * distributed under the MIT License.
 ****/
 
-using System.Windows.Forms;
+using Covid19Radar.LogViewer.Views;
 
 namespace Covid19Radar.LogViewer.Extensibility.Features
 {
@@ -14,6 +14,6 @@ namespace Covid19Radar.LogViewer.Extensibility.Features
 	{
 		public bool IsChecked { get; protected set; }
 
-		public void RunCommand(IWin32Window parent);
+		public void RunCommand(ILauncherWindow parent);
 	}
 }

@@ -20,7 +20,7 @@ using MBOX = System.Windows.Forms.MessageBox;
 
 namespace Covid19Radar.LogViewer.Launcher
 {
-	public partial class FormMain : Form
+	public partial class FormMain : Form, ILauncherWindow
 	{
 		private readonly IEnumerable<CocoaLogViewerModule> _modules;
 		private readonly ModuleInitializationContext       _context;
