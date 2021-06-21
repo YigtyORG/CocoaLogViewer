@@ -30,7 +30,7 @@ namespace Covid19Radar.LogViewer.Extensibility
 
 		public virtual IEnumerable<IPlugin>? GetChildPlugins()
 		{
-			yield return this;
+			return null;
 		}
 
 		protected abstract void InitializeCore(ModuleInitializationContext context);

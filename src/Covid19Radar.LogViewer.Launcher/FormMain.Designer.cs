@@ -43,6 +43,7 @@ namespace Covid19Radar.LogViewer.Launcher
 			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.menuFeatures = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuFeatures_showSender = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
 			this.menuStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -111,7 +112,8 @@ namespace Covid19Radar.LogViewer.Launcher
 			// 
 			this.menuFeatures.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuFeatures_showReceiver,
-            this.menuFeatures_showSender});
+            this.menuFeatures_showSender,
+            this.toolStripSeparator});
 			this.menuFeatures.Name = "menuFeatures";
 			this.menuFeatures.Size = new System.Drawing.Size(93, 20);
 			this.menuFeatures.Text = "menuFeatures";
@@ -123,6 +125,11 @@ namespace Covid19Radar.LogViewer.Launcher
 			this.menuFeatures_showSender.Size = new System.Drawing.Size(265, 22);
 			this.menuFeatures_showSender.Text = "menuFeatures_showSender";
 			this.menuFeatures_showSender.Click += new System.EventHandler(this.menuFeatures_showSender_Click);
+			// 
+			// toolStripSeparator
+			// 
+			this.toolStripSeparator.Name = "toolStripSeparator";
+			this.toolStripSeparator.Size = new System.Drawing.Size(262, 6);
 			// 
 			// FormMain
 			// 
@@ -158,6 +165,7 @@ namespace Covid19Radar.LogViewer.Launcher
 		private System.Windows.Forms.MenuStrip menuStrip;
 		private System.Windows.Forms.ToolStripMenuItem menuFeatures;
 		private System.Windows.Forms.ToolStripMenuItem menuFeatures_showSender;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
 	}
 }
 
