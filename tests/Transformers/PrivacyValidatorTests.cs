@@ -42,10 +42,15 @@ namespace Covid19Radar.LogViewer.Tests.Transformers
 			Assert.IsTrue(PrivacyValidator.Check("aa Exception bb"));
 			Assert.IsTrue(PrivacyValidator.Check("http  http://  ____"));
 			Assert.IsTrue(PrivacyValidator.Check("https https:// ____"));
+			Assert.IsTrue(PrivacyValidator.Check("{{}}"));
+			Assert.IsTrue(PrivacyValidator.Check("]:,["));
+			Assert.IsTrue(PrivacyValidator.Check("[ 123, 456, { \"abc\": null } ]"));
 
 			Assert.IsFalse(PrivacyValidator.Check("http https"));
 			Assert.IsFalse(PrivacyValidator.Check("Hello, World!!"));
 			Assert.IsFalse(PrivacyValidator.Check("0123456789"));
+			Assert.IsFalse(PrivacyValidator.Check("{ \"hello\": \"world\" }"));
+			Assert.IsFalse(PrivacyValidator.Check("[ false ]"));
 		}
 	}
 }

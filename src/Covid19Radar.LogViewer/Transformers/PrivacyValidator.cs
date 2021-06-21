@@ -23,7 +23,8 @@ namespace Covid19Radar.LogViewer.Transformers
 				return true;
 			}
 
-			var msg = originalMessage.AsSpan();
+			var msg      = originalMessage.AsSpan();
+			int likeJson = 0;
 			while (true) {
 				if (msg.StartsWith("http")) {
 					msg = msg.Slice(4);
@@ -38,11 +39,19 @@ namespace Covid19Radar.LogViewer.Transformers
 					}
 				} else if (msg.StartsWith(nameof(Exception))) {
 					return true;
+				} else {
+					switch (msg[0]) {
+					case '{': case '[':
+					case '}': case ']':
+					case ':': case ',':
+						++likeJson;
+						break;
+					}
 				}
 				if (msg.Length > 0) {
 					msg = msg.Slice(1);
 				} else {
-					return false;
+					return likeJson > 3;
 				}
 			}
 		}
