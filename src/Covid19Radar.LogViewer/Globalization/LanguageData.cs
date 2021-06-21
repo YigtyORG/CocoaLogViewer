@@ -7,6 +7,7 @@
 ****/
 
 using System.Threading;
+using Covid19Radar.LogViewer.Views;
 
 namespace Covid19Radar.LogViewer.Globalization
 {
