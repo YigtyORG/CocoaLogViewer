@@ -32,6 +32,13 @@ namespace Covid19Radar.LogViewer.Launcher.Extensibility
 				}
 			}
 
+			if (plugin is CocoaLogViewerModule module) {
+				if (module.Logo is not null and var image) {
+					this.Image = image;
+				}
+				this.ToolTipText = module.GetLocalizedDescription() ?? string.Empty;
+			}
+
 			if (plugin is ILauncherFeature feature) {
 				_feature     = feature;
 				this.Checked = feature.IsChecked;
