@@ -48,7 +48,7 @@ namespace Covid19Radar.LogViewer.Transformers
 						break;
 					}
 				}
-				if (msg.Length > 0) {
+				if (msg.Length > 1) {
 					msg = msg.Slice(1);
 				} else {
 					return likeJson > 3;
