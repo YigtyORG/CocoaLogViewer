@@ -8,9 +8,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<RootNamespace>Covid19Radar.LogViewer.Globalization</RootNamespace>
-		<Product>The English UI for CocoaLogViewer</Product>
-		<Description>This is an extension for CocoaLogViewer provides the English UI.</Description>
+		<Product>The Transformers Configuration Tool for CocoaLogViewer</Product>
+		<Description>This is an extension for CocoaLogViewer configures transformers.</Description>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="../Covid19Radar.LogViewer/Covid19Radar.LogViewer.csproj" />
@@ -18,5 +17,14 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
+		<EmbeddedResource Update="Properties/Resources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<Compile Update="Properties/Resources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
 	</ItemGroup>
 </Project>

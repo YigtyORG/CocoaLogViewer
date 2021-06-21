@@ -14,11 +14,13 @@ using System.Windows;
 using System.Windows.Forms;
 using Covid19Radar.LogViewer.Extensibility;
 using Covid19Radar.LogViewer.Globalization;
+using Covid19Radar.LogViewer.Launcher.Extensibility;
+using Covid19Radar.LogViewer.Views;
 using MBOX = System.Windows.Forms.MessageBox;
 
 namespace Covid19Radar.LogViewer.Launcher
 {
-	public partial class FormMain : Form
+	public partial class FormMain : Form, ILauncherWindow
 	{
 		private readonly IEnumerable<CocoaLogViewerModule> _modules;
 		private readonly ModuleInitializationContext       _context;
@@ -35,7 +37,9 @@ namespace Covid19Radar.LogViewer.Launcher
 
 		private async void FormMain_Load(object sender, EventArgs e)
 		{
-			foreach (var _ in _modules) ;
+			foreach (var module in _modules) {
+				menuFeatures.DropDownItems.Add(new PluginMenuItem(this, module));
+			}
 
 			this                     .Text = LanguageData.Current.MainWindow_Title;
 			btnOpen                  .Text = LanguageData.Current.FormMain_ButtonOpen;
