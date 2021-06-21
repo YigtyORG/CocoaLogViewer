@@ -30,6 +30,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub Items", "GitHub Item
 		.github\workflows\VerifyPR.yml = .github\workflows\VerifyPR.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Covid19Radar.LogViewer.Transformers.Configuration", "src\Covid19Radar.LogViewer.Transformers.Configuration\Covid19Radar.LogViewer.Transformers.Configuration.csproj", "{A73E8132-F6B4-4BBE-AF0F-729FB76AD704}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{F3E66810-5209-4F40-AC25-FC3C290B5F8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3E66810-5209-4F40-AC25-FC3C290B5F8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3E66810-5209-4F40-AC25-FC3C290B5F8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A73E8132-F6B4-4BBE-AF0F-729FB76AD704}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A73E8132-F6B4-4BBE-AF0F-729FB76AD704}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A73E8132-F6B4-4BBE-AF0F-729FB76AD704}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A73E8132-F6B4-4BBE-AF0F-729FB76AD704}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

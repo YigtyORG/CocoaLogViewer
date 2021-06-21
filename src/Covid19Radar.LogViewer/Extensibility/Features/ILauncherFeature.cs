@@ -12,7 +12,7 @@ namespace Covid19Radar.LogViewer.Extensibility.Features
 {
 	public interface ILauncherFeature : IPlugin
 	{
-		public bool IsChecked { get; protected set; }
+		public bool IsChecked { get; }
 
 		public void RunCommand(ILauncherWindow parent);
 	}
