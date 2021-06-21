@@ -44,7 +44,7 @@ namespace Covid19Radar.LogViewer.Launcher.Extensibility
 				this.Checked = feature.IsChecked;
 				this.Enabled = true;
 			} else {
-				this.Enabled = false;
+				this.Enabled = this.DropDownItems.Count > 0;
 			}
 		}
 
