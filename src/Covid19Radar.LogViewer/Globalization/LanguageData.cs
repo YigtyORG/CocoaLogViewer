@@ -68,10 +68,12 @@ namespace Covid19Radar.LogViewer.Globalization
 
 		#region FormMain
 
-		public abstract string FormMain_ButtonOpen          { get; }
-		public abstract string FormMain_Menu_ShowReceiver   { get; }
-		public abstract string FormMain_CheckBoxAllowEscape { get; }
-		public abstract string FormMain_FormClosing         { get; }
+		public abstract string FormMain_FeaturesMenu              { get; }
+		public abstract string FormMain_FeaturesMenu_ShowReceiver { get; }
+		public abstract string FormMain_FeaturesMenu_ShowSender   { get; }
+		public abstract string FormMain_ButtonOpen                { get; }
+		public abstract string FormMain_CheckBoxAllowEscape       { get; }
+		public abstract string FormMain_FormClosing               { get; }
 
 		#endregion
 
@@ -79,6 +81,17 @@ namespace Covid19Radar.LogViewer.Globalization
 
 		public abstract string FormReceiver_Title       { get; }
 		public abstract string FormReceiver_Description { get; }
+
+		#endregion
+
+		#region FormSender
+
+		public abstract string FormSender_Title         { get; }
+		public abstract string FormSender_Label_Address { get; }
+		public abstract string FormSender_Label_Port    { get; }
+		public abstract string FormSender_Label_File    { get; }
+		public abstract string FormSender_Button_Cancel { get; }
+		public abstract string FormSender_Button_Send   { get; }
 
 		#endregion
 

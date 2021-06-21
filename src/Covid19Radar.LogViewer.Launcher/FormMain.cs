@@ -24,6 +24,7 @@ namespace Covid19Radar.LogViewer.Launcher
 		private readonly ModuleInitializationContext       _context;
 		private          App?                              _app;
 		private          FormReceiver?                     _receiver;
+		private          FormSender?                       _sender;
 
 		public FormMain(IEnumerable<CocoaLogViewerModule> modules, ModuleInitializationContext context)
 		{
@@ -36,11 +37,13 @@ namespace Covid19Radar.LogViewer.Launcher
 		{
 			foreach (var _ in _modules) ;
 
-			this                 .Text = LanguageData.Current.MainWindow_Title;
-			btnOpen              .Text = LanguageData.Current.FormMain_ButtonOpen;
-			menuItem_showReceiver.Text = LanguageData.Current.FormMain_Menu_ShowReceiver;
-			cboxAllowEscape      .Text = LanguageData.Current.FormMain_CheckBoxAllowEscape;
-			labelVersion         .Text = VersionInfo.GetCaption();
+			this                     .Text = LanguageData.Current.MainWindow_Title;
+			btnOpen                  .Text = LanguageData.Current.FormMain_ButtonOpen;
+			menuFeatures             .Text = LanguageData.Current.FormMain_FeaturesMenu;
+			menuFeatures_showReceiver.Text = LanguageData.Current.FormMain_FeaturesMenu_ShowReceiver;
+			menuFeatures_showSender  .Text = LanguageData.Current.FormMain_FeaturesMenu_ShowSender;
+			cboxAllowEscape          .Text = LanguageData.Current.FormMain_CheckBoxAllowEscape;
+			labelVersion             .Text = VersionInfo.GetCaption() + "\r\n" + VersionInfo.GetCopyright();
 
 			_app = new App();
 			_app.OpenWindow   = false;
@@ -58,19 +61,27 @@ namespace Covid19Radar.LogViewer.Launcher
 			}
 		}
 
+		private void menuFeatures_showReceiver_Click(object sender, EventArgs e)
+		{
+			if (_receiver is null || _receiver.IsDisposed) {
+				_receiver = new(this);
+				_receiver.ShowReceiver();
+			}
+		}
+
+		private void menuFeatures_showSender_Click(object sender, EventArgs e)
+		{
+			if (_sender is null || _sender.IsDisposed) {
+				_sender = new();
+				_sender.Show(this);
+			}
+		}
+
 		private async void btnOpen_Click(object sender, EventArgs e)
 		{
 			var mwnd = this.CreateMainWindow();
 			if (await mwnd.ShowOpenFileDialogAsync(cboxAllowEscape.Checked)) {
 				this.ShowMainWindow(mwnd);
-			}
-		}
-
-		private void menuItem_showReceiver_Click(object sender, EventArgs e)
-		{
-			if (_receiver is null || _receiver.IsDisposed) {
-				_receiver = new(this);
-				_receiver.ShowReceiver();
 			}
 		}
 
@@ -109,10 +120,10 @@ namespace Covid19Radar.LogViewer.Launcher
 			}
 		}
 
-		internal async ValueTask OpenFileAsync(string filename)
+		internal async ValueTask OpenFileAsync(string filename, bool? allowEscape = null)
 		{
 			var mwnd = this.CreateMainWindow();
-			if (await mwnd.OpenFile(filename, cboxAllowEscape.Checked)) {
+			if (await mwnd.OpenFile(filename, allowEscape ?? cboxAllowEscape.Checked)) {
 				this.ShowMainWindow(mwnd);
 			}
 		}

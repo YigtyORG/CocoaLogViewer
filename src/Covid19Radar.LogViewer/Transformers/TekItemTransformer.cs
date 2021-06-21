@@ -18,9 +18,13 @@ namespace Covid19Radar.LogViewer.Transformers
 
 		private TekItemTransformer() { }
 
-		protected override string? TransformCore(string? message, Func<string?, string?> next)
+		protected override string TransformCore(string? message, Func<string?, string> next)
 		{
-			if ((message?.StartsWith(Prefix) ?? false) &&
+			if (string.IsNullOrEmpty(message)) {
+				return string.Empty;
+			}
+
+			if (message.StartsWith(Prefix) &&
 				long.TryParse(message.Substring(Prefix.Length), out long milliseconds)) {
 				var dto = DateTimeOffset.FromUnixTimeMilliseconds(milliseconds);
 				return $"一時接触キー(TEK)が作成されました。(作成日時：{dto:yyyy\'年\'MM\'月\'dd\'日\' HH\'時\'mm\'分\'ss.fffffff\'秒\'})";
