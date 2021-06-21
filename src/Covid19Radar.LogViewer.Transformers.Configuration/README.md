@@ -1,4 +1,4 @@
-# CocoaLogViewer
+# CocoaLogViewer (翻訳処理構成ツール/The Transformers Configuration Tool)
 Copyright (C) 2020-2021 Yigty.ORG; all rights reserved.
 Copyright (C) 2020-2021 Takym.
 

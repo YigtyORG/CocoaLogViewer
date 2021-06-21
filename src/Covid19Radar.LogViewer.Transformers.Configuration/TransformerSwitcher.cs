@@ -9,6 +9,7 @@
 using System;
 using Covid19Radar.LogViewer.Extensibility;
 using Covid19Radar.LogViewer.Extensibility.Features;
+using Covid19Radar.LogViewer.Transformers.Configuration.Properties;
 using Covid19Radar.LogViewer.Views;
 
 namespace Covid19Radar.LogViewer.Transformers.Configuration
@@ -17,7 +18,7 @@ namespace Covid19Radar.LogViewer.Transformers.Configuration
 	{
 		private readonly ModuleInitializationContext _context;
 		private          TransformerPipeline?        _default;
-		public           string?                     DisplayName { get; }
+		public           string?                     DisplayName => Resources.TransformerSwitcher_DisplayName;
 		public           bool                        IsChecked   => _context.TransformerPipeline == EmptyTransformerPipeline.Instance;
 
 		public TransformerSwitcher(ModuleInitializationContext moduleInitializationContext)

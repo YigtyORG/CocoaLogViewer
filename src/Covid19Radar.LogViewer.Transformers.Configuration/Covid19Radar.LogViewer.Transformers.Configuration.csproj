@@ -8,7 +8,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<Product>Transformers Configuration Tool for CocoaLogViewer</Product>
+		<Product>The Transformers Configuration Tool for CocoaLogViewer</Product>
 		<Description>This is an extension for CocoaLogViewer configures transformers.</Description>
 	</PropertyGroup>
 	<ItemGroup>
