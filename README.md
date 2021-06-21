@@ -2,7 +2,8 @@
 Copyright (C) 2020-2021 Yigty.ORG; all rights reserved.
 Copyright (C) 2020-2021 Takym.
 
-[![Version](https://img.shields.io/badge/version-v0.0.0.3-active)](https://github.com/YigtyORG/CocoaLogViewer/releases)
+[![Developing version](https://img.shields.io/badge/Developing%20version-v0.1.0.0-important)](https://github.com/YigtyORG/CocoaLogViewer/projects/1)
+[![Latest version](https://img.shields.io/badge/Latest%20version-v0.0.0.3-informational)](https://github.com/YigtyORG/CocoaLogViewer/releases)
 [![License](https://img.shields.io/github/license/YigtyORG/CocoaLogViewer)](https://github.com/YigtyORG/CocoaLogViewer/blob/master/LICENSE.md)
 [![Build](https://github.com/YigtyORG/CocoaLogViewer/workflows/Build/badge.svg)](https://github.com/YigtyORG/CocoaLogViewer/actions/workflows/Build.yml)
 
