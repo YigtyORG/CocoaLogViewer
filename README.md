@@ -69,7 +69,9 @@ Copyright (C) 2020-2021 Takym.
 ### 拡張機能
 * 拡張機能はランチャーから起動した場合にのみ読み込まれます。
 * ランチャーに `--disallow-extensions` を指定して起動すると拡張機能の読み込みを拒否できます。
-* 英語版の CocoaLogViewer は拡張機能として実装されています。
+* **拡張機能一覧**
+	* [英語版](./src/Covid19Radar.LogViewer.Globalization.English/)
+	* [翻訳処理構成ツール](./src/Covid19Radar.LogViewer.Transformers.Configuration/)
 
 ### コマンド行引数について
 * `c19r.lv` に下記の引数を指定して起動方法を制御できます。
