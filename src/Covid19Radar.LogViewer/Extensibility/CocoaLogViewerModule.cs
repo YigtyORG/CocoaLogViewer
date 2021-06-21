@@ -7,10 +7,11 @@
 ****/
 
 using System;
+using System.Collections.Generic;
 
 namespace Covid19Radar.LogViewer.Extensibility
 {
-	public abstract class CocoaLogViewerModule
+	public abstract class CocoaLogViewerModule : IPlugin
 	{
 		public virtual string? DisplayName => this.GetType().Assembly.FullName;
 
@@ -25,6 +26,11 @@ namespace Covid19Radar.LogViewer.Extensibility
 		public virtual string? GetLocalizedDescription()
 		{
 			return null;
+		}
+
+		public virtual IEnumerable<IPlugin>? GetChildPlugins()
+		{
+			yield return this;
 		}
 
 		protected abstract void InitializeCore(ModuleInitializationContext context);
