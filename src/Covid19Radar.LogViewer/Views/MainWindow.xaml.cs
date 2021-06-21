@@ -18,7 +18,7 @@ using Covid19Radar.LogViewer.Transformers;
 using DR   = System.Windows.Forms.DialogResult;
 using MBOX = System.Windows.MessageBox;
 
-namespace Covid19Radar.LogViewer
+namespace Covid19Radar.LogViewer.Views
 {
 	public partial class MainWindow : Window
 	{

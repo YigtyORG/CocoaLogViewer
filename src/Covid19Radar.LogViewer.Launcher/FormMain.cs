@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using Covid19Radar.LogViewer.Extensibility;
 using Covid19Radar.LogViewer.Globalization;
 using Covid19Radar.LogViewer.Launcher.Extensibility;
+using Covid19Radar.LogViewer.Views;
 using MBOX = System.Windows.Forms.MessageBox;
 
 namespace Covid19Radar.LogViewer.Launcher
