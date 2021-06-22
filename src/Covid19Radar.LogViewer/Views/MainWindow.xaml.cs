@@ -87,7 +87,7 @@ namespace Covid19Radar.LogViewer.Views
 					return true;
 				}
 			} catch (Exception e) {
-				Debug.Fail(e.ToString());
+				Debug.Fail(e.Message, e.ToString());
 				await this.Dispatcher.InvokeAsync(() => {
 					MBOX.Show(
 						this,
