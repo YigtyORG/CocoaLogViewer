@@ -87,6 +87,7 @@ namespace Covid19Radar.LogViewer.Views
 					return true;
 				}
 			} catch (Exception e) {
+				Debug.Fail(e.ToString());
 				await this.Dispatcher.InvokeAsync(() => {
 					MBOX.Show(
 						this,
@@ -97,7 +98,6 @@ namespace Covid19Radar.LogViewer.Views
 					);
 					this.PrintException(e);
 				});
-				Debug.Fail(e.ToString());
 			}
 			return false;
 		}
