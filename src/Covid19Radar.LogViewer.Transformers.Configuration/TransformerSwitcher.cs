@@ -31,7 +31,7 @@ namespace Covid19Radar.LogViewer.Transformers.Configuration
 
 		public void RunCommand(ILauncherWindow parent)
 		{
-			if (_context.TransformerPipeline == EmptyTransformerPipeline.Instance) {
+			if (this.IsChecked) {
 				_context.TransformerPipeline = _default;
 			} else {
 				_default                     = _context.TransformerPipeline;
