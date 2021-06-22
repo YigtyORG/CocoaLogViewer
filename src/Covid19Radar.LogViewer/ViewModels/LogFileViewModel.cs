@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using Covid19Radar.LogViewer.Globalization;
@@ -81,6 +82,7 @@ namespace Covid19Radar.LogViewer.ViewModels
 				);
 				return true;
 			} catch (Exception e) {
+				Debug.Fail(e.Message, e.ToString());
 				await Dialogs.ShowMessageAsync(
 					mwnd => {
 						mwnd?.PrintException(e);
