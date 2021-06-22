@@ -51,6 +51,7 @@ namespace Covid19Radar.LogViewer.Launcher
 		private static void HandleException(Exception exception)
 		{
 			MessageBox.Show(exception.Message, LanguageData.Current.MainWindow_OFD_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+			Debug.Fail(exception.ToString());
 
 			using (var fs = new FileStream(Path.Combine(AppContext.BaseDirectory, "error_log.md"), FileMode.Append, FileAccess.Write, FileShare.None))
 			using (var sw = new StreamWriter(fs, Encoding.UTF8)) {
