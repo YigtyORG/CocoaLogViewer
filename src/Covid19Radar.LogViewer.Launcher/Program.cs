@@ -8,6 +8,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -50,6 +51,7 @@ namespace Covid19Radar.LogViewer.Launcher
 
 		private static void HandleException(Exception exception)
 		{
+			Debug.Fail(exception.Message, exception.ToString());
 			MessageBox.Show(exception.Message, LanguageData.Current.MainWindow_OFD_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 			using (var fs = new FileStream(Path.Combine(AppContext.BaseDirectory, "error_log.md"), FileMode.Append, FileAccess.Write, FileShare.None))
