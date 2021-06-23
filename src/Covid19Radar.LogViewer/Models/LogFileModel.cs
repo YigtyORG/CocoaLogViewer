@@ -8,7 +8,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using Covid19Radar.LogViewer.Globalization;
@@ -72,7 +71,7 @@ namespace Covid19Radar.LogViewer.Models
 				switch (ch) {
 				case '\"':
 					++i;
-					if (i < line.Length && line[i] == '\"') {
+					if (dq && i < line.Length && line[i] == '\"') {
 						++i;
 						sb.Append('\"');
 					} else {
