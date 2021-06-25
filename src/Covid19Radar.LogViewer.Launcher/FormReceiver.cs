@@ -52,11 +52,15 @@ namespace Covid19Radar.LogViewer.Launcher
 				bool allowEscape;
 
 				while (!_cts.IsCancellationRequested) {
-					string temp = Path.GetTempFileName();
-					byte[] buf  = new byte[1024];
+					string     temp = Path.GetTempFileName();
+					IPAddress? ipa  = null;
+					byte[]     buf  = new byte[1024];
 
 					using (var client = await Task.Run(listener.AcceptTcpClientAsync, _cts.Token)) {
 						var ns = client.GetStream();
+						if (client.Client.RemoteEndPoint is IPEndPoint ep) {
+							ipa = ep.Address;
+						}
 						await using (ns.ConfigureAwait(false)) {
 							using (var br = new BinaryReader(ns)) {
 								while (!ns.DataAvailable) {
@@ -80,6 +84,7 @@ namespace Covid19Radar.LogViewer.Launcher
 						}
 					}
 
+					await SaveZoneIdentifier(temp, ipa);
 					await _owner.OpenFileAsync(temp, allowEscape);
 				}
 			} finally {
@@ -96,6 +101,22 @@ namespace Covid19Radar.LogViewer.Launcher
 		{
 			var addrs = await Dns.GetHostAddressesAsync(Dns.GetHostName());
 			return addrs.Length > 0 ? addrs[0] : IPAddress.Loopback;
+		}
+
+		private static async ValueTask SaveZoneIdentifier(string filename, IPAddress? ipa)
+		{
+			var fs = new FileStream(filename + ":Zone.Identifier", FileMode.Create, FileAccess.Write, FileShare.None);
+			await using (fs.ConfigureAwait(false)) {
+				var sw = new StreamWriter(fs);
+				await using (sw.ConfigureAwait(false)) {
+					await sw.WriteLineAsync("[ZoneTransfer]");
+					await sw.WriteLineAsync("ZoneId=3");
+					if (ipa is not null) {
+						await sw.WriteLineAsync($"HostIpAddress={ipa}");
+					}
+					await sw.WriteLineAsync("CocoaLogViewer=FormReceiver");
+				}
+			}
 		}
 	}
 }
