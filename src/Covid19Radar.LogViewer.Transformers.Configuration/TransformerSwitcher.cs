@@ -19,6 +19,7 @@ namespace Covid19Radar.LogViewer.Transformers.Configuration
 		private readonly ModuleInitializationContext _context;
 		private          TransformerPipeline?        _default;
 		public           string?                     DisplayName => Resources.TransformerSwitcher_DisplayName;
+		public           bool                        Visible     => true;
 		public           bool                        IsChecked   => _context.TransformerPipeline == EmptyTransformerPipeline.Instance;
 
 		public TransformerSwitcher(ModuleInitializationContext moduleInitializationContext)
