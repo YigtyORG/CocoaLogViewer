@@ -17,6 +17,9 @@ namespace Covid19Radar.LogViewer.Extensibility
 		public virtual string? DisplayName => this.GetType().Assembly.FullName;
 		public virtual Image?  Logo        => null;
 
+		// 必ずメニューに表示する。（モジュールの Visible は無視される）
+		bool IPlugin.Visible => true;
+
 		public void Initialize(ModuleInitializationContext context)
 		{
 			if (context is null) {

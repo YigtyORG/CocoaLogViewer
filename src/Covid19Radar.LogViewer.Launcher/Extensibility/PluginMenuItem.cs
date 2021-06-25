@@ -28,7 +28,9 @@ namespace Covid19Radar.LogViewer.Launcher.Extensibility
 
 			if (plugin.GetChildPlugins() is not null and var plugins) {
 				foreach (var childPlugin in plugins) {
-					this.DropDownItems.Add(new PluginMenuItem(mwnd, childPlugin));
+					if (childPlugin.Visible) {
+						this.DropDownItems.Add(new PluginMenuItem(mwnd, childPlugin));
+					}
 				}
 			}
 

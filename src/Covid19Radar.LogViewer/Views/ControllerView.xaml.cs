@@ -16,6 +16,12 @@ namespace Covid19Radar.LogViewer.Views
 	{
 		private readonly ControllerViewModel _view_model;
 
+		public MainWindow? MainWindow
+		{
+			get => _view_model.MainWindow;
+			set => _view_model.MainWindow = value;
+		}
+
 		public LogFileView? LogFileView
 		{
 			get => _view_model.LogFileView;
@@ -29,6 +35,7 @@ namespace Covid19Radar.LogViewer.Views
 			refresh .Content = LanguageData.Current.ControllerView_Refresh;
 			copy    .Content = LanguageData.Current.ControllerView_Copy;
 			copyAsMd.Content = LanguageData.Current.ControllerView_CopyAsMarkdown;
+			save    .Content = LanguageData.Current.ControllerView_Save;
 		}
 	}
 }

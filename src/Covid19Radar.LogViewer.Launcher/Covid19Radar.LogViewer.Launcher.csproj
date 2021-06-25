@@ -9,6 +9,12 @@
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
+		<StartupObject>Covid19Radar.LogViewer.Launcher.Program.DebugEnvironment</StartupObject>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<StartupObject>Covid19Radar.LogViewer.Launcher.Program</StartupObject>
+	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="../Covid19Radar.LogViewer/Covid19Radar.LogViewer.csproj" />
 		<Content Include="c19r.lv.bat">

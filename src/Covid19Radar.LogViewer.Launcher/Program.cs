@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -25,9 +26,10 @@ namespace Covid19Radar.LogViewer.Launcher
 		private static int Main(string[] args)
 		{
 			try {
-				var context = new ModuleInitializationContextInternal(args);
-				var modules = ModuleLoader.LoadModules(context);
-				ShowWindow(modules, context);
+				AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+				Application.ThreadException                += Application_ThreadException;
+
+				Run(args);
 				return 0;
 			} catch (Exception e) {
 				HandleException(e);
@@ -35,13 +37,29 @@ namespace Covid19Radar.LogViewer.Launcher
 			}
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		private static void Run(string[] args)
+		{
+			var context = new ModuleInitializationContextInternal(args);
+			var modules = ModuleLoader.LoadModules(context);
+			ShowWindow(modules, context);
+		}
+
 		private static void ShowWindow(IEnumerable<CocoaLogViewerModule> modules, ModuleInitializationContext context)
 		{
-			Application.ThreadException += Application_ThreadException;
 			Application.SetHighDpiMode(HighDpiMode.SystemAware);
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new FormMain(modules, context));
+		}
+
+		private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+		{
+			if (e.ExceptionObject is Exception exception) {
+				HandleException(exception);
+			} else {
+				HandleException(new Exception((sender, e).ToString()));
+			}
 		}
 
 		private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
@@ -70,5 +88,17 @@ namespace Covid19Radar.LogViewer.Launcher
 				sw.WriteLine();
 			}
 		}
+
+#if DEBUG
+		private static class DebugEnvironment
+		{
+			[STAThread()]
+			[Conditional("DEBUG")]
+			private static void Main(string[] args)
+			{
+				Run(args);
+			}
+		}
+#endif
 	}
 }

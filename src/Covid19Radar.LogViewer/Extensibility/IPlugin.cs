@@ -13,6 +13,7 @@ namespace Covid19Radar.LogViewer.Extensibility
 	public interface IPlugin
 	{
 		public string? DisplayName { get; }
+		public bool    Visible     { get; }
 
 		public IEnumerable<IPlugin>? GetChildPlugins()
 		{
