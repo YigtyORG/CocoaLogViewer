@@ -96,13 +96,19 @@ namespace Covid19Radar.LogViewer.ViewModels
 					DereferenceLinks             = true,
 					AddExtension                 = false,
 					SupportMultiDottedExtensions = true,
-					CheckPathExists              = true,
-					CheckFileExists              = true,
+					CheckPathExists              = false,
+					CheckFileExists              = false,
 					ValidateNames                = true,
 					AutoUpgradeEnabled           = true,
 					OverwritePrompt              = true
 				}) {
-					File.Copy(path, sfd.FileName, true);
+					if (sfd.ShowDialog() == DialogResult.OK) {
+						string? dir = Path.GetDirectoryName(path);
+						if (dir is not null && !Directory.Exists(dir)) {
+							Directory.CreateDirectory(dir);
+						}
+						File.Copy(path, sfd.FileName, true);
+					}
 				}
 			}
 			return default;
