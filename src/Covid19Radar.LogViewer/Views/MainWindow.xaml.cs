@@ -25,6 +25,9 @@ namespace Covid19Radar.LogViewer.Views
 		private static readonly TransformerPipeline   _default = new TransformerPipeline().ConfigureDefaults();
 		private        readonly Func<string?, string> _transformer;
 		private                 bool                  _file_loaded;
+		private                 string?               _file_path;
+
+		public string? FilePath => _file_path;
 
 		public MainWindow() : this(_default) { }
 
@@ -35,6 +38,7 @@ namespace Covid19Radar.LogViewer.Views
 			this.Title             = LanguageData.Current.MainWindow_Title;
 			btnOpen   .Content     = LanguageData.Current.MainWindow_ButtonOpen;
 			lblVersion.Content     = $"{VersionInfo.GetCaption()}\t{VersionInfo.GetCopyright()}";
+			controller.MainWindow  = this;
 			controller.LogFileView = lfv;
 		}
 
@@ -77,7 +81,10 @@ namespace Covid19Radar.LogViewer.Views
 			try {
 				var f = file();
 				if (f.HasValue) {
-					await this.Dispatcher.InvokeAsync(() => this.Title = Path.GetFileName(f.Value.path));
+					await this.Dispatcher.InvokeAsync(() => {
+						_file_path = f.Value.path;
+						this.Title = Path.GetFileName(_file_path);
+					});
 					lfv.ViewModel.LogFile = await Task.Run(() => new LogFileModel(f.Value.open(), _transformer, allowEscape)).ConfigureAwait(false);
 					await this.Dispatcher.InvokeAsync(() => {
 						btnOpen.Visibility      = Visibility.Collapsed;

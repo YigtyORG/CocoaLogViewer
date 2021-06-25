@@ -7,19 +7,29 @@
 ****/
 
 using System;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Forms;
 using Covid19Radar.LogViewer.Globalization;
 using Covid19Radar.LogViewer.Models;
 using Covid19Radar.LogViewer.Views;
+using Clipboard = System.Windows.Clipboard;
+using ListView = System.Windows.Controls.ListView;
 
 namespace Covid19Radar.LogViewer.ViewModels
 {
 	public class ControllerViewModel : ViewModelBase
 	{
+		private MainWindow?  _mwnd;
 		private LogFileView? _log_file_view;
+
+		public MainWindow? MainWindow
+		{
+			get => _mwnd;
+			set => this.RaisePropertyChanged(ref _mwnd, value, nameof(this.MainWindow));
+		}
 
 		public LogFileView? LogFileView
 		{
@@ -32,12 +42,14 @@ namespace Covid19Radar.LogViewer.ViewModels
 		public DelegateCommand Refresh             { get; }
 		public DelegateCommand ClickCopy           { get; }
 		public DelegateCommand ClickCopyAsMarkdown { get; }
+		public DelegateCommand ClickSave           { get; }
 
 		public ControllerViewModel()
 		{
 			this.Refresh             = new(this.RefreshCore);
 			this.ClickCopy           = new(this.ClickCopyCore);
 			this.ClickCopyAsMarkdown = new(this.ClickCopyAsMarkdownCore);
+			this.ClickSave           = new(this.ClickSaveCore);
 		}
 
 		private async ValueTask RefreshCore(object? ignored)
@@ -70,6 +82,28 @@ namespace Covid19Radar.LogViewer.ViewModels
 				ForAllLogData(sb, _log_file_view.listView, (sb, ldm) => ldm.CreateDetailsAsMarkdown(sb));
 				LogDataModel.CreateMarkdownFooter(sb);
 				return CopyToClipboardAsync(sb, true, _log_file_view);
+			}
+			return default;
+		}
+
+		private ValueTask ClickSaveCore(object? ignored)
+		{
+			if (_mwnd is not null && _mwnd.FilePath is not null and var path) {
+				using (var sfd = new SaveFileDialog() {
+					Title                        = LanguageData.Current.ControllerView_Save,
+					Filter                       = LanguageData.Current.MainWindow_OFD_Filter(),
+					RestoreDirectory             = true,
+					DereferenceLinks             = true,
+					AddExtension                 = false,
+					SupportMultiDottedExtensions = true,
+					CheckPathExists              = true,
+					CheckFileExists              = true,
+					ValidateNames                = true,
+					AutoUpgradeEnabled           = true,
+					OverwritePrompt              = true
+				}) {
+					File.Copy(path, sfd.FileName, true);
+				}
 			}
 			return default;
 		}

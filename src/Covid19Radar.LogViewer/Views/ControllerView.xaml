@@ -16,6 +16,7 @@
 		<KeyBinding Command="{Binding Refresh}"             Gesture="F5" />
 		<KeyBinding Command="{Binding ClickCopy}"           Gesture="Ctrl+C" />
 		<KeyBinding Command="{Binding ClickCopyAsMarkdown}" Gesture="Ctrl+Shift+C" />
+		<KeyBinding Command="{Binding ClickSave}"           Gesture="Ctrl+S" />
 	</UserControl.InputBindings>
 	<Grid>
 		<Grid.ColumnDefinitions>
@@ -47,5 +48,12 @@
 			d:Content="copyAsMd"
 			Margin="4,4,4,4"
 			Command="{Binding ClickCopyAsMarkdown}" />
+		<!-- TODO: 検索ボタン -->
+		<Button
+			Grid.Column="4"
+			x:Name="save"
+			d:Content="save"
+			Margin="4,4,4,4"
+			Command="{Binding ClickSave}" />
 	</Grid>
 </UserControl>
