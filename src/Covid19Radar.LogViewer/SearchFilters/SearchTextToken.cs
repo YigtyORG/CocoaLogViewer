@@ -6,12 +6,11 @@
  * distributed under the MIT License.
 ****/
 
-using System;
 using System.Collections.Concurrent;
 
 namespace Covid19Radar.LogViewer.SearchFilters
 {
-	public readonly struct SearchTextToken : IEquatable<SearchTextToken>
+	public readonly struct SearchTextToken
 	{
 		private static readonly ConcurrentDictionary<string, string> _cache = new();
 
@@ -22,9 +21,8 @@ namespace Covid19Radar.LogViewer.SearchFilters
 
 		public string GetText()
 		{
-			return _cache.GetOrAdd(this.Lexer.GetText(this.Index, this.Length).ToString(), text => {
+			return _cache.GetOrAdd(this.Lexer.GetText(this.Index, this.Length).ToString(), static text => {
 				var sb = StringBuilderCache<SearchTextToken>.Get();
-
 				for (int i = 0; i < text.Length; ++i) {
 					char ch = text[i];
 					if (ch == '\\') {
@@ -43,30 +41,8 @@ namespace Covid19Radar.LogViewer.SearchFilters
 						sb.Append(ch);
 					}
 				}
-
 				return sb.ToString();
 			});
-		}
-
-		public override bool Equals(object? obj)
-		{
-			if (obj is SearchTextToken other) {
-				return this.Equals(other);
-			}
-			return false;
-		}
-
-		public bool Equals(SearchTextToken other)
-		{
-			return this.Lexer  == other.Lexer
-				&& this.Index  == other.Index
-				&& this.Length == other.Length
-				&& this.Type   == other.Type;
-		}
-
-		public override int GetHashCode()
-		{
-			return HashCode.Combine(this.Length, this.Index, this.Length, this.Type);
 		}
 	}
 
