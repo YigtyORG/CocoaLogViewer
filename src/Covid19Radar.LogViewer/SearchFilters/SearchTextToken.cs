@@ -19,9 +19,9 @@ namespace Covid19Radar.LogViewer.SearchFilters
 		public TokenType       Type   { get; init; }
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public ReadOnlySpan<char> GetText()
+		public string GetText()
 		{
-			return this.Lexer.GetText(this.Index, this.Length);
+			return this.Lexer.GetText(this.Index, this.Length).ToString();
 		}
 	}
 

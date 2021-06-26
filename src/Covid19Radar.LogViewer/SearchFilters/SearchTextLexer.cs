@@ -48,7 +48,7 @@ namespace Covid19Radar.LogViewer.SearchFilters
 					};
 					break;
 				case '(':
-				case ')' or ':' or '=' or '-' or '!' or '*' or '+' or '^' or ',' or ';':
+				case ')' or '.' or ':' or '=' or '-' or '!' or '*' or '+' or '^' or ',' or ';':
 					yield return new() {
 						Lexer  = this,
 						Index  = pos,
@@ -111,7 +111,7 @@ namespace Covid19Radar.LogViewer.SearchFilters
 					or
 					'\"' or '\''
 					or
-					'(' or ')' or ':' or '=' or '-' or '!' or '*' or '+' or '^' or ',' or ';'
+					'(' or ')' or '.' or ':' or '=' or '-' or '!' or '*' or '+' or '^' or ',' or ';'
 					or
 					'&' or '|'
 				);
