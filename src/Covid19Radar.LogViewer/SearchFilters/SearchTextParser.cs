@@ -46,7 +46,7 @@ namespace Covid19Radar.LogViewer.SearchFilters
 			var left = this.ParseLevel3();
 			if (left is not null) {
 				_ = this.TryPeek(out var token) && token.Type == TokenType.Symbol &&
-					token.GetText() is "," or ";" && this.Skip();
+					token.GetText() is "," or ";" && _tokens.MoveNext();
 				return CreateNode(left, this.ParseLevel4());
 			}
 			return left;
@@ -72,7 +72,7 @@ namespace Covid19Radar.LogViewer.SearchFilters
 			var left = this.ParseLevel2();
 			if (left is not null && this.TryPeek(out var token) && token.Type is TokenType.Keyword or TokenType.Symbol) {
 				string text = token.GetText().ToUpper();
-				if (text is "OR" or "IOR" or "|" or "||" or "+" && this.Skip()) {
+				if (text is "OR" or "IOR" or "|" or "||" or "+" && _tokens.MoveNext()) {
 					var right = this.ParseLevel3();
 					if (right is null) {
 						return left;
@@ -85,7 +85,7 @@ namespace Covid19Radar.LogViewer.SearchFilters
 						result.Nodes.Add(right);
 						return result;
 					}
-				} else if (text is "XOR" or "^" && this.Skip()) {
+				} else if (text is "XOR" or "^" && _tokens.MoveNext()) {
 					var right = this.ParseLevel3();
 					if (right is null) {
 						return left;
@@ -107,7 +107,7 @@ namespace Covid19Radar.LogViewer.SearchFilters
 		{
 			var left = this.ParseLevel1();
 			if (left is not null && this.TryPeek(out var token) && token.Type is TokenType.Keyword or TokenType.Symbol &&
-				token.GetText().ToUpper() is "AND" or "&" or "&&" or "*" && this.Skip()) {
+				token.GetText().ToUpper() is "AND" or "&" or "&&" or "*" && _tokens.MoveNext()) {
 				var right = this.ParseLevel2();
 				if (right is null) {
 					return left;
@@ -145,7 +145,7 @@ namespace Covid19Radar.LogViewer.SearchFilters
 		{
 			var key = this.ParseToken();
 			if (key is not null && this.TryPeek(out var token) && token.Type == TokenType.Symbol &&
-				token.GetText() is "." or ":" or "=" && this.Skip()) {
+				token.GetText() is "." or ":" or "=" && _tokens.MoveNext()) {
 				var value = this.ParseLevel0();
 				if (value is not null) {
 					return new RequirementNode(key, value);
@@ -158,10 +158,10 @@ namespace Covid19Radar.LogViewer.SearchFilters
 		{
 			if (this.TryPeek(out var token)) {
 				if (token.Type == TokenType.Symbol && token.GetText() == "(") {
-					if (this.Skip()) {
+					if (_tokens.MoveNext()) {
 						var node = this.ParseCore();
 						if (this.TryPeek(out token) && token.Type == TokenType.Symbol && token.GetText() == ")") {
-							this.Skip();
+							_tokens.MoveNext();
 						}
 						return node;
 					}
@@ -172,28 +172,15 @@ namespace Covid19Radar.LogViewer.SearchFilters
 			return null;
 		}
 
-		private bool TryRead([MaybeNullWhen(false)][NotNullWhen(true)] out SearchTextToken result)
+		private bool TryPeek([MaybeNullWhen(false)][NotNullWhen(true)] out SearchTextToken result)
 		{
 			if (_tokens.MoveNext()) {
 				result = _tokens.Current;
-				return true;
+				return _tokens.MovePrev();
 			} else {
 				result = default;
 				return false;
 			}
-		}
-
-		private bool TryPeek([MaybeNullWhen(false)][NotNullWhen(true)] out SearchTextToken result)
-		{
-			if (this.TryRead(out result)) {
-				return _tokens.MovePrev();
-			}
-			return false;
-		}
-
-		private bool Skip()
-		{
-			return _tokens.MoveNext();
 		}
 
 		public void Dispose()
