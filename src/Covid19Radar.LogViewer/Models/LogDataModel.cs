@@ -6,8 +6,6 @@
  * distributed under the MIT License.
 ****/
 
-using System;
-using System.Globalization;
 using System.Text;
 using System.Windows.Documents;
 using System.Windows.Media;
@@ -35,17 +33,9 @@ namespace Covid19Radar.LogViewer.Models
 		private static readonly SolidColorBrush _file_path_color = new(Color.FromRgb(0x80, 0x40, 0x00));
 		private static readonly SolidColorBrush _line_num_color  = new(Color.FromRgb(0x80, 0xFF, 0x80));
 
-		public bool TryGetDateTime(out DateTime result)
-		{
-			return DateTime.TryParseExact(this.Timestamp, "yyyy/MM/dd HH:mm:ss",         null, DateTimeStyles.None, out result)
-				|| DateTime.TryParseExact(this.Timestamp, "yyyy/MM/dd HH:mm:ss.fff",     null, DateTimeStyles.None, out result)
-				|| DateTime.TryParseExact(this.Timestamp, "yyyy/MM/dd HH:mm:ss.fffffff", null, DateTimeStyles.None, out result)
-				|| DateTime.TryParse(this.Timestamp, out result);
-		}
-
 		public string GetDateTimeAsString(bool wrap = true)
 		{
-			if (this.TryGetDateTime(out var dt)) {
+			if (this.Timestamp.TryToDateTime(out var dt)) {
 				return dt.ToString(
 					wrap ? LanguageData.Current.LogDataModel_DateTime_Format_WithWordWrap
 					     : LanguageData.Current.LogDataModel_DateTime_Format_WithNoWrap
