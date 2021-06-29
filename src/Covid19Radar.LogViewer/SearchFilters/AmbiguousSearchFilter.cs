@@ -10,9 +10,13 @@ using Covid19Radar.LogViewer.Models;
 
 namespace Covid19Radar.LogViewer.SearchFilters
 {
-	public sealed class AmbiguousSearchFilter : ISearchFilter
+	internal sealed class AmbiguousSearchFilter : ISearchFilter
 	{
+		internal static readonly AmbiguousSearchFilter _inst = new();
+
 		public string Key => "$";
+
+		private AmbiguousSearchFilter() { }
 
 		public bool Match(SearchFilterNode value, LogDataModel model)
 		{
