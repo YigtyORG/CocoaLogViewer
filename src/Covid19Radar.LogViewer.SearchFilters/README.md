@@ -1,4 +1,4 @@
-# CocoaLogViewer (追加検索フィルタ/More Search Filters for CocoaLogViewer)
+# CocoaLogViewer (追加検索フィルタ/More Search Filters)
 Copyright (C) 2020-2021 Yigty.ORG; all rights reserved.
 Copyright (C) 2020-2021 Takym.
 
