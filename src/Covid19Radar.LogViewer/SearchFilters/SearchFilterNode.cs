@@ -71,7 +71,11 @@ namespace Covid19Radar.LogViewer.SearchFilters
 
 		protected override bool MatchCore(LogDataModel model)
 		{
-			throw new NotImplementedException();
+			if (this.Key is TokenNode node) {
+				return SearchFilterRegistry.Get(node.Token.GetText())?.Match(this.Value, model) ?? false;
+			} else {
+				return false;
+			}
 		}
 	}
 
