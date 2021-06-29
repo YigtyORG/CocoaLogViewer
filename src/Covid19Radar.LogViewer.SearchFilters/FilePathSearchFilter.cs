@@ -13,8 +13,9 @@ namespace Covid19Radar.LogViewer.SearchFilters
 {
 	internal sealed class FilePathSearchFilter : ISearchFilter
 	{
-		internal static readonly FilePathSearchFilter _inst =  new();
-		public                   string               Key   => "glob";
+		internal static readonly FilePathSearchFilter _inst = new();
+
+		public string Key => "glob";
 
 		private FilePathSearchFilter() { }
 
