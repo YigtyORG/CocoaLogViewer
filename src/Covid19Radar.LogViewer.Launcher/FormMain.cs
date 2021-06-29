@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Forms.Integration;
 using Covid19Radar.LogViewer.Extensibility;
 using Covid19Radar.LogViewer.Globalization;
 using Covid19Radar.LogViewer.Launcher.Extensibility;
@@ -140,6 +141,7 @@ namespace Covid19Radar.LogViewer.Launcher
 			} else {
 				mwnd = new();
 			}
+			ElementHost.EnableModelessKeyboardInterop(mwnd);
 			mwnd.Closing += this.Mwnd_Closing;
 			return mwnd;
 		}
