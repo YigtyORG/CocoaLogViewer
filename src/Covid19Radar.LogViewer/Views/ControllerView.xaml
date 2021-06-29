@@ -12,13 +12,6 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d">
-	<UserControl.InputBindings>
-		<KeyBinding Command="{Binding Refresh}"             Gesture="F5" />
-		<KeyBinding Command="{Binding ClickCopy}"           Gesture="Ctrl+C" />
-		<KeyBinding Command="{Binding ClickCopyAsMarkdown}" Gesture="Ctrl+Shift+C" />
-		<KeyBinding Command="{Binding ClickSearch}"         Gesture="Ctrl+F" />
-		<KeyBinding Command="{Binding ClickSave}"           Gesture="Ctrl+S" />
-	</UserControl.InputBindings>
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<Style x:Key="ControllerButton" TargetType="Button">
@@ -26,6 +19,13 @@
 			</Style>
 		</ResourceDictionary>
 	</UserControl.Resources>
+	<UserControl.InputBindings>
+		<KeyBinding Command="{Binding Refresh}"             Gesture="F5" />
+		<KeyBinding Command="{Binding ClickCopy}"           Gesture="Ctrl+C" />
+		<KeyBinding Command="{Binding ClickCopyAsMarkdown}" Gesture="Ctrl+Shift+C" />
+		<KeyBinding Command="{Binding ClickSave}"           Gesture="Ctrl+S" />
+		<KeyBinding Command="{Binding ClickSearch}"         Gesture="Ctrl+F" />
+	</UserControl.InputBindings>
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
@@ -58,16 +58,16 @@
 			Style="{StaticResource ControllerButton}" />
 		<Button
 			Grid.Column="3"
+			x:Name="save"
+			d:Content="save"
+			Command="{Binding ClickSave}"
+			Style="{StaticResource ControllerButton}" />
+		<Button
+			Grid.Column="4"
 			x:Name="search"
 			d:Content="search"
 			Command="{Binding ClickSearch}"
 			IsEnabled="{Binding RefreshButtonEnabled}"
-			Style="{StaticResource ControllerButton}" />
-		<Button
-			Grid.Column="4"
-			x:Name="save"
-			d:Content="save"
-			Command="{Binding ClickSave}"
 			Style="{StaticResource ControllerButton}" />
 	</Grid>
 </UserControl>

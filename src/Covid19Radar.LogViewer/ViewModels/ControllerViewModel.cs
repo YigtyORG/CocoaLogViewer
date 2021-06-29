@@ -42,16 +42,16 @@ namespace Covid19Radar.LogViewer.ViewModels
 		public DelegateCommand Refresh             { get; }
 		public DelegateCommand ClickCopy           { get; }
 		public DelegateCommand ClickCopyAsMarkdown { get; }
-		public DelegateCommand ClickSearch         { get; }
 		public DelegateCommand ClickSave           { get; }
+		public DelegateCommand ClickSearch         { get; }
 
 		public ControllerViewModel()
 		{
 			this.Refresh             = new(this.RefreshCore);
 			this.ClickCopy           = new(this.ClickCopyCore);
 			this.ClickCopyAsMarkdown = new(this.ClickCopyAsMarkdownCore);
-			this.ClickSearch         = new(this.ClickSearchCore);
 			this.ClickSave           = new(this.ClickSaveCore);
+			this.ClickSearch         = new(this.ClickSearchCore);
 		}
 
 		private async ValueTask RefreshCore(object? ignored)
@@ -88,11 +88,6 @@ namespace Covid19Radar.LogViewer.ViewModels
 			return default;
 		}
 
-		private ValueTask ClickSearchCore(object? ignored)
-		{
-			return default;
-		}
-
 		private ValueTask ClickSaveCore(object? ignored)
 		{
 			if (_mwnd is not null && _mwnd.FilePath is not null and var path) {
@@ -118,6 +113,11 @@ namespace Covid19Radar.LogViewer.ViewModels
 					}
 				}
 			}
+			return default;
+		}
+
+		private ValueTask ClickSearchCore(object? ignored)
+		{
 			return default;
 		}
 
