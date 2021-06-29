@@ -26,14 +26,6 @@ namespace Covid19Radar.LogViewer.Launcher.Extensibility
 		{
 			_mwnd = mwnd;
 
-			if (plugin.GetChildPlugins() is not null and var plugins) {
-				foreach (var childPlugin in plugins) {
-					if (childPlugin.Visible) {
-						this.DropDownItems.Add(new PluginMenuItem(mwnd, childPlugin));
-					}
-				}
-			}
-
 			if (plugin is CocoaLogViewerModule module) {
 				if (module.Logo is not null and var image) {
 					this.Image = image;

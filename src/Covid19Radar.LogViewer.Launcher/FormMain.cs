@@ -38,7 +38,7 @@ namespace Covid19Radar.LogViewer.Launcher
 		private async void FormMain_Load(object sender, EventArgs e)
 		{
 			foreach (var module in _modules) {
-				menuFeatures.DropDownItems.Add(new PluginMenuItem(this, module));
+				PluginLoader.Load(module, this, menuFeatures);
 			}
 
 			this                     .Text = LanguageData.Current.MainWindow_Title;
