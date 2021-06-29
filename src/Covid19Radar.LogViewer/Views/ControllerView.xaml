@@ -17,6 +17,9 @@
 			<Style x:Key="ControllerButton" TargetType="Button">
 				<Setter Property="Margin" Value="4,4,4,4" />
 			</Style>
+			<Style x:Key="ControllerTextBox" TargetType="TextBox">
+				<Setter Property="Margin" Value="1,1,1,1" />
+			</Style>
 		</ResourceDictionary>
 	</UserControl.Resources>
 	<UserControl.InputBindings>
@@ -33,9 +36,7 @@
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="3*" />
 		</Grid.ColumnDefinitions>
 		<Button
 			Grid.Column="0"
@@ -69,5 +70,11 @@
 			Command="{Binding ClickSearch}"
 			IsEnabled="{Binding RefreshButtonEnabled}"
 			Style="{StaticResource ControllerButton}" />
+		<TextBox
+			Grid.Column="5"
+			x:Name="searchText"
+			Text="{Binding SearchText}"
+			IsEnabled="{Binding RefreshButtonEnabled}"
+			Style="{StaticResource ControllerTextBox}" />
 	</Grid>
 </UserControl>

@@ -24,6 +24,7 @@ namespace Covid19Radar.LogViewer.ViewModels
 	{
 		private MainWindow?  _mwnd;
 		private LogFileView? _log_file_view;
+		private string?      _search_text;
 
 		public MainWindow? MainWindow
 		{
@@ -38,6 +39,12 @@ namespace Covid19Radar.LogViewer.ViewModels
 		}
 
 		public bool RefreshButtonEnabled => !(_log_file_view?.ViewModel.Refreshing ?? true);
+
+		public string? SearchText
+		{
+			get => _search_text;
+			set => this.RaisePropertyChanged(ref _search_text, value, nameof(this.SearchText));
+		}
 
 		public DelegateCommand Refresh             { get; }
 		public DelegateCommand ClickCopy           { get; }
