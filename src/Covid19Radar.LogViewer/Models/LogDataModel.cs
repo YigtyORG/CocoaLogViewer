@@ -148,6 +148,13 @@ namespace Covid19Radar.LogViewer.Models
 				.AppendLine("|:--|:-:|:--|:--|");
 		}
 
+		public string CreateDetailsAsMarkdown()
+		{
+			var sb = StringBuilderCache<LogDataModel>.Get();
+			this.CreateDetailsAsMarkdown(sb);
+			return sb.ToString();
+		}
+
 		public void CreateDetailsAsMarkdown(StringBuilder sb)
 		{
 			sb

@@ -42,19 +42,24 @@ namespace Covid19Radar.LogViewer.SearchFilters
 		protected override bool MatchCore(LogDataModel model)
 		{
 			string text = this.Token.GetText();
-			return model.Timestamp         .Contains(text)
-				|| model.Level             .Contains(text)
-				|| model.OriginalMessage   .Contains(text)
-				|| model.TransformedMessage.Contains(text)
-				|| model.Method            .Contains(text)
-				|| model.FilePath          .Contains(text)
-				|| model.LineNumber        .Contains(text)
-				|| model.Platform          .Contains(text)
-				|| model.PlatformVersion   .Contains(text)
-				|| model.DeviceModel       .Contains(text)
-				|| model.DeviceType        .Contains(text)
-				|| model.Version           .Contains(text)
-				|| model.BuildNumber       .Contains(text);
+			return model.Timestamp                .Contains(text)
+				|| model.Level                    .Contains(text)
+				|| model.OriginalMessage          .Contains(text)
+				|| model.TransformedMessage       .Contains(text)
+				|| model.Method                   .Contains(text)
+				|| model.FilePath                 .Contains(text)
+				|| model.LineNumber               .Contains(text)
+				|| model.Platform                 .Contains(text)
+				|| model.PlatformVersion          .Contains(text)
+				|| model.DeviceModel              .Contains(text)
+				|| model.DeviceType               .Contains(text)
+				|| model.Version                  .Contains(text)
+				|| model.BuildNumber              .Contains(text)
+				|| model.GetDateTimeAsString()    .Contains(text)
+				|| model.GetLogLevel().Text       .Contains(text)
+				|| model.GetLocation()            .Contains(text)
+				|| model.CreateDetails()          .Contains(text)
+				|| model.CreateDetailsAsMarkdown().Contains(text);
 		}
 	}
 
