@@ -43,6 +43,7 @@ namespace Covid19Radar.LogViewer.Globalization
 		public override string ControllerView_Copy                       => "Copy selected logs";
 		public override string ControllerView_CopyAsMarkdown             => "Copy as Markdown";
 		public override string ControllerView_Copy_MessageBox            => "Copied details of selected logs into the clipboard.";
+		public override string ControllerView_Search                     => "Find";
 		public override string ControllerView_Save                       => "Save to elsewhere"; // "Save to other location"/"Save to another place"
 		public override string LogFileView_MessageBox_Title              => "Open a log file";
 		public override string LogFileView_MessageBox_Failed             => "An unexpected error occurred while opening a log file.";

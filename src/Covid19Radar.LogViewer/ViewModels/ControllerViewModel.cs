@@ -42,6 +42,7 @@ namespace Covid19Radar.LogViewer.ViewModels
 		public DelegateCommand Refresh             { get; }
 		public DelegateCommand ClickCopy           { get; }
 		public DelegateCommand ClickCopyAsMarkdown { get; }
+		public DelegateCommand ClickSearch         { get; }
 		public DelegateCommand ClickSave           { get; }
 
 		public ControllerViewModel()
@@ -49,6 +50,7 @@ namespace Covid19Radar.LogViewer.ViewModels
 			this.Refresh             = new(this.RefreshCore);
 			this.ClickCopy           = new(this.ClickCopyCore);
 			this.ClickCopyAsMarkdown = new(this.ClickCopyAsMarkdownCore);
+			this.ClickSearch         = new(this.ClickSearchCore);
 			this.ClickSave           = new(this.ClickSaveCore);
 		}
 
@@ -83,6 +85,11 @@ namespace Covid19Radar.LogViewer.ViewModels
 				LogDataModel.CreateMarkdownFooter(sb);
 				return CopyToClipboardAsync(sb, true, _log_file_view);
 			}
+			return default;
+		}
+
+		private ValueTask ClickSearchCore(object? ignored)
+		{
 			return default;
 		}
 
