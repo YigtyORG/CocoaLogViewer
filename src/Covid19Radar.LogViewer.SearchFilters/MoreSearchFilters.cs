@@ -8,21 +8,23 @@
 
 using System.Collections.Generic;
 using Covid19Radar.LogViewer.Extensibility;
+using Covid19Radar.LogViewer.Extensibility.Providers;
 using Covid19Radar.LogViewer.SearchFilters.Properties;
 
 namespace Covid19Radar.LogViewer.SearchFilters
 {
-	public class MoreSearchFilters : CocoaLogViewerModule
+	public class MoreSearchFilters : CocoaLogViewerModule, ISearchFilterProvider
 	{
 		public override string? DisplayName => Resources.MoreSearchFilters_DisplayName;
 
 		protected override void InitializeCore(ModuleInitializationContext context)
 		{
+			// do nothing
 		}
 
-		public override IEnumerable<IPlugin>? GetChildPlugins()
+		public IEnumerable<ISearchFilter> GetSearchFilters()
 		{
-			yield break;
+			yield return RegularExpressionSearchFilter._inst;
 		}
 	}
 }
