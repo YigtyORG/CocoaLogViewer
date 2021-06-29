@@ -18,6 +18,7 @@ namespace Covid19Radar.LogViewer.SearchFilters
 		private readonly TwoWayEnumerable<SearchTextToken, IEnumerable<SearchTextToken>, IEnumerator<SearchTextToken>>.Enumerator _tokens;
 
 		private SearchFilterNode? _result;
+		private bool              _disposed;
 
 		public SearchTextParser(SearchTextLexer lexer)
 		{
@@ -29,6 +30,9 @@ namespace Covid19Radar.LogViewer.SearchFilters
 
 		public SearchFilterNode? Parse()
 		{
+			if (_disposed) {
+				throw new ObjectDisposedException(nameof(SearchTextParser));
+			}
 			if (_result is null) {
 				_result = this.ParseCore();
 			}
@@ -186,6 +190,8 @@ namespace Covid19Radar.LogViewer.SearchFilters
 		public void Dispose()
 		{
 			_tokens.Dispose();
+			_result   = null;
+			_disposed = true;
 		}
 	}
 }

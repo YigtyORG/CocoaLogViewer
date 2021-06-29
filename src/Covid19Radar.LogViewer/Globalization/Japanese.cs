@@ -88,6 +88,15 @@ namespace Covid19Radar.LogViewer.Globalization
 			}
 		}
 
+		public override string ControllerView_Search_Failed(MainWindow? mwnd)
+		{
+			if (mwnd is null) {
+				return "動作情報ファイルの検索に失敗しました。";
+			} else {
+				return $"動作情報ファイル「{mwnd.Title}」の検索に失敗しました。";
+			}
+		}
+
 		public override string LogFileView_MessageBox_Succeeded(MainWindow? mwnd)
 		{
 			if (mwnd is null) {

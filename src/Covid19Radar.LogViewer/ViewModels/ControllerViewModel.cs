@@ -123,9 +123,16 @@ namespace Covid19Radar.LogViewer.ViewModels
 			return default;
 		}
 
-		private ValueTask ClickSearchCore(object? ignored)
+		private async ValueTask ClickSearchCore(object? ignored)
 		{
-			return default;
+			if (_log_file_view is not null && !await _log_file_view.ViewModel.RefreshAsync(_search_text)) {
+				await Dialogs.ShowMessageAsync(
+					LanguageData.Current.ControllerView_Search_Failed,
+					LanguageData.Current.ControllerView_Search,
+					_log_file_view,
+					MessageBoxImage.Warning
+				);
+			}
 		}
 
 		private static void ForAllLogData(StringBuilder sb, ListView listView, Action<StringBuilder, LogDataModel> action)

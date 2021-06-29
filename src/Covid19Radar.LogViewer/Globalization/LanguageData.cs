@@ -113,6 +113,7 @@ namespace Covid19Radar.LogViewer.Globalization
 		public abstract string ControllerView_Search          { get; }
 
 		public abstract string ControllerView_Refresh_Failed(MainWindow? mwnd);
+		public abstract string ControllerView_Search_Failed (MainWindow? mwnd);
 
 		#endregion
 

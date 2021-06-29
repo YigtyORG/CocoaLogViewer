@@ -88,6 +88,15 @@ namespace Covid19Radar.LogViewer.Globalization
 			}
 		}
 
+		public override string ControllerView_Search_Failed(MainWindow? mwnd)
+		{
+			if (mwnd is null) {
+				return "Failed to search a log file.";
+			} else {
+				return $"Failed to search the log file \"{mwnd.Title}\".";
+			}
+		}
+
 		public override string LogFileView_MessageBox_Succeeded(MainWindow? mwnd)
 		{
 			if (mwnd is null) {
