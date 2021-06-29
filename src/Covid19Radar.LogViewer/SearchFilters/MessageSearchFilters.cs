@@ -6,7 +6,6 @@
  * distributed under the MIT License.
 ****/
 
-using System.Linq;
 using System.Text.RegularExpressions;
 using Covid19Radar.LogViewer.Models;
 

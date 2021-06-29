@@ -13,7 +13,31 @@ namespace Covid19Radar.LogViewer.SearchFilters
 {
 	public static class SearchFilterRegistry
 	{
-		private static readonly ConcurrentDictionary<string, ISearchFilter> _filters = new();
+		private static readonly ConcurrentDictionary<string, ISearchFilter> _filters;
+
+		static SearchFilterRegistry()
+		{
+			_filters = new();
+			Register(AmbiguousSearchFilter                  ._inst);
+			Register(DetailsSearchFilter                    ._inst);
+			Register(LogLevelSearchFilter                   ._inst);
+			Register(DateTimeSearchFilters.From             ._inst);
+			Register(DateTimeSearchFilters.To               ._inst);
+			Register(MessageSearchFilters .EqualsWith       ._inst1);
+			Register(MessageSearchFilters .EqualsWith       ._inst2);
+			Register(MessageSearchFilters .StartsWith       ._inst1);
+			Register(MessageSearchFilters .StartsWith       ._inst2);
+			Register(MessageSearchFilters .EndsWith         ._inst1);
+			Register(MessageSearchFilters .EndsWith         ._inst2);
+			Register(MessageSearchFilters .RegularExpression._inst);
+			Register(LocationSearchFilters.Method           ._inst1);
+			Register(LocationSearchFilters.Method           ._inst2);
+			Register(LocationSearchFilters.FilePath         ._inst1);
+			Register(LocationSearchFilters.FilePath         ._inst2);
+			Register(LocationSearchFilters.LineNumber       ._inst);
+			Register(LocationSearchFilters.Ambiguous        ._inst1);
+			Register(LocationSearchFilters.Ambiguous        ._inst2);
+		}
 
 		public static ISearchFilter? Get(string key)
 		{
