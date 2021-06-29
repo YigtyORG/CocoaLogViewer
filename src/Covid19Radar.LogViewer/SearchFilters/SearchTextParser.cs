@@ -161,14 +161,13 @@ namespace Covid19Radar.LogViewer.SearchFilters
 		private SearchFilterNode? ParseToken()
 		{
 			if (this.TryPeek(out var token)) {
+				_tokens.MoveNext();
 				if (token.Type == TokenType.Symbol && token.GetText() == "(") {
-					if (_tokens.MoveNext()) {
-						var node = this.ParseCore();
-						if (this.TryPeek(out token) && token.Type == TokenType.Symbol && token.GetText() == ")") {
-							_tokens.MoveNext();
-						}
-						return node;
+					var node = this.ParseCore();
+					if (this.TryPeek(out token) && token.Type == TokenType.Symbol && token.GetText() == ")") {
+						_tokens.MoveNext();
 					}
+					return node;
 				} else {
 					return new TokenNode(token);
 				}
