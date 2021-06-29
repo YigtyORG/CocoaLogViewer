@@ -7,7 +7,6 @@
 ****/
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
@@ -15,7 +14,7 @@ namespace Covid19Radar.LogViewer.SearchFilters
 {
 	public sealed class SearchTextParser : IDisposable
 	{
-		private readonly TwoWayEnumerable<SearchTextToken, IEnumerable<SearchTextToken>, IEnumerator<SearchTextToken>>.Enumerator _tokens;
+		private TwoWayEnumerable.Enumerator _tokens;
 
 		private SearchFilterNode? _result;
 		private bool              _disposed;
@@ -25,7 +24,7 @@ namespace Covid19Radar.LogViewer.SearchFilters
 			if (lexer is null) {
 				throw new ArgumentNullException(nameof(lexer));
 			}
-			_tokens = TwoWayEnumerable.Create(lexer.Scan(), e => e?.GetEnumerator()).GetEnumerator();
+			_tokens = new TwoWayEnumerable(lexer.Scan()).GetEnumerator();
 		}
 
 		public SearchFilterNode? Parse()
