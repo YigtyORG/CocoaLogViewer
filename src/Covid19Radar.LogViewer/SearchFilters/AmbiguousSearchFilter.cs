@@ -6,6 +6,7 @@
  * distributed under the MIT License.
 ****/
 
+using System;
 using Covid19Radar.LogViewer.Models;
 
 namespace Covid19Radar.LogViewer.SearchFilters
@@ -23,18 +24,24 @@ namespace Covid19Radar.LogViewer.SearchFilters
 			if (value is TokenNode node) {
 				string text = node.Token.GetText();
 				return node.Match(model)
-					|| model.LineNumber               .Contains(text)
-					|| model.Platform                 .Contains(text)
-					|| model.PlatformVersion          .Contains(text)
-					|| model.DeviceModel              .Contains(text)
-					|| model.DeviceType               .Contains(text)
-					|| model.Version                  .Contains(text)
-					|| model.BuildNumber              .Contains(text)
-					|| model.GetDateTimeAsString()    .Contains(text)
-					|| model.GetLogLevel().Text       .Contains(text)
-					|| model.GetLocation()            .Contains(text)
-					|| model.CreateDetails()          .Contains(text)
-					|| model.CreateDetailsAsMarkdown().Contains(text);
+					|| model.Timestamp                .Contains(text, StringComparison.CurrentCultureIgnoreCase)
+					|| model.Level                    .Contains(text, StringComparison.CurrentCultureIgnoreCase)
+					|| model.OriginalMessage          .Contains(text, StringComparison.CurrentCultureIgnoreCase)
+					|| model.TransformedMessage       .Contains(text, StringComparison.CurrentCultureIgnoreCase)
+					|| model.Method                   .Contains(text, StringComparison.CurrentCultureIgnoreCase)
+					|| model.FilePath                 .Contains(text, StringComparison.CurrentCultureIgnoreCase)
+					|| model.LineNumber               .Contains(text, StringComparison.CurrentCultureIgnoreCase)
+					|| model.Platform                 .Contains(text, StringComparison.CurrentCultureIgnoreCase)
+					|| model.PlatformVersion          .Contains(text, StringComparison.CurrentCultureIgnoreCase)
+					|| model.DeviceModel              .Contains(text, StringComparison.CurrentCultureIgnoreCase)
+					|| model.DeviceType               .Contains(text, StringComparison.CurrentCultureIgnoreCase)
+					|| model.Version                  .Contains(text, StringComparison.CurrentCultureIgnoreCase)
+					|| model.BuildNumber              .Contains(text, StringComparison.CurrentCultureIgnoreCase)
+					|| model.GetDateTimeAsString()    .Contains(text, StringComparison.CurrentCultureIgnoreCase)
+					|| model.GetLogLevel().Text       .Contains(text, StringComparison.CurrentCultureIgnoreCase)
+					|| model.GetLocation()            .Contains(text, StringComparison.CurrentCultureIgnoreCase)
+					|| model.CreateDetails()          .Contains(text, StringComparison.CurrentCultureIgnoreCase)
+					|| model.CreateDetailsAsMarkdown().Contains(text, StringComparison.CurrentCultureIgnoreCase);
 			} else {
 				return value.Match(model);
 			}
