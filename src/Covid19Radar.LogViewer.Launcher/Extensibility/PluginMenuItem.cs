@@ -18,6 +18,12 @@ namespace Covid19Radar.LogViewer.Launcher.Extensibility
 		private readonly FormMain          _mwnd;
 		private readonly ILauncherFeature? _feature;
 
+		public override bool Enabled
+		{
+			get => _feature is not null || this.DropDownItems.Count > 0;
+			set { }
+		}
+
 		internal PluginMenuItem(FormMain mwnd, IPlugin plugin) : base(
 			plugin.DisplayName                     ??
 			plugin.ToString()                      ??
@@ -25,14 +31,6 @@ namespace Covid19Radar.LogViewer.Launcher.Extensibility
 			string.Empty)
 		{
 			_mwnd = mwnd;
-
-			if (plugin.GetChildPlugins() is not null and var plugins) {
-				foreach (var childPlugin in plugins) {
-					if (childPlugin.Visible) {
-						this.DropDownItems.Add(new PluginMenuItem(mwnd, childPlugin));
-					}
-				}
-			}
 
 			if (plugin is CocoaLogViewerModule module) {
 				if (module.Logo is not null and var image) {
@@ -44,9 +42,6 @@ namespace Covid19Radar.LogViewer.Launcher.Extensibility
 			if (plugin is ILauncherFeature feature) {
 				_feature     = feature;
 				this.Checked = feature.IsChecked;
-				this.Enabled = true;
-			} else {
-				this.Enabled = this.DropDownItems.Count > 0;
 			}
 		}
 

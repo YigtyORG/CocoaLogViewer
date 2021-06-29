@@ -31,7 +31,7 @@ namespace Covid19Radar.LogViewer.SearchFilters
 				case '\b':
 					--pos;
 					break;
-				case (>= '\u0001' and <= '\u001F') or '\u007F':
+				case (>= '\u0001' and <= ' ') or '\u007F':
 					break;
 				case '\"' or '\'':
 					char tail  = ch;
@@ -39,19 +39,19 @@ namespace Covid19Radar.LogViewer.SearchFilters
 					while (TryPeek(out ch) && ch != tail) {
 						++pos;
 					}
-					++pos;
 					yield return new() {
 						Lexer  = this,
 						Index  = index,
 						Length = pos - index,
 						Type   = TokenType.Text
 					};
+					++pos;
 					break;
 				case '(':
 				case ')' or '.' or ':' or '=' or '-' or '!' or '*' or '+' or '^' or ',' or ';':
 					yield return new() {
 						Lexer  = this,
-						Index  = pos,
+						Index  = pos - 1,
 						Length = 1,
 						Type   = TokenType.Symbol
 					};
@@ -60,7 +60,7 @@ namespace Covid19Radar.LogViewer.SearchFilters
 					if (TryPeek(out char ch2) && ch == ch2) {
 						yield return new() {
 							Lexer  = this,
-							Index  = pos,
+							Index  = pos - 1,
 							Length = 2,
 							Type   = TokenType.Symbol
 						};
@@ -107,7 +107,7 @@ namespace Covid19Radar.LogViewer.SearchFilters
 			static bool Continue(char c)
 			{
 				return c is not (
-					(>= '\0' and <= '\u001F') or '\u007F'
+					(>= '\0' and <= ' ') or '\u007F'
 					or
 					'\"' or '\''
 					or

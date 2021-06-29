@@ -36,6 +36,7 @@ namespace Covid19Radar.LogViewer.Views
 			copy    .Content = LanguageData.Current.ControllerView_Copy;
 			copyAsMd.Content = LanguageData.Current.ControllerView_CopyAsMarkdown;
 			save    .Content = LanguageData.Current.ControllerView_Save;
+			search  .Content = LanguageData.Current.ControllerView_Search;
 		}
 	}
 }

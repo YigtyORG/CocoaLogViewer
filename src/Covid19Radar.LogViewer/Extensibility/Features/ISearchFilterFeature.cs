@@ -6,14 +6,9 @@
  * distributed under the MIT License.
 ****/
 
-using Covid19Radar.LogViewer.Views;
+using Covid19Radar.LogViewer.SearchFilters;
 
 namespace Covid19Radar.LogViewer.Extensibility.Features
 {
-	public interface ILauncherFeature : IFeature
-	{
-		public bool IsChecked { get; }
-
-		public void RunCommand(ILauncherWindow parent);
-	}
+	public interface ISearchFilterFeature : IFeature, ISearchFilter { }
 }

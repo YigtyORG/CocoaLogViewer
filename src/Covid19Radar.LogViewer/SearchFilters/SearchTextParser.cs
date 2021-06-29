@@ -7,7 +7,6 @@
 ****/
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
@@ -15,20 +14,24 @@ namespace Covid19Radar.LogViewer.SearchFilters
 {
 	public sealed class SearchTextParser : IDisposable
 	{
-		private readonly TwoWayEnumerable<SearchTextToken, IEnumerable<SearchTextToken>, IEnumerator<SearchTextToken>>.Enumerator _tokens;
+		private TwoWayEnumerable.Enumerator _tokens;
 
 		private SearchFilterNode? _result;
+		private bool              _disposed;
 
 		public SearchTextParser(SearchTextLexer lexer)
 		{
 			if (lexer is null) {
 				throw new ArgumentNullException(nameof(lexer));
 			}
-			_tokens = TwoWayEnumerable.Create(lexer.Scan(), e => e?.GetEnumerator()).GetEnumerator();
+			_tokens = new TwoWayEnumerable(lexer.Scan()).GetEnumerator();
 		}
 
 		public SearchFilterNode? Parse()
 		{
+			if (_disposed) {
+				throw new ObjectDisposedException(nameof(SearchTextParser));
+			}
 			if (_result is null) {
 				_result = this.ParseCore();
 			}
@@ -157,14 +160,13 @@ namespace Covid19Radar.LogViewer.SearchFilters
 		private SearchFilterNode? ParseToken()
 		{
 			if (this.TryPeek(out var token)) {
+				_tokens.MoveNext();
 				if (token.Type == TokenType.Symbol && token.GetText() == "(") {
-					if (_tokens.MoveNext()) {
-						var node = this.ParseCore();
-						if (this.TryPeek(out token) && token.Type == TokenType.Symbol && token.GetText() == ")") {
-							_tokens.MoveNext();
-						}
-						return node;
+					var node = this.ParseCore();
+					if (this.TryPeek(out token) && token.Type == TokenType.Symbol && token.GetText() == ")") {
+						_tokens.MoveNext();
 					}
+					return node;
 				} else {
 					return new TokenNode(token);
 				}
@@ -186,6 +188,8 @@ namespace Covid19Radar.LogViewer.SearchFilters
 		public void Dispose()
 		{
 			_tokens.Dispose();
+			_result   = null;
+			_disposed = true;
 		}
 	}
 }

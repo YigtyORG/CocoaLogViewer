@@ -24,6 +24,7 @@ namespace Covid19Radar.LogViewer.ViewModels
 	{
 		private MainWindow?  _mwnd;
 		private LogFileView? _log_file_view;
+		private string?      _search_text;
 
 		public MainWindow? MainWindow
 		{
@@ -39,10 +40,17 @@ namespace Covid19Radar.LogViewer.ViewModels
 
 		public bool RefreshButtonEnabled => !(_log_file_view?.ViewModel.Refreshing ?? true);
 
+		public string? SearchText
+		{
+			get => _search_text;
+			set => this.RaisePropertyChanged(ref _search_text, value, nameof(this.SearchText));
+		}
+
 		public DelegateCommand Refresh             { get; }
 		public DelegateCommand ClickCopy           { get; }
 		public DelegateCommand ClickCopyAsMarkdown { get; }
 		public DelegateCommand ClickSave           { get; }
+		public DelegateCommand ClickSearch         { get; }
 
 		public ControllerViewModel()
 		{
@@ -50,6 +58,7 @@ namespace Covid19Radar.LogViewer.ViewModels
 			this.ClickCopy           = new(this.ClickCopyCore);
 			this.ClickCopyAsMarkdown = new(this.ClickCopyAsMarkdownCore);
 			this.ClickSave           = new(this.ClickSaveCore);
+			this.ClickSearch         = new(this.ClickSearchCore);
 		}
 
 		private async ValueTask RefreshCore(object? ignored)
@@ -112,6 +121,18 @@ namespace Covid19Radar.LogViewer.ViewModels
 				}
 			}
 			return default;
+		}
+
+		private async ValueTask ClickSearchCore(object? ignored)
+		{
+			if (_log_file_view is not null && !await _log_file_view.ViewModel.RefreshAsync(_search_text)) {
+				await Dialogs.ShowMessageAsync(
+					LanguageData.Current.ControllerView_Search_Failed,
+					LanguageData.Current.ControllerView_Search,
+					_log_file_view,
+					MessageBoxImage.Warning
+				);
+			}
 		}
 
 		private static void ForAllLogData(StringBuilder sb, ListView listView, Action<StringBuilder, LogDataModel> action)

@@ -72,6 +72,7 @@ Copyright (C) 2020-2021 Takym.
 * ランチャーに `--disallow-extensions` を指定して起動すると拡張機能の読み込みを拒否できます。
 * **拡張機能一覧**
 	* [英語版](./src/Covid19Radar.LogViewer.Globalization.English/)
+	* [追加検索フィルタ](./src/Covid19Radar.LogViewer.SearchFilters/)
 	* [翻訳処理構成ツール](./src/Covid19Radar.LogViewer.Transformers.Configuration/)
 
 ### コマンド行引数について
@@ -115,6 +116,7 @@ Copyright (C) 2020-2021 Takym.
 	* 英語版は拡張機能として用意しています。
 * できる限り外部のライブラリに依存しないで開発しております。
 	* [COCOA](https://github.com/cocoa-mhlw/cocoa) 本体にも依存しておりません。
+	* ただし、拡張機能やテストプロジェクトでは外部ライブラリを利用している場合があります。
 * 著作権を [@Takym](https://github.com/Takym) へ**譲渡・転移する事に同意**してくださった方の PR のみ Merge します。
 	* あなたの PR に他者が作成したコードを**含めないで**ください。
 * PR は GitHub Actions を用いて検証しています。
@@ -139,12 +141,16 @@ Copyright (C) 2020-2021 Takym.
 ## 利用ライブラリ
 * Microsoft.NET.Sdk
 	* [.NET プロジェクト SDK](https://docs.microsoft.com/ja-jp/dotnet/core/project-sdk/overview)
-	* 著作権表記: Copyright (c) .NET Foundation and Contributors
-	* リポジトリ: <https://github.com/dotnet/sdk>
-	* 利用規約: [MITライセンス](https://github.com/dotnet/sdk/blob/main/LICENSE.TXT)
+	* 著作権表記：Copyright (c) .NET Foundation and Contributors
+	* リポジトリ：<https://github.com/dotnet/sdk>
+	* 利用規約：[MITライセンス](https://github.com/dotnet/sdk/blob/main/LICENSE.TXT)
+* [Microsoft.Extensions.FileSystemGlobbing](https://www.nuget.org/packages/Microsoft.Extensions.FileSystemGlobbing/)
+	* 著作権表記：Copyright (c) .NET Foundation and Contributors
+	* リポジトリ：<https://github.com/dotnet/runtime>
+	* 利用規約：[MITライセンス](https://github.com/dotnet/runtime/blob/main/LICENSE.TXT)
 * [Microsoft.NET.Test.Sdk](https://www.nuget.org/packages/Microsoft.NET.Test.Sdk/)
 	* 著作権表記：Copyright (c) 2020 Microsoft Corporation
-	* リポジトリ：<https://github.com/microsoft/vstest/>
+	* リポジトリ：<https://github.com/microsoft/vstest>
 	* 利用規約：[MITライセンス](https://github.com/microsoft/vstest/blob/master/LICENSE)
 	* 利用規約：<https://www.microsoft.com/web/webpi/eula/net_library_eula_enu.htm>
 * [MSTest.TestAdapter](https://www.nuget.org/packages/MSTest.TestAdapter/)

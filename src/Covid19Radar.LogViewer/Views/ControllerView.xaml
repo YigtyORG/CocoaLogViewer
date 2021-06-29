@@ -12,11 +12,22 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<Style x:Key="ControllerButton" TargetType="Button">
+				<Setter Property="Margin" Value="4,4,4,4" />
+			</Style>
+			<Style x:Key="ControllerTextBox" TargetType="TextBox">
+				<Setter Property="Margin" Value="1,1,1,1" />
+			</Style>
+		</ResourceDictionary>
+	</UserControl.Resources>
 	<UserControl.InputBindings>
 		<KeyBinding Command="{Binding Refresh}"             Gesture="F5" />
 		<KeyBinding Command="{Binding ClickCopy}"           Gesture="Ctrl+C" />
 		<KeyBinding Command="{Binding ClickCopyAsMarkdown}" Gesture="Ctrl+Shift+C" />
 		<KeyBinding Command="{Binding ClickSave}"           Gesture="Ctrl+S" />
+		<KeyBinding Command="{Binding ClickSearch}"         Gesture="Ctrl+F" />
 	</UserControl.InputBindings>
 	<Grid>
 		<Grid.ColumnDefinitions>
@@ -25,35 +36,45 @@
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="3*" />
 		</Grid.ColumnDefinitions>
 		<Button
 			Grid.Column="0"
 			x:Name="refresh"
 			d:Content="refresh"
-			Margin="4,4,4,4"
 			Command="{Binding Refresh}"
-			IsEnabled="{Binding RefreshButtonEnabled}" />
+			IsEnabled="{Binding RefreshButtonEnabled}"
+			Style="{StaticResource ControllerButton}" />
 		<Button
 			Grid.Column="1"
 			x:Name="copy"
 			d:Content="copy"
-			Margin="4,4,4,4"
-			Command="{Binding ClickCopy}" />
+			Command="{Binding ClickCopy}"
+			Style="{StaticResource ControllerButton}" />
 		<Button
 			Grid.Column="2"
 			x:Name="copyAsMd"
 			d:Content="copyAsMd"
-			Margin="4,4,4,4"
-			Command="{Binding ClickCopyAsMarkdown}" />
-		<!-- TODO: 検索ボタン -->
+			Command="{Binding ClickCopyAsMarkdown}"
+			Style="{StaticResource ControllerButton}" />
 		<Button
-			Grid.Column="4"
+			Grid.Column="3"
 			x:Name="save"
 			d:Content="save"
-			Margin="4,4,4,4"
-			Command="{Binding ClickSave}" />
+			Command="{Binding ClickSave}"
+			Style="{StaticResource ControllerButton}" />
+		<Button
+			Grid.Column="4"
+			x:Name="search"
+			d:Content="search"
+			Command="{Binding ClickSearch}"
+			IsEnabled="{Binding RefreshButtonEnabled}"
+			Style="{StaticResource ControllerButton}" />
+		<TextBox
+			Grid.Column="5"
+			x:Name="searchText"
+			Text="{Binding SearchText}"
+			IsEnabled="{Binding RefreshButtonEnabled}"
+			Style="{StaticResource ControllerTextBox}" />
 	</Grid>
 </UserControl>

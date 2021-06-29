@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Covid19Radar.LogViewer.Globalization;
 using Covid19Radar.LogViewer.Models;
+using Covid19Radar.LogViewer.SearchFilters;
 using Covid19Radar.LogViewer.Views;
 
 namespace Covid19Radar.LogViewer.ViewModels
@@ -52,7 +53,7 @@ namespace Covid19Radar.LogViewer.ViewModels
 			this.LogRows = new();
 		}
 
-		public async ValueTask<bool> RefreshAsync()
+		public async ValueTask<bool> RefreshAsync(string? searchText = null)
 		{
 			if (this.Refreshing) {
 				return false;
@@ -61,18 +62,22 @@ namespace Covid19Radar.LogViewer.ViewModels
 			this.Refreshing = true;
 			await _view.Dispatcher.InvokeAsync(this.LogRows.Clear);
 			if (_log_file is not null) {
-				result = await this.AddItemsAsync(_log_file.Logs);
+				result = await this.AddItemsAsync(_log_file.Logs, searchText);
 			}
 			this.Refreshing = false;
 			return result;
 		}
 
-		private async ValueTask<bool> AddItemsAsync(IReadOnlyList<LogDataModel> logs)
+		private async ValueTask<bool> AddItemsAsync(IReadOnlyList<LogDataModel> logs, string? searchText)
 		{
 			try {
-				int count = logs.Count;
+				int count  = logs.Count;
+				var filter = CreateSearchFilter(searchText);
 				for (int i = 0; i < count; ++i) {
-					_view.Dispatcher.Invoke(_add_item, logs[i]);
+					var log = logs[i];
+					if (filter is null || filter.Match(log)) {
+						_view.Dispatcher.Invoke(_add_item, log);
+					}
 					await Task.Yield();
 				}
 				await Dialogs.ShowMessageAsync(
@@ -93,6 +98,16 @@ namespace Covid19Radar.LogViewer.ViewModels
 					MessageBoxImage.Error
 				);
 				return false;
+			}
+		}
+
+		private static SearchFilterNode? CreateSearchFilter(string? text)
+		{
+			if (string.IsNullOrEmpty(text)) {
+				return null;
+			}
+			using (var parser = new SearchTextParser(new(text))) {
+				return parser.Parse();
 			}
 		}
 

@@ -44,6 +44,7 @@ namespace Covid19Radar.LogViewer.Globalization
 		public override string ControllerView_CopyAsMarkdown             => "Markdownとしてコピー";
 		public override string ControllerView_Copy_MessageBox            => "クリップボードに選択されたログの詳細情報をコピーしました。";
 		public override string ControllerView_Save                       => "別の場所に保存";
+		public override string ControllerView_Search                     => "検索(試験的機能)";
 		public override string LogFileView_MessageBox_Title              => "動作情報ファイルを開く";
 		public override string LogFileView_MessageBox_Failed             => "動作情報ファイルの読み込み中に予期せぬエラーが発生しました。";
 		public override string LogFileModel_InvalidLog_Short             => "無効なログ";
@@ -84,6 +85,15 @@ namespace Covid19Radar.LogViewer.Globalization
 				return "動作情報ファイルの再読み込みに失敗しました。";
 			} else {
 				return $"動作情報ファイル「{mwnd.Title}」の再読み込みに失敗しました。";
+			}
+		}
+
+		public override string ControllerView_Search_Failed(MainWindow? mwnd)
+		{
+			if (mwnd is null) {
+				return "動作情報ファイルの検索に失敗しました。";
+			} else {
+				return $"動作情報ファイル「{mwnd.Title}」の検索に失敗しました。";
 			}
 		}
 
