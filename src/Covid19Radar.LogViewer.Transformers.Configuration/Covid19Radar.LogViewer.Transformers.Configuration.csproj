@@ -12,7 +12,7 @@
 		<Description>This is an extension for CocoaLogViewer configures transformers.</Description>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="../Covid19Radar.LogViewer/Covid19Radar.LogViewer.csproj" />
+		<ProjectReference Include="../Covid19Radar.LogViewer/Covid19Radar.LogViewer.csproj" Private="false" />
 		<Content Include="README.md" Condition="'$(Configuration)'=='Release'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
