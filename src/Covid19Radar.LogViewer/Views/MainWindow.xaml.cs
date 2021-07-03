@@ -9,6 +9,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
@@ -123,6 +124,12 @@ namespace Covid19Radar.LogViewer.Views
 		public override string ToString()
 		{
 			return this.Title;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public int CountLogs()
+		{
+			return lfv.ViewModel.LogRows.Count;
 		}
 	}
 }

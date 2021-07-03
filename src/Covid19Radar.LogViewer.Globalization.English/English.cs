@@ -84,7 +84,7 @@ namespace Covid19Radar.LogViewer.Globalization
 			if (mwnd is null) {
 				return "Failed to reload a log file.";
 			} else {
-				return $"Failed to reload the log file \"{mwnd.Title}\".";
+				return "Failed to reload the log file \"" + mwnd.Title + "\".";
 			}
 		}
 
@@ -93,7 +93,7 @@ namespace Covid19Radar.LogViewer.Globalization
 			if (mwnd is null) {
 				return "Failed to search a log file.";
 			} else {
-				return $"Failed to search the log file \"{mwnd.Title}\".";
+				return "Failed to search the log file \"" + mwnd.Title + "\".";
 			}
 		}
 
@@ -102,7 +102,13 @@ namespace Covid19Radar.LogViewer.Globalization
 			if (mwnd is null) {
 				return "Completed to load a log file.";
 			} else {
-				return $"Completed to load the log file \"{mwnd.Title}\".";
+				string title = mwnd.Title;
+				return mwnd.CountLogs() switch {
+					0 => "Loaded no logs from the file \"" + title + "\".",
+					1 => "Loaded one log from the file \"" + title + "\".",
+					2 => "Loaded two logs from the file \"" + title + "\".",
+					var count => "Loaded " + count + " logs from the file \"" + title + "\"."
+				};
 			}
 		}
 	}
