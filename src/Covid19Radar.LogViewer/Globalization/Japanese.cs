@@ -84,7 +84,7 @@ namespace Covid19Radar.LogViewer.Globalization
 			if (mwnd is null) {
 				return "動作情報ファイルの再読み込みに失敗しました。";
 			} else {
-				return $"動作情報ファイル「{mwnd.Title}」の再読み込みに失敗しました。";
+				return "動作情報ファイル「" + mwnd.Title + "」の再読み込みに失敗しました。";
 			}
 		}
 
@@ -93,7 +93,7 @@ namespace Covid19Radar.LogViewer.Globalization
 			if (mwnd is null) {
 				return "動作情報ファイルの検索に失敗しました。";
 			} else {
-				return $"動作情報ファイル「{mwnd.Title}」の検索に失敗しました。";
+				return "動作情報ファイル「" + mwnd.Title + "」の検索に失敗しました。";
 			}
 		}
 
@@ -102,7 +102,7 @@ namespace Covid19Radar.LogViewer.Globalization
 			if (mwnd is null) {
 				return "動作情報ファイルの読み込みが完了しました。";
 			} else {
-				return $"動作情報ファイル「{mwnd.Title}」の読み込みが完了しました。";
+				return "動作情報ファイル「" + mwnd.Title + "」から " + mwnd.CountLogs() + " 件のログを読み込みました。";
 			}
 		}
 	}

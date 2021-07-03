@@ -7,9 +7,11 @@
 ****/
 
 using System.Collections.Concurrent;
+using System.Diagnostics;
 
 namespace Covid19Radar.LogViewer.SearchFilters
 {
+	[DebuggerDisplay("{" + nameof(GetText) + "(),nq}")]
 	public readonly struct SearchTextToken
 	{
 		private static readonly ConcurrentDictionary<string, string> _cache = new();

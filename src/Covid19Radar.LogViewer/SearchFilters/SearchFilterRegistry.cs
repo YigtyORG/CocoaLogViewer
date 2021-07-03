@@ -8,6 +8,8 @@
 
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Covid19Radar.LogViewer.SearchFilters
 {
@@ -17,7 +19,7 @@ namespace Covid19Radar.LogViewer.SearchFilters
 
 		static SearchFilterRegistry()
 		{
-			_filters = new();
+			_filters = new(EqualityComparer._inst);
 			Register(AmbiguousSearchFilter                  ._inst);
 			Register(DetailsSearchFilter                    ._inst);
 			Register(LogLevelSearchFilter                   ._inst);
@@ -62,6 +64,29 @@ namespace Covid19Radar.LogViewer.SearchFilters
 				throw new ArgumentNullException(nameof(searchFilter));
 			}
 			return _filters.TryRemove(new(searchFilter.Key, searchFilter));
+		}
+
+		private sealed class EqualityComparer : IEqualityComparer<string>
+		{
+			internal static readonly EqualityComparer _inst = new();
+
+			private EqualityComparer() { }
+
+			public bool Equals(string? x, string? y)
+			{
+				if (x == y) {
+					return true;
+				}
+				if (x is null || y is null) {
+					return false;
+				}
+				return x.ToLower() == y.ToLower();
+			}
+
+			public int GetHashCode([DisallowNull()] string obj)
+			{
+				return (obj ?? string.Empty).ToLower().GetHashCode();
+			}
 		}
 	}
 }

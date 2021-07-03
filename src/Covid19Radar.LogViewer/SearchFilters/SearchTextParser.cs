@@ -48,8 +48,14 @@ namespace Covid19Radar.LogViewer.SearchFilters
 		{
 			var left = this.ParseLevel3();
 			if (left is not null) {
-				_ = this.TryPeek(out var token) && token.Type == TokenType.Symbol &&
-					token.GetText() is "," or ";" && _tokens.MoveNext();
+				if (this.TryPeek(out var token) && token.Type == TokenType.Symbol) {
+					string text = token.GetText();
+					if (text is "," or ";") {
+						_tokens.MoveNext();
+					} else if (text is ")") {
+						return left;
+					}
+				}
 				return CreateNode(left, this.ParseLevel4());
 			}
 			return left;
@@ -59,7 +65,7 @@ namespace Covid19Radar.LogViewer.SearchFilters
 				if (right is null) {
 					return left;
 				} else if (right is SearchFilterNodeList nodeList) {
-					nodeList.Nodes.Add(left);
+					nodeList.Nodes.Insert(0, left);
 					return nodeList;
 				} else {
 					var result = new SearchFilterNodeList();
@@ -80,7 +86,7 @@ namespace Covid19Radar.LogViewer.SearchFilters
 					if (right is null) {
 						return left;
 					} else if (right is InclusiveDisjunctionNode disjunctionNode) {
-						disjunctionNode.Nodes.Add(left);
+						disjunctionNode.Nodes.Insert(0, left);
 						return disjunctionNode;
 					} else {
 						var result = new InclusiveDisjunctionNode();
@@ -93,7 +99,7 @@ namespace Covid19Radar.LogViewer.SearchFilters
 					if (right is null) {
 						return left;
 					} else if (right is ExclusiveDisjunctionNode disjunctionNode) {
-						disjunctionNode.Nodes.Add(left);
+						disjunctionNode.Nodes.Insert(0, left);
 						return disjunctionNode;
 					} else {
 						var result = new ExclusiveDisjunctionNode();
@@ -115,7 +121,7 @@ namespace Covid19Radar.LogViewer.SearchFilters
 				if (right is null) {
 					return left;
 				} else if (right is ConjunctionNode conjunctionNode) {
-					conjunctionNode.Nodes.Add(left);
+					conjunctionNode.Nodes.Insert(0, left);
 					return conjunctionNode;
 				} else {
 					var result = new ConjunctionNode();

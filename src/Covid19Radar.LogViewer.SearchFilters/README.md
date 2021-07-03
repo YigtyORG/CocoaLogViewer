@@ -12,9 +12,14 @@ You can use this when you want to narrow logs down with more detailed conditions
 Please see <https://github.com/YigtyORG/CocoaLogViewer/blob/master/README.md> (Japanese) for the latest information.
 
 ## インストール方法/How to Install
-`Covid19Radar.LogViewer.SearchFilters.dll` を CocoaLogViewer ディレクトリへコピーしてください。
+下記のファイルを CocoaLogViewer ディレクトリへコピーしてください。
 
-Copy the `Covid19Radar.LogViewer.SearchFilters.dll` to the CocoaLogViewer directory.
+Copy the files below to the CocoaLogViewer directory:
+
+* `en/Covid19Radar.LogViewer.SearchFilters.resources.dll`
+* `ja/Covid19Radar.LogViewer.SearchFilters.resources.dll`
+* `Covid19Radar.LogViewer.SearchFilters.dll`
+* `Microsoft.Extensions.FileSystemGlobbing.dll`
 
 ## 利用規約/Terms of Use
 この拡張機能はMITライセンスに基づいて配布されています。

@@ -27,4 +27,9 @@
 			<Visible>false</Visible>
 		</Content>
 	</ItemGroup>
+	<ItemGroup Condition="'$(Configuration)'=='Debug'">
+		<ProjectReference Include="../Covid19Radar.LogViewer.Globalization.English/Covid19Radar.LogViewer.Globalization.English.csproj" />
+		<ProjectReference Include="../Covid19Radar.LogViewer.SearchFilters/Covid19Radar.LogViewer.SearchFilters.csproj" />
+		<ProjectReference Include="../Covid19Radar.LogViewer.Transformers.Configuration/Covid19Radar.LogViewer.Transformers.Configuration.csproj" />
+	</ItemGroup>
 </Project>

@@ -8,6 +8,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Covid19Radar.LogViewer.Models;
 using Microsoft.Extensions.FileSystemGlobbing;
@@ -35,7 +36,7 @@ namespace Covid19Radar.LogViewer.SearchFilters
 				var context = new MatcherContext(
 					GetPatterns(pattern),
 					Enumerable.Empty<IPattern>(),
-					new InMemoryDirectoryInfo("/", GetFiles(model.FilePath)),
+					new InMemoryDirectoryInfo(Path.GetDirectoryName(model.FilePath), GetFiles(model.FilePath)),
 					StringComparison.OrdinalIgnoreCase
 				);
 				return context.Execute().HasMatches;
