@@ -26,7 +26,8 @@ namespace Covid19Radar.LogViewer.SearchFilters
 		{
 			yield return RegularExpressionSearchFilter._inst;
 			yield return FilePathSearchFilter         ._inst;
-			yield return PrivacySearchFilter          ._inst;
+			yield return PrivacySearchFilter          ._inst1;
+			yield return PrivacySearchFilter          ._inst2;
 		}
 	}
 }
