@@ -9,7 +9,6 @@
 using System;
 using System.IO;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Covid19Radar.LogViewer.Globalization;
