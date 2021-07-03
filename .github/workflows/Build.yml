@@ -44,7 +44,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: benchmarks-results
-          path: "**/BenchmarkDotNet.Artifacts/results/*"
+          path: "**/BenchmarkDotNet.Artifacts/**/*"
       # Pack
       - name: Pack
         run: dotnet pack -c ${{ matrix.config }} --no-build --include-symbols --version-suffix ${{ matrix.config }}${{ github.sha }}
