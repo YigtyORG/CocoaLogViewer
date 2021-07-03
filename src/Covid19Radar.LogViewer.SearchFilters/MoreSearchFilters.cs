@@ -31,5 +31,10 @@ namespace Covid19Radar.LogViewer.SearchFilters
 			yield return PrivacySearchFilter          ._inst1;
 			yield return PrivacySearchFilter          ._inst2;
 		}
+
+		private static void Main()
+		{
+			// do nothing
+		}
 	}
 }

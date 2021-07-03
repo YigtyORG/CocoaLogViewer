@@ -7,7 +7,7 @@
 **-->
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<OutputType>Library</OutputType>
+		<OutputType>Exe</OutputType>
 		<Product>More Search Filters for CocoaLogViewer</Product>
 		<Description>This is an extension for CocoaLogViewer to add more search filters.</Description>
 	</PropertyGroup>
