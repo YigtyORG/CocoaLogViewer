@@ -24,7 +24,9 @@ namespace Covid19Radar.LogViewer.SearchFilters
 
 		public IEnumerable<ISearchFilter> GetSearchFilters()
 		{
-			yield return RegularExpressionSearchFilter._inst;
+			yield return RegularExpressionSearchFilter._inst1;
+			yield return RegularExpressionSearchFilter._inst2;
+			yield return RegularExpressionSearchFilter._inst3;
 			yield return FilePathSearchFilter         ._inst;
 			yield return PrivacySearchFilter          ._inst1;
 			yield return PrivacySearchFilter          ._inst2;
