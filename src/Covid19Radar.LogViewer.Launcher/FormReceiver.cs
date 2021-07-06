@@ -100,7 +100,14 @@ namespace Covid19Radar.LogViewer.Launcher
 		private static async ValueTask<IPAddress> GetLocalIPAddress()
 		{
 			var addrs = await Dns.GetHostAddressesAsync(Dns.GetHostName());
-			return addrs.Length > 0 ? addrs[0] : IPAddress.Loopback;
+			for (int i = 0; i < addrs.Length; ++i) {
+				var ip = addrs[i];
+				if (IPAddress.IsLoopback(ip) || ip.IsIPv6LinkLocal) {
+					continue;
+				}
+				return ip;
+			}
+			return IPAddress.Any;
 		}
 
 		private static async ValueTask SaveZoneIdentifier(string filename, IPAddress? ipa)
@@ -112,7 +119,8 @@ namespace Covid19Radar.LogViewer.Launcher
 					await sw.WriteLineAsync("[ZoneTransfer]");
 					await sw.WriteLineAsync("ZoneId=3");
 					if (ipa is not null) {
-						await sw.WriteLineAsync($"HostIpAddress={ipa}");
+						await sw.WriteAsync("HostIpAddress=");
+						await sw.WriteLineAsync(ipa.ToString());
 					}
 					await sw.WriteLineAsync("CocoaLogViewer=FormReceiver");
 				}
