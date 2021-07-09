@@ -2,7 +2,7 @@
 Copyright (C) 2020-2021 Yigty.ORG; all rights reserved.
 Copyright (C) 2020-2021 Takym.
 
-[![Developing version](https://img.shields.io/badge/Developing%20version-v0.1.0.1-important)](https://github.com/YigtyORG/CocoaLogViewer/projects/1)
+[![Developing version](https://img.shields.io/badge/Developing%20version-v0.1.0.2-important)](https://github.com/YigtyORG/CocoaLogViewer/projects/1)
 [![Latest version](https://img.shields.io/badge/Latest%20version-v0.1.0.1-informational)](https://github.com/YigtyORG/CocoaLogViewer/releases)
 [![License](https://img.shields.io/github/license/YigtyORG/CocoaLogViewer)](https://github.com/YigtyORG/CocoaLogViewer/blob/master/LICENSE.md)
 [![Build](https://github.com/YigtyORG/CocoaLogViewer/workflows/Build/badge.svg)](https://github.com/YigtyORG/CocoaLogViewer/actions/workflows/Build.yml)
@@ -101,6 +101,7 @@ Copyright (C) 2020-2021 Takym.
 
 | # |バージョン|開発コード名|更新日    |リリースノート                                                    |
 |--:|:--------:|:-----------|:--------:|:-----------------------------------------------------------------|
+|  6|v0.1.0.2  |c19r.lv01a2 |0000/00/00|まだ                                                              |
 |  5|v0.1.0.1  |c19r.lv01a1 |2021/07/09|<https://github.com/YigtyORG/CocoaLogViewer/releases/tag/v0.1.0.1>|
 |  4|v0.1.0.0  |c19r.lv01a0 |2021/07/03|<https://github.com/YigtyORG/CocoaLogViewer/releases/tag/v0.1.0.0>|
 |  3|v0.0.0.3  |c19r.lv00a3 |2021/06/06|<https://github.com/YigtyORG/CocoaLogViewer/releases/tag/v0.0.0.3>|
