@@ -12,7 +12,7 @@
 		<Description>This is an extension for CocoaLogViewer to add more search filters.</Description>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.FileSystemGlobbing" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.FileSystemGlobbing" Version="7.0.0" />
 		<ProjectReference Include="../Covid19Radar.LogViewer/Covid19Radar.LogViewer.csproj" Private="false" />
 		<Content Include="README.md" Condition="'$(Configuration)'=='Release'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
